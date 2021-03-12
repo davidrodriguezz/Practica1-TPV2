@@ -1,24 +1,12 @@
 #include <iostream>
+#include <SDL.h>
 
-#include "Game.h"
-
-using namespace std;
-
-void start() {
-	Game g;
-	g.start();
-}
+#include "sdlutils/sdlutils_demo.h"
 
 int main(int ac, char **av) {
-	try {
-		start();
-	} catch (std::string &e) { // catch errors thrown as strings
-		cerr << e << endl;
-	} catch (const std::exception &e) { // catch other exceptions
-		cerr << e.what();
-	} catch (...) {
-		cerr << "Caught and exception of unknown type ..";
-	}
+
+	sdlutils_basic_demo();
 
 	return 0;
 }
+
