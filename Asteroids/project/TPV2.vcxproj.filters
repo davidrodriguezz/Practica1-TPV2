@@ -31,87 +31,237 @@
     <Filter Include="Source Files\utils">
       <UniqueIdentifier>{4996d8ef-bbc9-46ba-a09a-6b560aba4a97}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\components">
+      <UniqueIdentifier>{43fe86f1-ce1c-47ca-8f87-e21188d42f40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\components">
+      <UniqueIdentifier>{9f729a52-b6be-4501-9937-199c816701f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ecs">
+      <UniqueIdentifier>{4be960b6-c43c-44b6-990f-570d14507c47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ecs">
+      <UniqueIdentifier>{9edcbe48-dad2-4966-bcee-b03e8006b6ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game">
+      <UniqueIdentifier>{d96f3876-04a1-493f-9776-5ddd3fc9715a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game">
+      <UniqueIdentifier>{317462d1-b676-47e9-aea0-66f4e122b050}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="src\json\somplejson_demo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="json\JSON.cpp">
-      <Filter>Source Files\json</Filter>
+    <ClCompile Include="src\json\JSON.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="json\JSONValue.cpp">
-      <Filter>Source Files\json</Filter>
+    <ClCompile Include="src\json\JSONValue.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utils\Collisions.cpp">
-      <Filter>Source Files\utils</Filter>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="utils\Vector2D.cpp">
-      <Filter>Source Files\utils</Filter>
+    <ClCompile Include="src\sdlutils\sdlutils_demo.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sdlutils\SDLUtils.cpp">
-      <Filter>Source Files\sdlutils</Filter>
+    <ClCompile Include="src\sdlutils\SDLUtils.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sdlutils\sdlutils_demo.cpp">
-      <Filter>Source Files\sdlutils</Filter>
+    <ClCompile Include="src\sdlutils\SoundEffect.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sdlutils\SoundEffect.cpp">
-      <Filter>Source Files\sdlutils</Filter>
+    <ClCompile Include="src\sdlutils\Texture.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sdlutils\Texture.cpp">
-      <Filter>Source Files\sdlutils</Filter>
+    <ClCompile Include="src\utils\Collisions.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="json\somplejson_demo.cpp">
-      <Filter>Source Files\json</Filter>
+    <ClCompile Include="src\utils\Vector2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sdlutils\ecs\Manager.cpp">
+      <Filter>Source Files\ecs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sdlutils\ecs\Entity.cpp">
+      <Filter>Source Files\ecs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\DeAcceleration.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\DisableOnExit.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\FighterCtrl.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Follow.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\FramedImage.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Generations.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Gun.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Health.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\Image.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\ShowAtOppositeSide.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\State.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\Game.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\AICtrl.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\GameLogic.cpp">
+      <Filter>Source Files\components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="json\JSON.h">
-      <Filter>Header Files\json</Filter>
+    <ClInclude Include="src\json\simplejson_demo.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="json\JSONValue.h">
-      <Filter>Header Files\json</Filter>
+    <ClInclude Include="src\json\JSON.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="utils\Collisions.h">
-      <Filter>Header Files\utils</Filter>
+    <ClInclude Include="src\json\JSONValue.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="utils\Singleton.h">
-      <Filter>Header Files\utils</Filter>
+    <ClInclude Include="src\sdlutils\sdlutils_demo.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="utils\Vector2D.h">
-      <Filter>Header Files\utils</Filter>
+    <ClInclude Include="src\sdlutils\InputHandler.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sdlutils\Font.h">
-      <Filter>Header Files\sdlutils</Filter>
+    <ClInclude Include="src\sdlutils\macros.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sdlutils\InputHandler.h">
-      <Filter>Header Files\sdlutils</Filter>
+    <ClInclude Include="src\sdlutils\Music.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sdlutils\macros.h">
-      <Filter>Header Files\sdlutils</Filter>
+    <ClInclude Include="src\sdlutils\RandomNumberGenerator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sdlutils\Music.h">
-      <Filter>Header Files\sdlutils</Filter>
+    <ClInclude Include="src\sdlutils\SDLUtils.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sdlutils\RandomNumberGenerator.h">
-      <Filter>Header Files\sdlutils</Filter>
+    <ClInclude Include="src\sdlutils\SoundEffect.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sdlutils\SDLUtils.h">
-      <Filter>Header Files\sdlutils</Filter>
+    <ClInclude Include="src\sdlutils\Texture.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sdlutils\sdlutils_demo.h">
-      <Filter>Header Files\sdlutils</Filter>
+    <ClInclude Include="src\sdlutils\VirtualTimer.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sdlutils\SoundEffect.h">
-      <Filter>Header Files\sdlutils</Filter>
+    <ClInclude Include="src\utils\Collisions.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sdlutils\Texture.h">
-      <Filter>Header Files\sdlutils</Filter>
+    <ClInclude Include="src\utils\Singleton.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sdlutils\VirtualTimer.h">
-      <Filter>Header Files\sdlutils</Filter>
+    <ClInclude Include="src\utils\Vector2D.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="json\simplejson_demo.h">
-      <Filter>Header Files\json</Filter>
+    <ClInclude Include="src\sdlutils\ecs\Manager.h">
+      <Filter>Header Files\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sdlutils\ecs\mpl.h">
+      <Filter>Header Files\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game.h">
+      <Filter>Header Files\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sdlutils\ecs\Entity.h">
+      <Filter>Header Files\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sdlutils\ecs\ecs_defs_example.h">
+      <Filter>Header Files\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sdlutils\ecs\ecs.h">
+      <Filter>Header Files\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sdlutils\ecs\Component.h">
+      <Filter>Header Files\ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Bounce.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\DeAcceleration.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\DisableOnExit.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\FighterCtrl.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Follow.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\FramedImage.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Generations.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Gun.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Health.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Image.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\KeyBoardCtrl.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Rectangle.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\ShowAtOppositeSide.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\State.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\Transform.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\ecs_defs.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\Game.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\BallPhysics.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\AICtrl.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\GameLogic.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\MouseCtrl.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\PaddlePhysics.h">
+      <Filter>Header Files\components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
