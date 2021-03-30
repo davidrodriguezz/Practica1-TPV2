@@ -55,6 +55,10 @@ public:
 	void setRot(float rot) {
 		rotation_ = rot;
 	}
+	
+	void setVel(Vector2D vel) {
+		vel_ = vel;
+	}
 
 	void update() override {
 		pos_ = pos_ + vel_;

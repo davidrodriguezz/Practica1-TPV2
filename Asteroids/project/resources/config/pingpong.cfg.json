@@ -1,7 +1,14 @@
 {
+  "fighter" : 
+  { 
+    "type" : "image", 
+    "img"  : "fighter", 
+    "color": "0x0000ffff"
+  },
 
   "ball" : 
-    { "type" : "image", 
+    { 
+      "type" : "image", 
       "img"  : "tennis_ball", 
       "color": "0x0000ffff"
     },

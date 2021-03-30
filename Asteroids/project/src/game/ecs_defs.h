@@ -13,6 +13,8 @@ class BallPhysics;
 class GameLogic;
 class AICtrl;
 class Image;
+// Asteroids
+class FighterCtrl;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -24,7 +26,8 @@ class Image;
 	BallPhysics,\
 	GameLogic,\
 	AICtrl,\
-	Image
+	Image,\
+	FighterCtrl
 
 // groups
 
@@ -35,4 +38,6 @@ struct Paddles;
 struct Ball;
 struct LeftPaddle;
 struct RightPaddle;
-#define _HDLRS_LIST_ Ball,LeftPaddle,RightPaddle
+struct Fighter;
+#define _HDLRS_LIST_ Ball,LeftPaddle,RightPaddle,Fighter
+

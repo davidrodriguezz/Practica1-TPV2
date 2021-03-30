@@ -22,7 +22,7 @@ public:
 	void update() override {
 		if (ih().mouseMotionEvent()) {
 			auto &pos = tr_->getPos();
-			pos.setY(ih().getMousePos().second);
+			pos.setY(float(ih().getMousePos().second));
 		}
 	}
 private:
