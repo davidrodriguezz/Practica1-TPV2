@@ -22,6 +22,7 @@
 
 // Asteroids
 #include "../components/FighterCtrl.h"
+#include "../components/ShowAtOppositeSide.h"
 
 Game::Game() {
 	mngr_.reset(new Manager());
@@ -42,6 +43,7 @@ void Game::init() {
 	//caza->addComponent<Rectangle>(build_sdlcolor(0x112233ff));
 	caza->addComponent<Image>(&sdlutils().images().at("fighter"));
 	caza->addComponent<FighterCtrl>();
+	caza->addComponent<ShowAtOppositeSide>();
 	mngr_->setHandler<Ball>(caza);
 
 	//auto *ball = mngr_->addEntity();

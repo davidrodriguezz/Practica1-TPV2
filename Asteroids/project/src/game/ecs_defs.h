@@ -15,6 +15,7 @@ class AICtrl;
 class Image;
 // Asteroids
 class FighterCtrl;
+class ShowAtOppositeSide;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -27,7 +28,8 @@ class FighterCtrl;
 	GameLogic,\
 	AICtrl,\
 	Image,\
-	FighterCtrl
+	FighterCtrl,\
+	ShowAtOppositeSide
 
 // groups
 

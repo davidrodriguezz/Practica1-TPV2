@@ -1,5 +1,3 @@
-// This file is part of the course TPV2@UCM - Samir Genaim
-
 #pragma once
 
 #include "../sdlutils/ecs/Component.h"
@@ -58,6 +56,18 @@ public:
 	
 	void setVel(Vector2D vel) {
 		vel_ = vel;
+	}
+
+	void setPos(Vector2D pos) {
+		pos_ = pos;
+	}
+
+	void setX(float x) {
+		pos_.setX(x);
+	}
+
+	void setY(float y) {
+		pos_.setY(y);
 	}
 
 	void update() override {
