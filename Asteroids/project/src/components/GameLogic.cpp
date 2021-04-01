@@ -10,9 +10,7 @@
 #include "Transform.h"
 
 GameLogic::GameLogic() :
-		ball_(nullptr), //
-		leftPaddle_(nullptr), //
-		rightPaddle_(nullptr), //
+		fighter_(nullptr), //
 		state_(nullptr) {
 
 }
@@ -21,16 +19,8 @@ GameLogic::~GameLogic() {
 }
 
 void GameLogic::init() {
-	ball_ = entity_->getMngr()->getHandler<Ball>()->getComponent<Transform>();
-	assert(ball_ != nullptr);
-
-	leftPaddle_ = entity_->getMngr()->getHandler<LeftPaddle>()->getComponent<
-			Transform>();
-	assert(leftPaddle_ != nullptr);
-
-	rightPaddle_ = entity_->getMngr()->getHandler<RightPaddle>()->getComponent<
-			Transform>();
-	assert(rightPaddle_ != nullptr);
+	fighter_ = entity_->getMngr()->getHandler<Fighter>()->getComponent<Transform>();
+	assert(fighter_ != nullptr);
 
 	state_ = entity_->getComponent<State>();
 	assert(state_ != nullptr);
@@ -42,7 +32,7 @@ void GameLogic::update() {
 		return;
 
 	// check if ball hits paddles
-	if (Collisions::collides(leftPaddle_->getPos(), leftPaddle_->getW(),
+	/*if (Collisions::collides(leftPaddle_->getPos(), leftPaddle_->getW(),
 			leftPaddle_->getH(), ball_->getPos(), ball_->getW(), ball_->getH())
 			|| Collisions::collides(rightPaddle_->getPos(),
 					rightPaddle_->getW(), rightPaddle_->getH(), ball_->getPos(),
@@ -58,10 +48,10 @@ void GameLogic::update() {
 	} else if (ball_->getPos().getX() < 0)
 		onBallExit(LEFT);
 	else if (ball_->getPos().getX() + ball_->getW() > sdlutils().width())
-		onBallExit(RIGHT);
+		onBallExit(RIGHT);*/
 }
 
-void GameLogic::onBallExit(Side side) {
+/*void GameLogic::onBallExit(Side side) {
 
 	auto &score_ = state_->getScore();
 	auto maxScore_ = state_->getMaxScore();
@@ -82,4 +72,4 @@ void GameLogic::onBallExit(Side side) {
 		state_->setState(State::PAUSED);
 	else
 		state_->setState(State::GAMEOVER);
-}
+}*/

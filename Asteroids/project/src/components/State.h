@@ -21,7 +21,7 @@ public:
 			score_(), //
 			state_(), //
 			maxScore_(3), //
-			ballTR_(nullptr) //
+			FighterTR_(nullptr) //
 	{
 	}
 
@@ -55,6 +55,6 @@ private:
 	std::array<unsigned int, 2> score_;
 	GameSate state_;
 	const unsigned int maxScore_;
-	Transform *ballTR_;
+	Transform * FighterTR_;
 };
 

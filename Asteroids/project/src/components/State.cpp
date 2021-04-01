@@ -70,9 +70,9 @@ void State::moveBall() {
 
 	Vector2D v(dx * r.nextInt(2, 7), dy * r.nextInt(2, 7));
 
-	ballTR_->getVel().set(v.normalize() * 2);
+	FighterTR_->getVel().set(v.normalize() * 2);
 }
 
 void State::init() {
-	ballTR_ = entity_->getMngr()->getHandler<Ball>()->getComponent<Transform>();
+	FighterTR_ = entity_->getMngr()->getHandler<Fighter>()->getComponent<Transform>();
 }

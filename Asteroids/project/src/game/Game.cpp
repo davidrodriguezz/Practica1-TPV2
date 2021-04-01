@@ -40,44 +40,10 @@ void Game::init() {
 	caza->addComponent<Transform>(
 		Vector2D(sdlutils().width(), sdlutils().height()),
 		Vector2D(), 20.0f, 20.0f, 0.0f);
-	//caza->addComponent<Rectangle>(build_sdlcolor(0x112233ff));
 	caza->addComponent<Image>(&sdlutils().images().at("fighter"));
 	caza->addComponent<FighterCtrl>();
 	caza->addComponent<ShowAtOppositeSide>();
-	mngr_->setHandler<Ball>(caza);
-
-	//auto *ball = mngr_->addEntity();
-	//ball->addComponent<Transform>(
-	//		Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
-	//		Vector2D(), 10.0f, 10.0f, 0.0f);
-	////ball->addComponent<Rectangle>(build_sdlcolor(0x112233ff));
-	//ball->addComponent<Image>(&sdlutils().images().at("tennis_ball"));
-	//ball->addComponent<BallPhysics>();
-	//mngr_->setHandler<Ball>(ball);
-
-	auto *leftPaddle = mngr_->addEntity();
-	leftPaddle->addComponent<Transform>(
-			Vector2D(10.0, sdlutils().height() / 2.0f - 25.0f), Vector2D(),
-			10.0f,
-			50.0f, 0.0f);
-	leftPaddle->addComponent<Rectangle>(build_sdlcolor(0x4466aaff));
-	//leftPaddle->addComponent<AICtrl>();
-	leftPaddle->addComponent<MouseCtrl>();
-	leftPaddle->addComponent<PaddlePhysics>();
-
-	mngr_->setHandler<LeftPaddle>(leftPaddle);
-
-	auto *rightPaddle = mngr_->addEntity();
-	rightPaddle->addComponent<Transform>(
-			Vector2D(sdlutils().width() - 10.0f - 10.0f,
-					sdlutils().height() / 2.0f - 25.0f), Vector2D(), 10.0f,
-			50.0f,
-			0.0f);
-	rightPaddle->addComponent<Rectangle>(build_sdlcolor(0xaa0011ff));
-	rightPaddle->addComponent<MouseCtrl>();
-	//rightPaddle->addComponent<AICtrl>();
-	rightPaddle->addComponent<PaddlePhysics>();
-	mngr_->setHandler<RightPaddle>(rightPaddle);
+	mngr_->setHandler<Fighter>(caza);
 
 	auto *gameMngr = mngr_->addEntity();
 	gameMngr->addComponent<State>();

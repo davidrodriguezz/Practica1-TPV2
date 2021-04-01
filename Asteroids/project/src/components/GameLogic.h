@@ -20,11 +20,9 @@ public:
 	void update() override;
 private:
 
-	void onBallExit(Side);
+	//void onBallExit(Side);
 
-	Transform *ball_;
-	Transform *leftPaddle_;
-	Transform *rightPaddle_;
+	Transform *fighter_;
 	State *state_;
 
 };
