@@ -12,6 +12,13 @@
 #include "../components/Rectangle.h"
 #include "../components/State.h"
 #include "../components/Transform.h"
+#include "../components/DeAcceleration.h"
+#include "../components/DisableOnExit.h"
+#include "../components/Follow.h"
+#include "../components/FramedImage.h"
+#include "../components/Generations.h"
+#include "../components/Gun.h"
+#include "../components/Health.h"
 #include "../sdlutils/ecs/ecs.h"
 #include "../sdlutils/ecs/Entity.h"
 #include "../sdlutils/InputHandler.h"
@@ -34,7 +41,7 @@ Game::~Game() {
 void Game::init() {
 
 	SDLUtils::init("Ping Pong", 800, 600,
-			"resources/config/pingpong.resources.json");
+			"resources/config/asteroids.resources.json");
 
 	auto* caza = mngr_->addEntity();
 	caza->addComponent<Transform>(
@@ -43,6 +50,8 @@ void Game::init() {
 	caza->addComponent<Image>(&sdlutils().images().at("fighter"));
 	caza->addComponent<FighterCtrl>();
 	caza->addComponent<ShowAtOppositeSide>();
+	caza->addComponent<DeAcceleration>();
+	caza->addComponent<Gun>();
 	mngr_->setHandler<Fighter>(caza);
 
 	auto *gameMngr = mngr_->addEntity();

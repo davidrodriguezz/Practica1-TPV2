@@ -22,7 +22,7 @@ public:
 	}
 
 	void update() override {
-		tr_->setVel(tr_->getVel * 0.995f);
+		tr_->setVel(tr_->getVel() * 0.995f);
 	}
 
 private:
