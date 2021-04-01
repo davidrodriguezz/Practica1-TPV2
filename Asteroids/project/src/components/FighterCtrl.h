@@ -6,6 +6,7 @@
 #include "../sdlutils/ecs/Component.h"
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/ecs/Entity.h"
+#include "../sdlutils/SDLUtils.h"
 #include "Transform.h"
 
 class FighterCtrl : public Component {
@@ -30,8 +31,10 @@ public:
 			auto& vel = tr_->getVel();
 			if (ih().isKeyDown(SDL_SCANCODE_UP) || ih().isKeyDown(SDL_SCANCODE_W)) {
 				tr_->setVel(tr_->getVel() + Vector2D(0, -1).rotate(tr_->getRot()) * thrust_);
+				sdlutils().soundEffects().at("thrust").play();
 				if (tr_->getVel().magnitude() > speedlimit_)
 					tr_->setVel(tr_->getVel().normalize() * speedlimit_);
+					
 			}
 			else if (ih().isKeyDown(SDL_SCANCODE_RIGHT) || ih().isKeyDown(SDL_SCANCODE_D)) {
 				tr_->setRot(tr_->getRot() + 5.0f);

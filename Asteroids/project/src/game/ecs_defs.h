@@ -16,6 +16,13 @@ class Image;
 // Asteroids
 class FighterCtrl;
 class ShowAtOppositeSide;
+class DisableOnExit;
+class DeAcceleration;
+class Gun;
+class Follow;
+class Health;
+class FramedImage;
+class Generations;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -29,12 +36,21 @@ class ShowAtOppositeSide;
 	AICtrl,\
 	Image,\
 	FighterCtrl,\
-	ShowAtOppositeSide
+	ShowAtOppositeSide,\
+	DisableOnExit,\
+	DeAcceleration,\
+	Gun,\
+	Follow,\
+	Health,\
+	FramedImage,\
+	Generations
+
+
 
 // groups
 
 struct Paddles;
-#define _GRPS_LIST_  Paddles
+#define _GRPS_LIST_  Paddles//, Asteroid_grp, Bullet_grp
 
 // handlers
 struct Ball;
