@@ -52,6 +52,7 @@ void Game::init() {
 	caza->addComponent<ShowAtOppositeSide>();
 	caza->addComponent<DeAcceleration>();
 	caza->addComponent<Gun>();
+	caza->addComponent<Health>();
 	mngr_->setHandler<Fighter>(caza);
 
 	auto *gameMngr = mngr_->addEntity();

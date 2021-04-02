@@ -8,11 +8,12 @@
 #include "../sdlutils/ecs/Entity.h"
 #include "../sdlutils/SDLUtils.h"
 #include "Transform.h"
+#include "../sdlutils/Texture.h"
 
 class Gun : public Component {
 public:
 	Gun() :
-		tr_(nullptr){
+		tr_(nullptr), tex_(&sdlutils().images().at("fire")) {
 	}
 	virtual ~Gun() {
 	}
@@ -28,7 +29,7 @@ public:
 		if (ih().keyDownEvent()) {
 			auto& vel = tr_->getVel();
 			if (ih().isKeyDown(SDL_SCANCODE_S)) {
-				//crear bala
+				//tex_->render(0, 0, 0.0);
 				sdlutils().soundEffects().at("fire").play();
 				tr_->setVel(Vector2D(0.0f, -1.0f).rotate(tr_->getRot()) * (vel.magnitude() + 5.0f));
 				tr_->setPos(tr_->getPos()+Vector2D(tr_->getW()/2.0f,tr_->getH()/2.0f)-Vector2D(0.0f, tr_->getH() /2.0f+5.0f+12.0f).rotate(tr_->getRot())-Vector2D(2.0f,10.0f));
@@ -38,6 +39,7 @@ public:
 
 private:
 	Transform* tr_;
+	Texture* tex_;
 
 }
 ;
