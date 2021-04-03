@@ -20,8 +20,9 @@ public:
 	State() :
 			score_(), //
 			state_(), //
-			maxScore_(3), //
-			FighterTR_(nullptr) //
+			maxScore_(3) //
+			//FighterTR_(nullptr), //
+			//AsteroidTR_(nullptr) //
 	{
 	}
 
@@ -55,6 +56,7 @@ private:
 	std::array<unsigned int, 2> score_;
 	GameSate state_;
 	const unsigned int maxScore_;
-	Transform * FighterTR_;
+	/*Transform * FighterTR_;
+	Transform * AsteroidTR_;*/
 };
 

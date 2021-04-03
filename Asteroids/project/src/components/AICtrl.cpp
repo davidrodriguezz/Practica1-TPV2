@@ -45,8 +45,8 @@ void AICtrl::update() {
 }
 
 void AICtrl::init() {
-	ballTR_ = entity_->getMngr()->getHandler<Ball>()->getComponent<Transform>();
-	assert(ballTR_ != nullptr);
+	/*ballTR_ = entity_->getMngr()->getHandler<Ball>()->getComponent<Transform>();
+	assert(ballTR_ != nullptr);*/
 }
 
 bool AICtrl::ballComingTowardsPaddle(const Vector2D &pos) {
