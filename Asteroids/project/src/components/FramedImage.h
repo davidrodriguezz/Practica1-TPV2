@@ -1,41 +1,62 @@
 #pragma once
 
 #include "../sdlutils/ecs/Component.h"
-#include "Transform.h"
-#include "../sdlutils/ecs/Entity.h"
 #include "../sdlutils/Texture.h"
+#include "../sdlutils/ecs/Entity.h"
+#include "Transform.h"
+#include "../sdlutils/VirtualTimer.h"
 
 typedef unsigned int uint;
 
 class FramedImage : public Component {
 public:
-	FramedImage(Texture* tex, uint r, uint c) :
+	FramedImage(Texture* tex) :
 		Component(),
 		tr_(nullptr), //
-		tex_(tex), //
-		row(r),
-		col(c)
+		tex_(tex)
 	{}
 	virtual ~FramedImage() {
 	}
 
 	void init() override {
+		row = col = 0;
+		time = new VirtualTimer();
 		tr_ = entity_->getComponent<Transform>();
 		assert(tr_ != nullptr);
 	}
 
-	void draw(){
-		SDL_Rect dest = { int(tr_->getPos().getX()), int(tr_->getPos().getY()), int(tr_->getW()), int(tr_->getH()) };
-		SDL_Rect clip = { int(row), int(col), tex_->width() / 4, tex_->height() };
-		tex_->render(dest, clip);
+	void render() override {
+		SDL_Rect dest = build_sdlrect(tr_->getPos(), tr_->getW(), tr_->getH());		
+		SDL_Rect clip = build_sdlrect(float(row), float(col), tex_->width() / 6.0f, tex_->height() / 5.0f);
+		tex_->render(clip, dest, tr_->getRot());
+	}
+	
+	void update() override {
+		if (time->currTime() >= 50) {
+			avanza();
+			tr_->setRot(tr_->getRot() + 1);
+			time->reset();
+		}
 	}
 
-	void avanza() { row = row + tex_->height(); };
-	bool get() { return (row > 0 && int(row) < tex_->height() * 2); };
-	void reset() { row = 0; };
+	void avanza() { 
+		if (row < tex_->width() * (5.0f / 6.0f)) {
+			row = row + tex_->width() / 6.0f;
+		}
+		else if (col < tex_->height() * (4.0f / 5.0f)) {
+			row = 0;
+			col = col + tex_->width() / 5.0f;
+		}
+		else {
+			row = 0;
+			col = 0;
+		}
+	}
+
 private:
 	Transform* tr_;
 	Texture* tex_;
 	uint row;
 	uint col;
+	VirtualTimer* time;
 };

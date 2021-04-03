@@ -45,17 +45,12 @@ class Generations;
 	FramedImage,\
 	Generations
 
-
-
 // groups
-
-struct Paddles;
-#define _GRPS_LIST_  Paddles//, Asteroid_grp, Bullet_grp
+struct Asteroid_grp;
+struct Bullet_grp;
+#define _GRPS_LIST_  Asteroid_grp,Bullet_grp
 
 // handlers
-struct Ball;
-struct LeftPaddle;
-struct RightPaddle;
 struct Fighter;
-#define _HDLRS_LIST_ Ball,LeftPaddle,RightPaddle,Fighter
+#define _HDLRS_LIST_ Fighter
 

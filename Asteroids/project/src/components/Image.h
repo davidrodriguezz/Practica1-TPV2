@@ -4,7 +4,6 @@
 
 #include "../sdlutils/ecs/Component.h"
 #include "../sdlutils/Texture.h"
-
 #include "Transform.h"
 
 class Image: public Component {
