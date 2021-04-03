@@ -67,6 +67,7 @@
     <ClInclude Include="src\components\ShowAtOppositeSide.h" />
     <ClInclude Include="src\components\State.h" />
     <ClInclude Include="src\components\Transform.h" />
+    <ClInclude Include="src\entity\Bullet.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\game\ecs_defs.h" />
     <ClInclude Include="src\game\Game.h" />

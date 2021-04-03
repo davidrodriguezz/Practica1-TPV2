@@ -266,5 +266,8 @@
     <ClInclude Include="src\sdlutils\asteroids_macros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\entity\Bullet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

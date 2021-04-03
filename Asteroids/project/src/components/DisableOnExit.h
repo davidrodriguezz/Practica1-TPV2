@@ -3,7 +3,6 @@
 #include <SDL.h>
 #include <cassert>
 #include "../sdlutils/SDLUtils.h"
-
 #include "../sdlutils/ecs/Component.h"
 #include "../sdlutils/ecs/Entity.h"
 #include "Transform.h"
@@ -23,10 +22,13 @@ public:
 	}
 
 	void update() override {
-		if (tr_->getPos().getX() + tr_->getW() / 2 < 0) { /*destruir bala*/ }
-		if (tr_->getPos().getX() - tr_->getW() / 2 > sdlutils().width()) { /*destruir bala*/ }
-		if (tr_->getPos().getY() + tr_->getH() / 2 < 0) { /*destruir bala*/ }
-		if (tr_->getPos().getY() - tr_->getH() / 2 > sdlutils().height()) { /*destruir bala*/ }
+		if ( tr_->getPos().getX() + tr_->getW() / 2 < 0
+			|| tr_->getPos().getX() - tr_->getW() / 2 > sdlutils().width()
+			|| tr_->getPos().getY() + tr_->getH() / 2 < 0
+			|| tr_->getPos().getY() - tr_->getH() / 2 > sdlutils().height() ) 
+		{
+			entity_->setActive(false);
+		}
 	}
 
 private:
