@@ -12,7 +12,7 @@
 class FighterCtrl : public Component {
 public:
 	FighterCtrl() :
-		tr_(nullptr), speedlimit_(1.5f), thrust_(0.2f) {
+		tr_(nullptr), speedlimit_(3.0f), thrust_(0.2f) {
 	}
 	virtual ~FighterCtrl() {
 	}

@@ -263,5 +263,8 @@
     <ClInclude Include="src\components\PaddlePhysics.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
+    <ClInclude Include="src\sdlutils\asteroids_macros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

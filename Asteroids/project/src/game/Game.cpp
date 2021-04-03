@@ -54,17 +54,16 @@ void Game::init() {
 	caza->addComponent<Gun>();
 	caza->addComponent<Health>();
 	mngr_->setHandler<Fighter>(caza);
-
 	
 	auto* rock = mngr_->addEntity();
 	rock->addComponent<Transform>(
-		Vector2D(sdlutils().width() / 2, sdlutils().height() / 2),
+		Vector2D(sdlutils().width() / 4, sdlutils().height() / 4),
 		Vector2D(), 40.0f, 40.0f, 0.0f);
 	rock->addComponent<ShowAtOppositeSide>();
 	//rock->addComponent<Rectangle>();
 	rock->addComponent<FramedImage>(&sdlutils().images().at("asteroid"));
 	//rock->addComponent<Generations>();
-	//rock->addComponent<Follow>();
+	rock->addComponent<Follow>(caza->getComponent<Transform>());
 	rock->setGroup<Asteroid_grp>(true);
 
 	auto *gameMngr = mngr_->addEntity();

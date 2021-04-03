@@ -73,6 +73,7 @@
     <ClInclude Include="src\json\simplejson_demo.h" />
     <ClInclude Include="src\json\JSON.h" />
     <ClInclude Include="src\json\JSONValue.h" />
+    <ClInclude Include="src\sdlutils\asteroids_macros.h" />
     <ClInclude Include="src\sdlutils\ecs\Component.h" />
     <ClInclude Include="src\sdlutils\ecs\ecs.h" />
     <ClInclude Include="src\sdlutils\ecs\ecs_defs_example.h" />
