@@ -8,6 +8,7 @@
 #include "../utils/Collisions.h"
 #include "State.h"
 #include "Transform.h"
+#include "Health.h"
 
 GameLogic::GameLogic() :
 		fighter_(nullptr), //
@@ -31,24 +32,49 @@ void GameLogic::update() {
 	if (state_->getState() != State::RUNNING)
 		return;
 
-	// check if ball hits paddles
-	/*if (Collisions::collides(leftPaddle_->getPos(), leftPaddle_->getW(),
-			leftPaddle_->getH(), ball_->getPos(), ball_->getW(), ball_->getH())
-			|| Collisions::collides(rightPaddle_->getPos(),
-					rightPaddle_->getW(), rightPaddle_->getH(), ball_->getPos(),
-					ball_->getW(), ball_->getH())) {
+	// check if fighter is hit by any asteroid
+	for (Entity* e_ : entity_->getMngr()->getEntities())
+	{
+		if (e_->hasGroup<Asteroid_grp>()) {
+			Transform* a_ = e_->getComponent<Transform>();
+			if (Collisions::collides(fighter_->getPos(), fighter_->getW(),
+				fighter_->getH(), a_->getPos(), a_->getW(), a_->getH())) {
 
-		// change the direction of the ball, and increment the speed
-		auto &vel = ball_->getVel(); // the use of & is important, so the changes goes directly to the ball
-		vel.setX(-vel.getX());
-		vel = vel * 1.2f;
+				Health* h_ = fighter_->getEntity()->getComponent<Health>();
+				if (h_->getLives() > 0) {
+					h_->minusLife();
+					a_->getEntity()->setActive(false); // asteroid destruction
+				}
+				else
+					fighter_->getEntity()->setActive(false); // fighter destruction
 
-		// play some sound
-		sdlutils().soundEffects().at("paddle_hit").play();
-	} else if (ball_->getPos().getX() < 0)
-		onBallExit(LEFT);
-	else if (ball_->getPos().getX() + ball_->getW() > sdlutils().width())
-		onBallExit(RIGHT);*/
+				sdlutils().soundEffects().at("explosion").play();
+			}
+		}
+	}
+
+	// check if any asteroid is hit by any bullet
+	for (Entity* asteroid_ : entity_->getMngr()->getEntities())
+	{
+		if (asteroid_->hasGroup<Asteroid_grp>()) { 
+			Transform* a_ = asteroid_->getComponent<Transform>(); // asteroid
+			for (Entity* bullet_ : entity_->getMngr()->getEntities())
+			{
+				if (bullet_->hasGroup<Bullet_grp>()) {
+					Transform* b_ = bullet_->getComponent<Transform>(); // bullet
+
+					if (Collisions::collides(a_->getPos(), a_->getW(), a_->getH(),
+						b_->getPos(), b_->getW(), b_->getH())) {
+
+						a_->getEntity()->setActive(false); // asteroid destruction
+						b_->getEntity()->setActive(false); // bullet destruction
+
+						sdlutils().soundEffects().at("explosion").play();
+					}
+				}
+			}
+		}
+	}
 }
 
 /*void GameLogic::onBallExit(Side side) {

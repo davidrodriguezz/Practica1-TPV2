@@ -10,11 +10,12 @@
 #include "../sdlutils/Texture.h"
 #include "Transform.h"
 
+typedef unsigned int uint;
 
 class Health : public Component {
 public:
 	Health() :
-		tr_(nullptr), lives_(3), tex_(&sdlutils().images().at("heart")), src_({ 0, 0, tex_->width(), tex_->height() }) {
+		tr_(nullptr) {
 	}
 	virtual ~Health() {
 	}
@@ -22,8 +23,8 @@ public:
 	int getLives() {
 		return lives_;
 	}
-	void minusLife(int lives) {
-		lives_ = lives - 1;
+	void minusLife() {
+		--lives_;
 	}
 	void resetLives() {
 		lives_ = 3;
@@ -32,13 +33,15 @@ public:
 	void init() override {
 		tr_ = entity_->getComponent<Transform>();
 		assert(tr_ != nullptr);
+		lives_ = 3;
+		tex_ = &sdlutils().images().at("heart");
 	}
 
 	void render() override {
-		Vector2D pos(tr_->getW(), tr_->getH());
+		Vector2D pos(tr_->getW(), tr_->getH()); // window position is like one fighter cube
 		SDL_Rect dest = build_sdlrect(pos, tr_->getW(), tr_->getH());
 		for (int i = 0; i < lives_; i++) {
-			tex_->render(src_, dest, 0);
+			tex_->render(dest);
 
 			dest.x = dest.x + tr_->getW() + 10;
 		}
@@ -47,8 +50,6 @@ public:
 private:
 	Transform* tr_;
 	Texture* tex_;
-	SDL_Rect src_;
-	int lives_;
-	float thrust_;
+	uint lives_;
 }
 ;

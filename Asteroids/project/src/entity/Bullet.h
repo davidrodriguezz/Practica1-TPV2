@@ -8,7 +8,7 @@ class Bullet : public Entity
 {
 public:
 	Bullet(Manager* mngr) : Entity(mngr) {};
-	~Bullet() {};
+	~Bullet() { this->setGroup<Bullet_grp>(false); };
 
 	void init(Transform* caza) {
 		sdlutils().soundEffects().at("fire").play();
@@ -17,6 +17,7 @@ public:
 		this->addComponent<Transform>(bPos, bVel, 5.0f, 20.0f, caza->getRot());
 		this->addComponent<Image>(&sdlutils().images().at("fire"));
 		this->addComponent<DisableOnExit>();
+		this->setGroup<Bullet_grp>(true);
 	}
 };
 
