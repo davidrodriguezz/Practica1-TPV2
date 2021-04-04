@@ -19,6 +19,7 @@
 #include "../components/Generations.h"
 #include "../components/Gun.h"
 #include "../components/Health.h"
+#include "../components/AsteroidsManager.h"
 #include "../sdlutils/ecs/ecs.h"
 #include "../sdlutils/ecs/Entity.h"
 #include "../sdlutils/InputHandler.h"
@@ -48,6 +49,7 @@ void Game::init() {
 
 	auto *gameMngr = mngr_->addEntity();
 	gameMngr->addComponent<State>();
+	gameMngr->addComponent<AsteroidsManager>();
 	gameMngr->addComponent<GameLogic>();
 }
 

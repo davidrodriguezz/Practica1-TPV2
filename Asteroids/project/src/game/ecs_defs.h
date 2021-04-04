@@ -23,6 +23,7 @@ class Follow;
 class Health;
 class FramedImage;
 class Generations;
+class AsteroidsManager;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -43,7 +44,8 @@ class Generations;
 	Follow,\
 	Health,\
 	FramedImage,\
-	Generations
+	Generations,\
+	AsteroidsManager
 
 // groups
 struct Asteroid_grp;

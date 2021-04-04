@@ -129,6 +129,9 @@
     <ClCompile Include="src\components\GameLogic.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
+    <ClCompile Include="src\components\AsteroidsManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\json\simplejson_demo.h">
@@ -274,6 +277,9 @@
     </ClInclude>
     <ClInclude Include="src\entity\Fighter.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\AsteroidsManager.h">
+      <Filter>Header Files\components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\components\AICtrl.cpp" />
+    <ClCompile Include="src\components\AsteroidsManager.cpp" />
     <ClCompile Include="src\components\DeAcceleration.cpp" />
     <ClCompile Include="src\components\DisableOnExit.cpp" />
     <ClCompile Include="src\components\FighterCtrl.cpp" />
@@ -48,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\components\AICtrl.h" />
+    <ClInclude Include="src\components\AsteroidsManager.h" />
     <ClInclude Include="src\components\BallPhysics.h" />
     <ClInclude Include="src\components\Bounce.h" />
     <ClInclude Include="src\components\DeAcceleration.h" />

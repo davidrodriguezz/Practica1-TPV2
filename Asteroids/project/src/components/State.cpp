@@ -12,16 +12,16 @@ void State::update() {
 		if (ih().isKeyDown(SDL_SCANCODE_SPACE)) {
 			switch (state_) {
 			case NEWGAME:
-				setAsteroids();
+				//setAsteroids();
 				state_ = RUNNING;
 				break;
 			case PAUSED:
-				moveBall();
+				//moveBall();
 				state_ = RUNNING;
 				break;
 			case GAMEOVER:
 				state_ = NEWGAME;
-				score_[0] = score_[1] = 0;
+				score_ = 0;
 				break;
 			default:
 				break;
@@ -54,47 +54,13 @@ void State::render() {
 	}
 
 	// score
-	/*Texture scoreMsg(
+	Texture scoreMsg(
 			sdlutils().renderer(), //
-			std::to_string(score_[0]) + " - " + std::to_string(score_[1]),
+			std::to_string(score_),
 			sdlutils().fonts().at("ARIAL16"), build_sdlcolor(0xffffffff));
-	scoreMsg.render((sdlutils().width() - scoreMsg.width()) / 2, 10);*/
-
-}
-
-#include "../entity/Asteroid.h"
-#include "../sdlutils/ecs/Entity.h"
-#include "../sdlutils/asteroids_macros.h"
-#include "../components/Transform.h"
-void State::createAsteroid(bool isGold) {
-	Asteroid* a = static_cast<Asteroid*>(entity_->getMngr()->addEntity());
-	a->init(FighterTR_, isGold);
-}
-
-void State::setAsteroids()
-{
-	for (int i = 0; i < 5; i++)
-	{
-		createAsteroid(false); // clasicos
-	}
-	for (int i = 0; i < 5; i++)
-	{
-		createAsteroid(true); // golds
-	}
-}
-
-void State::moveBall() {
-	auto &r = sdlutils().rand();
-
-	int dx = 1 - 2 * r.nextInt(0, 2); // 1 or -1
-	int dy = 1 - 2 * r.nextInt(0, 2); // 1 or -1
-
-	Vector2D v(dx * r.nextInt(2, 7), dy * r.nextInt(2, 7));
-
-	//FighterTR_->getVel().set(v.normalize() * 2);
+	scoreMsg.render((sdlutils().width() - scoreMsg.width()) / 2, 10);
 }
 
 void State::init() {
-	FighterTR_ = entity_->getMngr()->getHandler<Fighter>()->getComponent<Transform>();
-	//AsteroidTR_ = entity_->getMngr()->getHandler<Asteroid>()->getComponent<Transform>();
+	
 }

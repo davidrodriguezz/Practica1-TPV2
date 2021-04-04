@@ -3,7 +3,7 @@
 #include "../sdlutils/ecs/Component.h"
 #include "../sdlutils/ecs/Entity.h"
 #include "Transform.h"
-#include <iostream>
+//#include <iostream>
 typedef unsigned int uint;
 
 class Generations : public Component {
@@ -26,6 +26,9 @@ public:
 	void update() override {
 		//std::cout << sdlutils().rand().nextInt(0, 3) + 1 << std::endl;
 	}
+
+	uint getGen() { return g_; }
+	void setGen(uint g) { g_ = g; scale(); }
 
 	void scale() {
 		tr_->setW(10 + 7.5f * g_);

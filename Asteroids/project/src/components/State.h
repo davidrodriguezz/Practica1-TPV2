@@ -7,6 +7,7 @@
 #include "../sdlutils/SDLUtils.h"
 
 class Transform;
+typedef unsigned int uint;
 
 class State: public Component {
 public:
@@ -18,10 +19,9 @@ public:
 	};
 
 	State() :
-			score_(), //
+			score_(0), //
 			state_(), //
-			maxScore_(3), //
-			FighterTR_(nullptr)
+			maxScore_(3) //
 	{
 	}
 
@@ -40,6 +40,10 @@ public:
 		return maxScore_;
 	}
 
+	void setScore(int n) {
+		score_ = score_ + n;
+	}
+
 	GameSate getState() const {
 		return state_;
 	}
@@ -49,13 +53,9 @@ public:
 	}
 
 private:
-	void createAsteroid(bool isGold);
-	void setAsteroids();
-	void moveBall();
-
-	std::array<unsigned int, 2> score_;
+	//std::array<unsigned int, 2> score_;
+	uint score_;
 	GameSate state_;
 	const unsigned int maxScore_;
-	Transform * FighterTR_;
 };
 
