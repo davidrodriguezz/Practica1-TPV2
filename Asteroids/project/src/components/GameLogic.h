@@ -3,6 +3,7 @@
 #pragma once
 #include "../sdlutils/ecs/Component.h"
 #include "State.h"
+#include "AsteroidsManager.h"
 
 class Transform;
 
@@ -19,11 +20,8 @@ public:
 	void init() override;
 	void update() override;
 private:
-
-	//void onBallExit(Side);
-
 	Transform *fighter_;
 	State *state_;
-
+	AsteroidsManager *aMngr_;
 };
 

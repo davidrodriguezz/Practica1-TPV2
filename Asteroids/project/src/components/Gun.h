@@ -11,20 +11,16 @@
 
 class Gun : public Component {
 public:
-	Gun() :
-		tr_(nullptr) {
-	}
+	Gun() {};
 	virtual ~Gun() {
 	}
 
 	void init() override {
-		tr_ = entity_->getComponent<Transform>();
-		assert(tr_ != nullptr);
+
 	}
 
 	void update() override {
 		if (ih().keyDownEvent()) {
-			auto& vel = tr_->getVel();
 			if (ih().isKeyDown(SDL_SCANCODE_S)) {
 				createBullet();
 			}
@@ -33,10 +29,7 @@ public:
 
 	void createBullet() {
 		Bullet* b = static_cast<Bullet*>(entity_->getMngr()->addEntity());
-		b->init(tr_);
+		b->init();
 	}
-
-private:
-	Transform* tr_;
 }
 ;

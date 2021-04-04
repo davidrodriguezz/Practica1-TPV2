@@ -11,9 +11,10 @@ class Asteroid : public Entity
 {
 public:
 	Asteroid(Manager* mngr) : Entity(mngr) {};
-	~Asteroid() { this->setGroup<Asteroid_grp>(false); };
+	~Asteroid() {};
 
-	void init(Transform* caza, bool isGold) {
+	void init(bool isGold) {
+		Transform* caza = this->getMngr()->getHandler<Fighter>()->getComponent<Transform>();
 		float x = sdlutils().rand().nextInt(0, sdlutils().width() + 1.0f);
 		float y = sdlutils().rand().nextInt(0, sdlutils().height() + 1.0f);
 		Vector2D pos(x, y);

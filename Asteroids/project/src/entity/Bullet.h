@@ -8,9 +8,10 @@ class Bullet : public Entity
 {
 public:
 	Bullet(Manager* mngr) : Entity(mngr) {};
-	~Bullet() { this->setGroup<Bullet_grp>(false); };
+	~Bullet() {};
 
-	void init(Transform* caza) {
+	void init() {
+		Transform* caza = this->getMngr()->getHandler<Fighter>()->getComponent<Transform>();
 		sdlutils().soundEffects().at("fire").play();
 		Vector2D bPos = caza->getPos() + Vector2D(caza->getW() / 2.0f, caza->getH() / 2.0f) - Vector2D(0.0f, caza->getH() / 2.0f + 5.0f + 12.0f).rotate(caza->getRot()) - Vector2D(2.0f, 10.0f);
 		Vector2D bVel = Vector2D(0.0f, -1.0f).rotate(caza->getRot()) * (caza->getVel().magnitude() + 5.0f);

@@ -12,7 +12,9 @@
 
 GameLogic::GameLogic() :
 		fighter_(nullptr), //
-		state_(nullptr) {
+		state_(nullptr),
+		aMngr_(nullptr)
+{
 
 }
 GameLogic::~GameLogic() {
@@ -25,6 +27,9 @@ void GameLogic::init() {
 
 	state_ = entity_->getComponent<State>();
 	assert(state_ != nullptr);
+	
+	aMngr_ = entity_->getComponent<AsteroidsManager>();
+	assert(aMngr_ != nullptr);
 }
 
 void GameLogic::update() {
@@ -33,17 +38,17 @@ void GameLogic::update() {
 		return;
 
 	// check if fighter is hit by any asteroid
-	for (Entity* e_ : entity_->getMngr()->getEntities())
+	for (Entity* asteroid_ : entity_->getMngr()->getEntities())
 	{
-		if (e_->hasGroup<Asteroid_grp>()) {
-			Transform* a_ = e_->getComponent<Transform>();
-			if (Collisions::collides(fighter_->getPos(), fighter_->getW(),
-				fighter_->getH(), a_->getPos(), a_->getW(), a_->getH())) {
+		if (asteroid_->hasGroup<Asteroid_grp>()) {
+			Transform* a_ = asteroid_->getComponent<Transform>();
+			if (Collisions::collidesWithRotation(fighter_->getPos(), fighter_->getW(), fighter_->getH(), fighter_->getRot(),
+				a_->getPos(), a_->getW(), a_->getH(), a_->getRot())) {
 
 				Health* h_ = fighter_->getEntity()->getComponent<Health>();
 				if (h_->getLives() > 0) {
 					h_->minusLife();
-					a_->getEntity()->setActive(false); // asteroid destruction
+					asteroid_->setActive(false); // asteroid destruction
 				}
 				else
 					fighter_->getEntity()->setActive(false); // fighter destruction
@@ -66,8 +71,9 @@ void GameLogic::update() {
 					if (Collisions::collidesWithRotation(a_->getPos(), a_->getW(), a_->getH(), a_->getRot(),
 						b_->getPos(), b_->getW(), b_->getH(), b_->getRot())) {
 
-						a_->getEntity()->setActive(false); // asteroid destruction
-						b_->getEntity()->setActive(false); // bullet destruction
+						state_->setScore(50);
+						bullet_->setActive(false); // bullet destruction
+						aMngr_->onCollision(static_cast<Asteroid*>(asteroid_)); // asteroid destruction
 
 						sdlutils().soundEffects().at("explosion").play();
 					}
