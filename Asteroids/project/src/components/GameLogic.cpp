@@ -63,8 +63,8 @@ void GameLogic::update() {
 				if (bullet_->hasGroup<Bullet_grp>()) {
 					Transform* b_ = bullet_->getComponent<Transform>(); // bullet
 
-					if (Collisions::collides(a_->getPos(), a_->getW(), a_->getH(),
-						b_->getPos(), b_->getW(), b_->getH())) {
+					if (Collisions::collidesWithRotation(a_->getPos(), a_->getW(), a_->getH(), a_->getRot(),
+						b_->getPos(), b_->getW(), b_->getH(), b_->getRot())) {
 
 						a_->getEntity()->setActive(false); // asteroid destruction
 						b_->getEntity()->setActive(false); // bullet destruction

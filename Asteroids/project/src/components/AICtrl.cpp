@@ -50,7 +50,6 @@ void AICtrl::init() {
 }
 
 bool AICtrl::ballComingTowardsPaddle(const Vector2D &pos) {
-
 	return (pos.getX() < ballTR_->getPos().getX() && ballTR_->getVel().getX() < 0)
 			|| (pos.getX() > ballTR_->getPos().getX()
 					&& ballTR_->getVel().getX() > 0);

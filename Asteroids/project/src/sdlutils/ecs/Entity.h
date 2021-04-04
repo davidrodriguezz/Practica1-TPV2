@@ -107,7 +107,6 @@ public:
 		groups_.reset();
 	}
 
-
 	void update() {
 		std::size_t n = components_.size();
 		for (auto i = 0u; i < n; i++) {
