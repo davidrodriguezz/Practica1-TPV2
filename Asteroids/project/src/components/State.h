@@ -20,9 +20,8 @@ public:
 	State() :
 			score_(), //
 			state_(), //
-			maxScore_(3) //
-			//FighterTR_(nullptr), //
-			//AsteroidTR_(nullptr) //
+			maxScore_(3), //
+			FighterTR_(nullptr)
 	{
 	}
 
@@ -50,13 +49,13 @@ public:
 	}
 
 private:
-
+	void createAsteroid(bool isGold);
+	void setAsteroids();
 	void moveBall();
 
 	std::array<unsigned int, 2> score_;
 	GameSate state_;
 	const unsigned int maxScore_;
-	/*Transform * FighterTR_;
-	Transform * AsteroidTR_;*/
+	Transform * FighterTR_;
 };
 

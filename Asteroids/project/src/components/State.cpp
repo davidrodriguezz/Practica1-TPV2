@@ -12,7 +12,7 @@ void State::update() {
 		if (ih().isKeyDown(SDL_SCANCODE_SPACE)) {
 			switch (state_) {
 			case NEWGAME:
-				moveBall();
+				setAsteroids();
 				state_ = RUNNING;
 				break;
 			case PAUSED:
@@ -54,12 +54,33 @@ void State::render() {
 	}
 
 	// score
-	Texture scoreMsg(
+	/*Texture scoreMsg(
 			sdlutils().renderer(), //
 			std::to_string(score_[0]) + " - " + std::to_string(score_[1]),
 			sdlutils().fonts().at("ARIAL16"), build_sdlcolor(0xffffffff));
-	scoreMsg.render((sdlutils().width() - scoreMsg.width()) / 2, 10);
+	scoreMsg.render((sdlutils().width() - scoreMsg.width()) / 2, 10);*/
 
+}
+
+#include "../entity/Asteroid.h"
+#include "../sdlutils/ecs/Entity.h"
+#include "../sdlutils/asteroids_macros.h"
+#include "../components/Transform.h"
+void State::createAsteroid(bool isGold) {
+	Asteroid* a = static_cast<Asteroid*>(entity_->getMngr()->addEntity());
+	a->init(FighterTR_, isGold);
+}
+
+void State::setAsteroids()
+{
+	for (int i = 0; i < 5; i++)
+	{
+		createAsteroid(false); // clasicos
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		createAsteroid(true); // golds
+	}
 }
 
 void State::moveBall() {
@@ -74,6 +95,6 @@ void State::moveBall() {
 }
 
 void State::init() {
-	//FighterTR_ = entity_->getMngr()->getHandler<Fighter>()->getComponent<Transform>();
+	FighterTR_ = entity_->getMngr()->getHandler<Fighter>()->getComponent<Transform>();
 	//AsteroidTR_ = entity_->getMngr()->getHandler<Asteroid>()->getComponent<Transform>();
 }

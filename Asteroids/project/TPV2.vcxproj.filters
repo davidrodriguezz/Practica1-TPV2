@@ -269,5 +269,11 @@
     <ClInclude Include="src\entity\Bullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\entity\Asteroid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entity\Fighter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
