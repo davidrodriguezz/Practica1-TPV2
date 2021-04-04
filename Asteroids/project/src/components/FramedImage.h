@@ -15,6 +15,7 @@ public:
 		tr_(nullptr), //
 		tex_(tex)
 	{}
+
 	virtual ~FramedImage() {
 	}
 
@@ -34,7 +35,7 @@ public:
 	void update() override {
 		if (time->currTime() >= 50) {
 			avanza();
-			tr_->setRot(tr_->getRot() + 1);
+			tr_->setRot(tr_->getRot() + 1.0f);
 			time->reset();
 		}
 	}

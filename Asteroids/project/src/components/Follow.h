@@ -4,7 +4,6 @@
 #include "../sdlutils/ecs/Entity.h"
 #include "../sdlutils/asteroids_macros.h"
 #include "Transform.h"
-#include <iostream>
 
 typedef unsigned int uint;
 
@@ -14,6 +13,11 @@ public:
 		Component(),
 		tr_(nullptr),
 		caza_(caza)
+	{}
+	Follow(Vector2D center) :
+		Component(),
+		tr_(nullptr),
+		caza_(new Transform(center, Vector2D(), 0.0f, 0.0f, 0.0f))
 	{}
 
 	virtual ~Follow() {
