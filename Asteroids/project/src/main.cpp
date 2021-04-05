@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include <memory>
-#include "checkML.h"
+
 
 #include "game/Game.h"
 
@@ -16,7 +16,6 @@ void start() {
 }
 
 int main(int, char**) {
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // checkea los memory licks
 	try {
 		start();
 	} catch (const std::string &e) { // catch exceptions thrown as strings
