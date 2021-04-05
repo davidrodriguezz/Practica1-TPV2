@@ -53,6 +53,6 @@ struct Bullet_grp;
 #define _GRPS_LIST_  Asteroid_grp,Bullet_grp
 
 // handlers
-struct Fighter;
-#define _HDLRS_LIST_ Fighter
+struct Fighter_st;
+#define _HDLRS_LIST_ Fighter_st
 

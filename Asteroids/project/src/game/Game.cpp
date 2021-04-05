@@ -2,27 +2,11 @@
 
 #include "Game.h"
 
-#include "../components/AICtrl.h"
-#include "../components/BallPhysics.h"
 #include "../components/GameLogic.h"
-#include "../components/Image.h"
-#include "../components/KeyBoardCtrl.h"
-#include "../components/MouseCtrl.h"
-#include "../components/PaddlePhysics.h"
-#include "../components/Rectangle.h"
 #include "../components/State.h"
-#include "../components/Transform.h"
-#include "../components/DeAcceleration.h"
-#include "../components/DisableOnExit.h"
-#include "../components/Follow.h"
-#include "../components/FramedImage.h"
-#include "../components/Generations.h"
-#include "../components/Gun.h"
-#include "../components/Health.h"
 #include "../components/AsteroidsManager.h"
 #include "../sdlutils/ecs/ecs.h"
 #include "../sdlutils/ecs/Entity.h"
-#include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
 
 #include "../sdlutils/ecs/Manager.h"
@@ -45,7 +29,7 @@ void Game::init() {
 
 	auto* caza = static_cast<Fighter*>(mngr_->addEntity());
 	caza->init();
-	mngr_->setHandler<Fighter>(caza);
+	mngr_->setHandler<Fighter_st>(caza);
 
 	auto *gameMngr = mngr_->addEntity();
 	gameMngr->addComponent<State>();

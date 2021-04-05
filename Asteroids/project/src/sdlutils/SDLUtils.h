@@ -167,7 +167,6 @@ private:
 	VirtualTimer timer_; // virtual timer
 };
 
-
 // This macro defines a compact way for using the singleton SDLUtils, instead of
 // writing SDLUtils::instance()->method() we write sdlutils().method()
 //

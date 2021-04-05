@@ -14,7 +14,10 @@ class AsteroidsManager : public Component {
 public:
 	AsteroidsManager() :
 		Component(),
-		state_(nullptr)
+		state_(nullptr),
+		initDone(false),
+		nAst(0),
+		time(nullptr)
 	{}
 
 	virtual ~AsteroidsManager() {
@@ -23,9 +26,7 @@ public:
 	void init() override {
 		state_ = entity_->getComponent<State>();
 		assert(state_ != nullptr);
-		time = new VirtualTimer();	
-		nAst = 0;
-		initDone = false;
+		time = new VirtualTimer();
 	}
 
 	void update() override {
@@ -35,7 +36,7 @@ public:
 				initDone = true;
 			}
 			else if (time->currTime() >= 5000) {
-				//createAsteroid();
+				createAsteroid();
 				time->reset();
 			}
 		}
@@ -55,9 +56,14 @@ public:
 		return a;
 	}
 
+	void deleteAsteroid(Asteroid* a) {
+		a->setActive(false);
+		--nAst;
+	}
+
 	void setAsteroids()
 	{
-		for (int i = 0; i < 1; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			createAsteroid();
 		}
@@ -67,45 +73,45 @@ public:
 		// datos
 		Vector2D pos = a->getComponent<Transform>()->getPos();
 		Vector2D vel = a->getComponent<Transform>()->getVel();
-		uint w = a->getComponent<Transform>()->getW();
-		uint h = a->getComponent<Transform>()->getH();
+		float w = a->getComponent<Transform>()->getW();
+		float h = a->getComponent<Transform>()->getH();
 		int r = sdlutils().rand().nextInt(0, 360 + 1);
 		// desactiva y crea 2 asteroides
-		a->setActive(false);
-		--nAst;
+		deleteAsteroid(a);		
 		uint n = a->getComponent<Generations>()->getGen() - 1;
 		if (n != 0) {
 			// primer asteroide
-			Asteroid* a_ = createAsteroid();
-			a_->getComponent<Generations>()->setGen(n);
-			a_->getComponent<Transform>()->setPos(pos + vel.rotate(r) * 2.0f * w);
-			a_->getComponent<Transform>()->setVel(vel.rotate(r) * 1.1f);
+			Asteroid* a1_ = createAsteroid();
+			a1_->getComponent<Generations>()->setGen(n);
+			a1_->getComponent<Transform>()->setPos(pos + vel.rotate(float(r)) * 2.0f * w);
+			a1_->getComponent<Transform>()->setVel(vel.rotate(float(r)) * 1.1f);
 			// segundo asteroide
 			r = sdlutils().rand().nextInt(0, 360 + 1);
-			a_ = createAsteroid();
-			a_->getComponent<Generations>()->setGen(n);
-			a_->getComponent<Transform>()->setPos(pos + vel.rotate(r) * 2.0f * w);
-			a_->getComponent<Transform>()->setVel(vel.rotate(r) * 1.1f);
+			Asteroid* a2_ = createAsteroid();
+			a2_->getComponent<Generations>()->setGen(n);
+			a2_->getComponent<Transform>()->setPos(pos + vel.rotate(float(r)) * 2.0f * w);
+			a2_->getComponent<Transform>()->setVel(vel.rotate(float(r)) * 1.1f);
 		}
 	}
 
 	void desactivateAsteroids() {
 		for (Entity* asteroid_ : entity_->getMngr()->getEntities())
 		{
-			if (asteroid_->hasGroup<Asteroid_grp>()) {
+			if (asteroid_->isActive() && asteroid_->hasGroup<Asteroid_grp>()) {
 				asteroid_->setActive(false);
 			}
 		}
 	}
 
-	uint getNumAsteroids() { return nAst; };
-	void setReset(bool f) { 
-		initDone = f; 
+	int getNumAsteroids() { return nAst; };
+	void setReset() { 
+		initDone = false; 
 		desactivateAsteroids();
+		nAst = 0;
 	}
 
 private:
-	uint nAst;
+	int nAst;
 	VirtualTimer* time;
 	State* state_;
 	bool initDone;

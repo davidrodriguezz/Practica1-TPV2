@@ -17,10 +17,12 @@ void State::update() {
 			case PAUSED:
 				state_ = RUNNING;
 				break;
-			case GAMEOVER:
-			case GAMEDONE:
+			case GAMEOVER:			
 				state_ = NEWGAME;
 				score_ = 0;
+				break;
+			case GAMEDONE:
+				state_ = NEWGAME;
 				break;
 			default:
 				break;
@@ -65,14 +67,6 @@ void State::render() {
 			sdlutils().fonts().at("ARIAL16"), build_sdlcolor(0xffffffff));
 	scoreMsg.render((sdlutils().width() - scoreMsg.width()) / 2, 10);
 }
-
-//#include "../entity/Fighter.h"
-//void State::setFighter()
-//{
-//	auto* caza = static_cast<Fighter*>(entity_->getMngr()->addEntity());
-//	caza->init();
-//	entity_->getMngr()->setHandler<Fighter>(caza);
-//}
 
 void State::init() {
 	

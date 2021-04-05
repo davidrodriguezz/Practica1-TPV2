@@ -1,10 +1,8 @@
 #pragma once
 
 #include <SDL.h>
-#include <cassert>
 
 #include "../sdlutils/ecs/Component.h"
-#include "../sdlutils/InputHandler.h"
 #include "../sdlutils/ecs/Entity.h"
 #include "Transform.h"
 

@@ -77,8 +77,8 @@ public:
 
 	void reset() {
 		vel_ = Vector2D();
-		pos_ = Vector2D(sdlutils().width() / 2, sdlutils().height() / 2);
-		float rotation_ = 0.0f;
+		pos_ = Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f);
+		rotation_ = 0.0f;
 	}
 
 private:

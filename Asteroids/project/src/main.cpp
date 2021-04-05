@@ -1,10 +1,10 @@
-// This file is part of the course TPV2@UCM - Samir Genaim
+// Practica n.01 TPV2 
+// David Rodriguez Gomez
+// Pablo Cubells Talavera
 
 #include <iostream>
 #include <memory>
-
-
-
+#include "checkML.h"
 
 #include "game/Game.h"
 
@@ -15,9 +15,8 @@ void start() {
 	g.start();
 }
 
-
 int main(int, char**) {
-
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // checkea los memory licks
 	try {
 		start();
 	} catch (const std::string &e) { // catch exceptions thrown as strings

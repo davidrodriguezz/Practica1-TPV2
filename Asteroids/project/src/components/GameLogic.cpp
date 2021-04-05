@@ -22,7 +22,7 @@ GameLogic::~GameLogic() {
 }
 
 void GameLogic::init() {
-	fighter_ = entity_->getMngr()->getHandler<Fighter>()->getComponent<Transform>();
+	fighter_ = entity_->getMngr()->getHandler<Fighter_st>()->getComponent<Transform>();
 	assert(fighter_ != nullptr);
 
 	state_ = entity_->getComponent<State>();
@@ -35,7 +35,7 @@ void GameLogic::init() {
 void GameLogic::update() {
 
 	if (state_->getState() != State::RUNNING)
-		return;
+		return;		
 
 	// check if fighter is hit by any asteroid
 	for (Entity* asteroid_ : entity_->getMngr()->getEntities())
@@ -48,13 +48,12 @@ void GameLogic::update() {
 				Health* h_ = fighter_->getEntity()->getComponent<Health>();
 				if (h_->getLives() > 0) {
 					h_->minusLife();
-					asteroid_->setActive(false); // asteroid destruction
-					aMngr_->setReset(false);
+					aMngr_->setReset();
 					fighter_->reset();
 					state_->setState(State::PAUSED);
 				}
 				else {
-					aMngr_->setReset(false);
+					aMngr_->setReset();
 					fighter_->reset();
 					fighter_->getEntity()->getComponent<Health>()->resetLives();
 					state_->setState(State::GAMEOVER);
@@ -66,25 +65,25 @@ void GameLogic::update() {
 	}
 
 	// check if any asteroid is hit by any bullet
-	for (Entity* asteroid_ : entity_->getMngr()->getEntities())
+	for (Entity* bullet_ : entity_->getMngr()->getEntities())
 	{
-		if (asteroid_->isActive() && asteroid_->hasGroup<Asteroid_grp>()) {
-			Transform* a_ = asteroid_->getComponent<Transform>(); // asteroid
-			for (Entity* bullet_ : entity_->getMngr()->getEntities())
+		if (bullet_->isActive() && bullet_->hasGroup<Bullet_grp>()) {
+			Transform* b_ = bullet_->getComponent<Transform>(); // bullet
+			for (Entity* asteroid_ : entity_->getMngr()->getEntities())
 			{
-				if (bullet_->isActive() && bullet_->hasGroup<Bullet_grp>()) {
-					Transform* b_ = bullet_->getComponent<Transform>(); // bullet
+				if (bullet_->isActive() && asteroid_->isActive() && asteroid_->hasGroup<Asteroid_grp>()) {
+					Transform* a_ = asteroid_->getComponent<Transform>(); // asteroid
 
 					if (Collisions::collidesWithRotation(a_->getPos(), a_->getW(), a_->getH(), a_->getRot(),
 						b_->getPos(), b_->getW(), b_->getH(), b_->getRot())) {
 
-						aMngr_->onCollision(static_cast<Asteroid*>(asteroid_)); // asteroid destruction
-						state_->setScore(10);
 						bullet_->setActive(false); // bullet destruction
+						aMngr_->onCollision(static_cast<Asteroid*>(asteroid_)); // asteroid destruction
+						state_->setScore(10);						
 
 						// comprueba el final de la partida
-						if (aMngr_->getNumAsteroids() == 0) { 
-							aMngr_->setReset(false);
+						if (aMngr_->getNumAsteroids() <= 0) { 
+							aMngr_->setReset();
 							fighter_->reset();
 							state_->setState(State::GAMEDONE);
 						}

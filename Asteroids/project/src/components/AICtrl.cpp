@@ -10,7 +10,6 @@
 
 AICtrl::AICtrl() :
 		ballTR_(nullptr) {
-
 }
 
 AICtrl::~AICtrl() {

@@ -1,0 +1,7 @@
+Grupo_06:
+- David Rodriguez Gomez
+- Pedro Pablo Cubells Talavera
+
+Extras:
+- Puntuación modificada: 10 puntos por asteroide destruido
+- GameLogic = CollisionsManager

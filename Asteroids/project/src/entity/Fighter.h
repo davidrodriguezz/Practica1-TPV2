@@ -17,7 +17,7 @@ public:
 
 	void init() {
 		this->addComponent<Transform>(
-			Vector2D(sdlutils().width() / 2, sdlutils().height() / 2),
+			Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
 			Vector2D(), 20.0f, 20.0f, 0.0f);
 		this->addComponent<Image>(&sdlutils().images().at("fighter"));
 		this->addComponent<FighterCtrl>();

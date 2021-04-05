@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SDL.h>
-#include <cassert>
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/ecs/Component.h"
 #include "../sdlutils/ecs/Entity.h"

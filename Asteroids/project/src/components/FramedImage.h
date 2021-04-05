@@ -1,8 +1,8 @@
 #pragma once
 
 #include "../sdlutils/ecs/Component.h"
-#include "../sdlutils/Texture.h"
 #include "../sdlutils/ecs/Entity.h"
+#include "../sdlutils/Texture.h"
 #include "Transform.h"
 #include "../sdlutils/VirtualTimer.h"
 
@@ -13,7 +13,7 @@ public:
 	FramedImage(Texture* tex) :
 		Component(),
 		tr_(nullptr), //
-		tex_(tex)
+		tex_(tex), col(), row(), time()
 	{}
 
 	virtual ~FramedImage() {
@@ -57,7 +57,7 @@ public:
 private:
 	Transform* tr_;
 	Texture* tex_;
-	uint row;
-	uint col;
+	float row;
+	float col;
 	VirtualTimer* time;
 };

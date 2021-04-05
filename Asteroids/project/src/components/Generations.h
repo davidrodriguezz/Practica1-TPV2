@@ -3,14 +3,15 @@
 #include "../sdlutils/ecs/Component.h"
 #include "../sdlutils/ecs/Entity.h"
 #include "Transform.h"
-//#include <iostream>
+
 typedef unsigned int uint;
 
 class Generations : public Component {
 public:
 	Generations() :
 		Component(),
-		tr_(nullptr)
+		tr_(nullptr), 
+		g_()
 	{}
 
 	virtual ~Generations() {
@@ -19,7 +20,7 @@ public:
 	void init() override {
 		tr_ = entity_->getComponent<Transform>();
 		assert(tr_ != nullptr);
-		g_ = sdlutils().rand().nextInt(1, 3 + 1);		
+		g_ = sdlutils().rand().nextInt(1, 3 + 1);
 		scale();
 	}
 
