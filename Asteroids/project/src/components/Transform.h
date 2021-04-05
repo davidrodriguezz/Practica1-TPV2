@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../sdlutils/ecs/Component.h"
+#include "../sdlutils/SDLUtils.h"
 #include "../utils/Vector2D.h"
 
 class Transform: public Component {
@@ -72,6 +73,12 @@ public:
 
 	void update() override {
 		pos_ = pos_ + vel_;
+	}
+
+	void reset() {
+		vel_ = Vector2D();
+		pos_ = Vector2D(sdlutils().width() / 2, sdlutils().height() / 2);
+		float rotation_ = 0.0f;
 	}
 
 private:

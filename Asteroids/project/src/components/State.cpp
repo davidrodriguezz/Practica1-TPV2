@@ -12,14 +12,13 @@ void State::update() {
 		if (ih().isKeyDown(SDL_SCANCODE_SPACE)) {
 			switch (state_) {
 			case NEWGAME:
-				//setAsteroids();
 				state_ = RUNNING;
 				break;
 			case PAUSED:
-				//moveBall();
 				state_ = RUNNING;
 				break;
 			case GAMEOVER:
+			case GAMEDONE:
 				state_ = NEWGAME;
 				score_ = 0;
 				break;
@@ -39,6 +38,12 @@ void State::render() {
 			auto &t = sdlutils().msgs().at("gameover");
 			t.render((sdlutils().width() - t.width()) / 2,
 					(sdlutils().height() - t.height()) / 2);
+		}
+		// game complete message
+		if (state_ == GAMEDONE) {
+			auto& t = sdlutils().msgs().at("complete");
+			t.render((sdlutils().width() - t.width()) / 2,
+				(sdlutils().height() - t.height()) / 2);
 		}
 
 		// new game message
@@ -60,6 +65,14 @@ void State::render() {
 			sdlutils().fonts().at("ARIAL16"), build_sdlcolor(0xffffffff));
 	scoreMsg.render((sdlutils().width() - scoreMsg.width()) / 2, 10);
 }
+
+//#include "../entity/Fighter.h"
+//void State::setFighter()
+//{
+//	auto* caza = static_cast<Fighter*>(entity_->getMngr()->addEntity());
+//	caza->init();
+//	entity_->getMngr()->setHandler<Fighter>(caza);
+//}
 
 void State::init() {
 	

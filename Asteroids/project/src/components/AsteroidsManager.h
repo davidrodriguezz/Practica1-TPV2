@@ -35,7 +35,7 @@ public:
 				initDone = true;
 			}
 			else if (time->currTime() >= 5000) {
-				createAsteroid();
+				//createAsteroid();
 				time->reset();
 			}
 		}
@@ -57,7 +57,7 @@ public:
 
 	void setAsteroids()
 	{
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 1; i++)
 		{
 			createAsteroid();
 		}
@@ -72,6 +72,7 @@ public:
 		int r = sdlutils().rand().nextInt(0, 360 + 1);
 		// desactiva y crea 2 asteroides
 		a->setActive(false);
+		--nAst;
 		uint n = a->getComponent<Generations>()->getGen() - 1;
 		if (n != 0) {
 			// primer asteroide
@@ -85,10 +86,23 @@ public:
 			a_->getComponent<Generations>()->setGen(n);
 			a_->getComponent<Transform>()->setPos(pos + vel.rotate(r) * 2.0f * w);
 			a_->getComponent<Transform>()->setVel(vel.rotate(r) * 1.1f);
-		}		
+		}
+	}
+
+	void desactivateAsteroids() {
+		for (Entity* asteroid_ : entity_->getMngr()->getEntities())
+		{
+			if (asteroid_->hasGroup<Asteroid_grp>()) {
+				asteroid_->setActive(false);
+			}
+		}
 	}
 
 	uint getNumAsteroids() { return nAst; };
+	void setReset(bool f) { 
+		initDone = f; 
+		desactivateAsteroids();
+	}
 
 private:
 	uint nAst;

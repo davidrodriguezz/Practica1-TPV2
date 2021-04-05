@@ -15,7 +15,8 @@ public:
 		NEWGAME = 0, // just before starting a new game
 		PAUSED, // between rounds
 		RUNNING, // playing
-		GAMEOVER // game over
+		GAMEOVER, // game over
+		GAMEDONE // game complete
 	};
 
 	State() :
@@ -53,6 +54,7 @@ public:
 	}
 
 private:
+	//void setFighter();
 	//std::array<unsigned int, 2> score_;
 	uint score_;
 	GameSate state_;

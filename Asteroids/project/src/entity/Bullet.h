@@ -1,6 +1,8 @@
 #pragma once
 #include "../sdlutils/ecs/Entity.h"
 #include "../components/Transform.h"
+//#include "../components/Image.h"
+//#include "../components/DisableOnExit.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/ecs/Manager.h"
 
@@ -8,7 +10,7 @@ class Bullet : public Entity
 {
 public:
 	Bullet(Manager* mngr) : Entity(mngr) {};
-	~Bullet() {};
+	~Bullet() { this->setGroup<Bullet_grp>(false); };
 
 	void init() {
 		Transform* caza = this->getMngr()->getHandler<Fighter>()->getComponent<Transform>();

@@ -11,7 +11,7 @@ class Asteroid : public Entity
 {
 public:
 	Asteroid(Manager* mngr) : Entity(mngr) {};
-	~Asteroid() {};
+	~Asteroid() { this->setGroup<Asteroid_grp>(false); };
 
 	void init(bool isGold) {
 		Transform* caza = this->getMngr()->getHandler<Fighter>()->getComponent<Transform>();
