@@ -2,21 +2,37 @@
 
 #include "Game.h"
 
-#include "../components/GameLogic.h"
-#include "../components/State.h"
-#include "../components/AsteroidsManager.h"
-#include "../sdlutils/ecs/ecs.h"
-#include "../sdlutils/ecs/Entity.h"
-#include "../sdlutils/SDLUtils.h"
+#include "../components/Image.h"
+#include "../components/Transform.h"
 
-#include "../sdlutils/ecs/Manager.h"
+#include "../ecs/ecs.h"
+#include "../ecs/Entity.h"
+#include "../ecs/Manager.h"
+
+#include "../sdlutils/SDLUtils.h"
+#include "../sdlutils/InputHandler.h"
+
 #include "../utils/Vector2D.h"
 
-// Asteroids
 #include "../entity/Fighter.h"
+
+#include "AsteroidsSystem.h"
+#include "BulletsSystem.h"
+#include "FighterSystem.h"
+#include "FighterGunSystem.h"
+#include "CollisionSystem.h"
+#include "GameCtrlSystem.h"
+#include "RenderSystem.h"
 
 Game::Game() {
 	mngr_.reset(new Manager());
+	AsteroidsSystem_ = nullptr;
+	BulletsSystem_ = nullptr;
+	FighterSystem_ = nullptr;
+	FighterGunSystem_ = nullptr;
+	CollisionSystem_ = nullptr;
+	GameCtrlSystem_ = nullptr;
+	RenderSystem_ = nullptr;
 }
 
 Game::~Game() {
@@ -27,14 +43,13 @@ void Game::init() {
 	SDLUtils::init("Asteroids", 800, 600,
 			"resources/config/asteroids.resources.json");
 
-	auto* caza = static_cast<Fighter*>(mngr_->addEntity());
-	caza->init();
-	mngr_->setHandler<Fighter_st>(caza);
-
-	auto *gameMngr = mngr_->addEntity();
-	gameMngr->addComponent<State>();
-	gameMngr->addComponent<AsteroidsManager>();
-	gameMngr->addComponent<GameLogic>();
+	AsteroidsSystem_ = mngr_->addSystem<AsteroidsSystem>();
+	BulletsSystem_ = mngr_->addSystem<BulletsSystem>();
+	FighterSystem_ = mngr_->addSystem<FighterSystem>();
+	FighterGunSystem_ = mngr_->addSystem<FighterGunSystem>();
+	CollisionSystem_ = mngr_->addSystem<CollisionSystem>();
+	GameCtrlSystem_ = mngr_->addSystem<GameCtrlSystem>();
+	RenderSystem_ = mngr_->addSystem<RenderSystem>();
 }
 
 void Game::start() {
@@ -55,11 +70,19 @@ void Game::start() {
 			continue;
 		}
 
-		mngr_->update();
 		mngr_->refresh();
 
+		AsteroidsSystem_->update();
+		BulletsSystem_->update();
+		FighterSystem_->update();
+		FighterGunSystem_->update();
+		CollisionSystem_->update();
+		GameCtrlSystem_->update();
+		
+		mngr_->flushMsgsQueue();
+
 		sdlutils().clearRenderer();
-		mngr_->render();
+		RenderSystem_->update();
 		sdlutils().presentRenderer();
 
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;
@@ -69,4 +92,3 @@ void Game::start() {
 	}
 
 }
-

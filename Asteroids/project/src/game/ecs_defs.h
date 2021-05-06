@@ -56,3 +56,23 @@ struct Bullet_grp;
 struct Fighter_st;
 #define _HDLRS_LIST_ Fighter_st
 
+// systems
+class AsteroidsSystem;
+class BulletsSystem;
+class FighterSystem;
+class FighterGunSystem;
+class CollisionSystem;
+class GameCtrlSystem;
+class RenderSystem;
+class CollisionSystem;
+#define _SYS_LIST_ \
+		AsteroidsSystem, \
+		BulletsSystem, \
+		FighterSystem, \
+		FighterGunSystem, \
+		CollisionSystem, \
+		GameCtrlSystem, \
+		RenderSystem
+
+// messages
+#include "messages.h"

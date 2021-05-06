@@ -8,6 +8,7 @@
 // when you are not using the methods of a class, just
 // say that it exists, that saves time when parsing files
 class Manager;
+class System;
 
 class Game {
 public:
@@ -17,5 +18,11 @@ public:
 	void start();
 private:
 	std::unique_ptr<Manager> mngr_;
+	System *AsteroidsSystem_;
+	System *BulletsSystem_;
+	System *FighterSystem_;
+	System *FighterGunSystem_;
+	System *CollisionSystem_;
+	System *GameCtrlSystem_;
+	System *RenderSystem_;
 };
-
