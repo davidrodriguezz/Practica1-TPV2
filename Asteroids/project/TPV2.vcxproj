@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\components\AICtrl.cpp" />
     <ClCompile Include="src\components\AsteroidsManager.cpp" />
     <ClCompile Include="src\components\DeAcceleration.cpp" />
     <ClCompile Include="src\components\DisableOnExit.cpp" />
@@ -35,7 +34,14 @@
     <ClCompile Include="src\components\State.cpp" />
     <ClCompile Include="src\ecs\Entity.cpp" />
     <ClCompile Include="src\ecs\Manager.cpp" />
+    <ClCompile Include="src\game\AsteroidsSystem.cpp" />
+    <ClCompile Include="src\game\BulletsSystem.cpp" />
+    <ClCompile Include="src\game\CollisionSystem.cpp" />
+    <ClCompile Include="src\game\FighterGunSystem.cpp" />
+    <ClCompile Include="src\game\FighterSystem.cpp" />
     <ClCompile Include="src\game\Game.cpp" />
+    <ClCompile Include="src\game\GameCtrlSystem.cpp" />
+    <ClCompile Include="src\game\RenderSystem.cpp" />
     <ClCompile Include="src\json\json_demo.cpp" />
     <ClCompile Include="src\json\somplejson_demo.cpp" />
     <ClCompile Include="src\json\JSON.cpp" />
@@ -50,10 +56,7 @@
     <ClCompile Include="src\utils\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\components\AICtrl.h" />
     <ClInclude Include="src\components\AsteroidsManager.h" />
-    <ClInclude Include="src\components\BallPhysics.h" />
-    <ClInclude Include="src\components\Bounce.h" />
     <ClInclude Include="src\components\DeAcceleration.h" />
     <ClInclude Include="src\components\DisableOnExit.h" />
     <ClInclude Include="src\components\FighterCtrl.h" />
@@ -67,8 +70,6 @@
     <ClInclude Include="src\components\Image.h" />
     <ClInclude Include="src\components\KeyBoardCtrl.h" />
     <ClInclude Include="src\components\MouseCtrl.h" />
-    <ClInclude Include="src\components\PaddlePhysics.h" />
-    <ClInclude Include="src\components\Rectangle.h" />
     <ClInclude Include="src\components\ShowAtOppositeSide.h" />
     <ClInclude Include="src\components\State.h" />
     <ClInclude Include="src\components\Transform.h" />

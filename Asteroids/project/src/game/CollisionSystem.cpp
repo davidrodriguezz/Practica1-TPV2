@@ -1,41 +1,22 @@
-// This file is part of the course TPV2@UCM - Samir Genaim
+#include "CollisionSystem.h"
 
-#include "GameLogic.h"
-
-#include <cassert>
-#include "../ecs/Entity.h"
-#include "../ecs/Manager.h"
-#include "../utils/Collisions.h"
-#include "State.h"
-#include "Transform.h"
-#include "Health.h"
-
-GameLogic::GameLogic() :
-		fighter_(nullptr), //
-		state_(nullptr),
-		aMngr_(nullptr)
+CollisionsSystem::CollisionsSystem()
 {
 }
 
-GameLogic::~GameLogic() {
-
+CollisionsSystem::~CollisionsSystem()
+{
 }
 
-void GameLogic::init() {
-	fighter_ = entity_->getMngr()->getHandler<Fighter_st>()->getComponent<Transform>();
-	assert(fighter_ != nullptr);
-
-	state_ = entity_->getComponent<State>();
-	assert(state_ != nullptr);
-	
-	aMngr_ = entity_->getComponent<AsteroidsManager>();
-	assert(aMngr_ != nullptr);
+void CollisionsSystem::init()
+{
 }
 
-void GameLogic::update() {
-
-	if (state_->getState() != State::RUNNING)
-		return;		
+void CollisionsSystem::update()
+{
+	if (manager_->getSystem<GameManagerSystem>()->getState()
+		!= GameManagerSystem::RUNNING)
+		return;
 
 	// check if fighter is hit by any asteroid
 	for (Entity* asteroid_ : entity_->getMngr()->getEntities())
@@ -94,4 +75,8 @@ void GameLogic::update() {
 			}
 		}
 	}
+}
+
+void CollisionsSystem::receive(const Message&)
+{
 }

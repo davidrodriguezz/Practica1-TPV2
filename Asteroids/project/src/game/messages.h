@@ -3,14 +3,22 @@
 #pragma once
 #include <SDL_stdinc.h>
 
-#include "GameManagerSystem.h"
+#include "GameCtrlSystem.h"
 
 enum MsgId : Uint8 {
-	_BALL_EXIT, _ROUND_START, _ROUND_OVER, _GAME_OVER
+	_BULLET_SHOOT,		// fighter dispara un bullet
+	_BULLET_ASTEROID,	// colisionan un bullet y un asteroid
+	_FIGHTER_ASTEROID,	// colisionan fighter y un asteroid
+	_ROUND_START,		// comienza la accion
+	_PAUSE_START,		// entra en pausa
+	_PAUSE_OVER,		// termina la pausa
+	_ROUND_OVER,		// todos los asteroides destruidos
+	_GAME_OVER,			// te quedas sin vidas
+	_GAME_COMPLETE		// juego completado
 };
 
 struct BallExitMsg {
-	GameManagerSystem::Side side_;
+	GameCtrlSystem::Side side_;
 };
 
 struct SomeOtherMsg { // just for the example

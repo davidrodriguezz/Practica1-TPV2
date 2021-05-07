@@ -1,17 +1,17 @@
 #pragma once
 #include "../ecs/System.h"
 
-struct Entity;
+struct Transform;
 
-class PaddlesSystem: public System {
+class FighterSystem: public System {
 public:
-	PaddlesSystem();
-	virtual ~PaddlesSystem();
+	FighterSystem();
+	virtual ~FighterSystem();
 	void init() override;
 	void update() override;
-private:
-	void movePaddle(Entity *e);
 
-	Entity *leftPaddle_;
-	Entity *rightPaddle_;
+	void onCollisionWithAsteroid(Entity* a);
+
+private:
+	Transform* fighter_;
 };

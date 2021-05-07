@@ -1,21 +1,24 @@
 #pragma once
 #include "../ecs/System.h"
+#include "../entity/Asteroid.h"
+#include "../sdlutils/VirtualTimer.h"
 
-struct Transform;
-class SoundEffect;
+//struct Transform;
+//class SoundEffect;
 
-class BallSystem: public System {
+class AsteroidsSystem: public System {
 public:
-	BallSystem();
-	virtual ~BallSystem();
+	AsteroidsSystem();
+	virtual ~AsteroidsSystem();
 	void init() override;
 	void update() override;
 
-	void resetBall();
-	void initBall();
+	void addAsteroids(int n);
+	void onCollisionWithBullet(Entity* a, Entity* b);
 	void receive(const Message&) override;
 
 private:
-	Transform *ballTr_;
-	SoundEffect *wallHit_;
+	std::size_t numOfAsteroids_;
+	VirtualTimer* time;
+	//SoundEffect* sound = nullptr;
 };
