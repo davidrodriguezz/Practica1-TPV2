@@ -1,7 +1,7 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
 
 #pragma once
-#include "../sdlutils/ecs/Component.h"
+#include "../ecs/Component.h"
 
 class Vector2D;
 class Transform;

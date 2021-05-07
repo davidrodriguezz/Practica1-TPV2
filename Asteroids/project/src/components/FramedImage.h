@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../sdlutils/ecs/Component.h"
-#include "../sdlutils/ecs/Entity.h"
+#include "../ecs/Component.h"
+#include "../ecs/Entity.h"
 #include "../sdlutils/Texture.h"
 #include "Transform.h"
 #include "../sdlutils/VirtualTimer.h"

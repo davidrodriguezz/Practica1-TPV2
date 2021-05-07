@@ -1,7 +1,7 @@
 #pragma once
-#include "../sdlutils/ecs/Entity.h"
+#include "../ecs/Entity.h"
 #include "../sdlutils/SDLUtils.h"
-#include "../sdlutils/ecs/Manager.h"
+#include "../ecs/Manager.h"
 #include "../components/Transform.h"
 #include "../components/Image.h"
 #include "../components/DisableOnExit.h"

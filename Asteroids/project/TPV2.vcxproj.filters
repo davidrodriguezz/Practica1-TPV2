@@ -81,12 +81,6 @@
     <ClCompile Include="src\utils\Vector2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\sdlutils\ecs\Manager.cpp">
-      <Filter>Source Files\ecs</Filter>
-    </ClCompile>
-    <ClCompile Include="src\sdlutils\ecs\Entity.cpp">
-      <Filter>Source Files\ecs</Filter>
-    </ClCompile>
     <ClCompile Include="src\components\DeAcceleration.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
@@ -120,9 +114,6 @@
     <ClCompile Include="src\components\State.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
-    <ClCompile Include="src\game\Game.cpp">
-      <Filter>Source Files\game</Filter>
-    </ClCompile>
     <ClCompile Include="src\components\AICtrl.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
@@ -130,6 +121,21 @@
       <Filter>Source Files\components</Filter>
     </ClCompile>
     <ClCompile Include="src\components\AsteroidsManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ecs\Entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ecs\Manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\json\json_demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sdlutils\RandomNumberGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -179,27 +185,6 @@
     <ClInclude Include="src\utils\Vector2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\sdlutils\ecs\Manager.h">
-      <Filter>Header Files\ecs</Filter>
-    </ClInclude>
-    <ClInclude Include="src\sdlutils\ecs\mpl.h">
-      <Filter>Header Files\ecs</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game.h">
-      <Filter>Header Files\ecs</Filter>
-    </ClInclude>
-    <ClInclude Include="src\sdlutils\ecs\Entity.h">
-      <Filter>Header Files\ecs</Filter>
-    </ClInclude>
-    <ClInclude Include="src\sdlutils\ecs\ecs_defs_example.h">
-      <Filter>Header Files\ecs</Filter>
-    </ClInclude>
-    <ClInclude Include="src\sdlutils\ecs\ecs.h">
-      <Filter>Header Files\ecs</Filter>
-    </ClInclude>
-    <ClInclude Include="src\sdlutils\ecs\Component.h">
-      <Filter>Header Files\ecs</Filter>
-    </ClInclude>
     <ClInclude Include="src\components\Bounce.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
@@ -245,12 +230,6 @@
     <ClInclude Include="src\components\Transform.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\ecs_defs.h">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
-    <ClInclude Include="src\game\Game.h">
-      <Filter>Header Files\game</Filter>
-    </ClInclude>
     <ClInclude Include="src\components\BallPhysics.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
@@ -280,6 +259,66 @@
     </ClInclude>
     <ClInclude Include="src\components\AsteroidsManager.h">
       <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\FighterCtrlKeys.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ecs\Component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ecs\ecs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ecs\ecs_defs_example.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ecs\Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ecs\Manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ecs\mpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ecs\System.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\AsteroidsSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\BulletsSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\CollisionSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\ecs_defs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\FighterGunSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\FighterSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\GameCtrlSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\messages.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\RenderSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\json\json_demo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sdlutils\Font.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

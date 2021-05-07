@@ -2,9 +2,9 @@
 
 #include "State.h"
 
-#include "../sdlutils/ecs/Entity.h"
+#include "../ecs/Entity.h"
 #include "../sdlutils/InputHandler.h"
-#include "../sdlutils/ecs/Manager.h"
+#include "../ecs/Manager.h"
 #include "Transform.h"
 
 void State::update() {

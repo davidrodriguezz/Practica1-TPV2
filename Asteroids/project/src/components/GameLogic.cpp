@@ -3,8 +3,8 @@
 #include "GameLogic.h"
 
 #include <cassert>
-#include "../sdlutils/ecs/Entity.h"
-#include "../sdlutils/ecs/Manager.h"
+#include "../ecs/Entity.h"
+#include "../ecs/Manager.h"
 #include "../utils/Collisions.h"
 #include "State.h"
 #include "Transform.h"

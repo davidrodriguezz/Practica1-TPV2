@@ -2,8 +2,8 @@
 
 #include <SDL.h>
 
-#include "../sdlutils/ecs/Component.h"
-#include "../sdlutils/ecs/Entity.h"
+#include "../ecs/Component.h"
+#include "../ecs/Entity.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/Texture.h"
 #include "Transform.h"

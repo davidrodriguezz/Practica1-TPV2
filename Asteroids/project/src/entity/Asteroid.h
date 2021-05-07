@@ -1,5 +1,5 @@
 #pragma once
-#include "../sdlutils/ecs/Entity.h"
+#include "../ecs/Entity.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../components/Transform.h"
 #include "../components/ShowAtOppositeSide.h"

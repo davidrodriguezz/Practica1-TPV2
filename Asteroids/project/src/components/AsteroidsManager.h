@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../sdlutils/ecs/Manager.h"
-#include "../sdlutils/ecs/Component.h"
-#include "../sdlutils/ecs/Entity.h"
+#include "../ecs/Manager.h"
+#include "../ecs/Component.h"
+#include "../ecs/Entity.h"
 #include "../sdlutils/asteroids_macros.h"
 #include "../sdlutils/VirtualTimer.h"
 #include "../entity/Asteroid.h"

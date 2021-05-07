@@ -3,7 +3,7 @@
 #pragma once
 #include <array>
 
-#include "../sdlutils/ecs/Component.h"
+#include "../ecs/Component.h"
 #include "../sdlutils/SDLUtils.h"
 
 class Transform;

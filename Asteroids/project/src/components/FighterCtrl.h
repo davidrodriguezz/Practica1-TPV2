@@ -2,9 +2,9 @@
 
 #include <SDL.h>
 
-#include "../sdlutils/ecs/Component.h"
+#include "../ecs/Component.h"
 #include "../sdlutils/InputHandler.h"
-#include "../sdlutils/ecs/Entity.h"
+#include "../ecs/Entity.h"
 #include "../sdlutils/SDLUtils.h"
 #include "Transform.h"
 

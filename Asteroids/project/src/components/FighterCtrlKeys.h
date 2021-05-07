@@ -7,7 +7,7 @@
 
 struct FighterCtrlKeys: Component {
 
-	PaddleCtrlKeys(SDL_Scancode up, SDL_Scancode down, SDL_Scancode stop,
+	FighterCtrlKeys(SDL_Scancode up, SDL_Scancode down, SDL_Scancode stop,
 			float speed) :
 			up_(up), //
 			down_(down), //
