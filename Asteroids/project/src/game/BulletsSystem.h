@@ -19,7 +19,7 @@ public:
 
 private:
 	std::size_t numOfAsteroids_;
-	
+	VirtualTimer* time;
 	//SoundEffect* sound = nullptr;
 
 	void createBullet();
