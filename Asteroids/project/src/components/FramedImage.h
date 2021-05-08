@@ -1,41 +1,40 @@
 #pragma once
 
-#include "../ecs/Component.h"
-#include "../ecs/Entity.h"
-#include "../sdlutils/Texture.h"
 #include "Transform.h"
+#include "../sdlutils/Texture.h"
 #include "../sdlutils/VirtualTimer.h"
 
 typedef unsigned int uint;
 
 class FramedImage : public Component {
 public:
-	FramedImage(Texture* tex) :
+	FramedImage(Texture* tex, Transform* tr) :
 		Component(),
-		tr_(nullptr), //
+		tr_(tr), //
 		tex_(tex), col(), row(), time()
-	{}
+	{
+		init();
+	}
 
 	virtual ~FramedImage() {
 	}
 
-	void init() override {
+	void init() {
 		row = col = 0;
 		time = new VirtualTimer();
-		tr_ = entity_->getComponent<Transform>();
 		assert(tr_ != nullptr);
 	}
 
-	void render() override {
-		SDL_Rect dest = build_sdlrect(tr_->getPos(), tr_->getW(), tr_->getH());		
+	void render() {
+		SDL_Rect dest = build_sdlrect(tr_->pos_, tr_->width_, tr_->height_);		
 		SDL_Rect clip = build_sdlrect(float(row), float(col), tex_->width() / 6.0f, tex_->height() / 5.0f);
-		tex_->render(clip, dest, tr_->getRot());
+		tex_->render(clip, dest, tr_->rotation_);
 	}
 	
-	void update() override {
+	void update() {
 		if (time->currTime() >= 50) {
 			avanza();
-			tr_->setRot(tr_->getRot() + 1.0f);
+			tr_->rotation_ = tr_->rotation_ + 1.0f;
 			time->reset();
 		}
 	}

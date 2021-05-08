@@ -53,8 +53,8 @@ struct Bullet_grp;
 #define _GRPS_LIST_  Asteroid_grp,Bullet_grp
 
 // handlers
-struct Fighter_st;
-#define _HDLRS_LIST_ Fighter_st
+struct fighter;
+#define _HDLRS_LIST_ fighter
 
 // systems
 class AsteroidsSystem;
@@ -76,3 +76,12 @@ class CollisionSystem;
 
 // messages
 #include "messages.h"
+
+class Manager;
+class Entity;
+class Component;
+
+// these two should be used to get a component via an
+// entity e provided as a parameter
+#define GETCMP2(e,type,mngr) GETCMP3(e,type,mngr)
+#define GETCMP3(e,type,mngr) mngr->getComponent<type>(e)

@@ -9,33 +9,36 @@ typedef unsigned int uint;
 
 class Follow : public Component {
 public:
-	Follow(Transform* caza) :
+	Follow(Transform* caza, Transform* tr) :
 		Component(),
-		tr_(nullptr),
-		caza_(caza)
-	{}
-	Follow(Vector2D center) :
+		objetive_(caza),
+		tr_(tr)
+	{
+		init();
+	}
+	Follow(Vector2D center, Transform* tr) :
 		Component(),
-		tr_(nullptr),
-		caza_(new Transform(center, Vector2D(), 0.0f, 0.0f, 0.0f))
-	{}
+		objetive_(new Transform(center, Vector2D(), 0.0f, 0.0f, 0.0f)),
+		tr_(tr)
+	{
+		init();
+	}
 
 	virtual ~Follow() {
 	}
 
-	void init() override {
-		tr_ = entity_->getComponent<Transform>();
+	void init() {
 		assert(tr_ != nullptr);
-		tr_->setVel(follow(tr_->getPos(), caza_->getPos()));
+		tr_->vel_.set(follow(tr_->pos_, objetive_->pos_));
 	}
 
-	void update() override {
-		Vector2D vel = tr_->getVel();
-		float a = angle(vel, tr_->getPos(), caza_->getPos());
-		tr_->setVel(vel.rotate(a > 0 ? 1.0f : -1.0f));
+	void update() {
+		Vector2D vel = tr_->vel_;
+		float a = angle(vel, tr_->pos_, objetive_->pos_);
+		tr_->vel_.set(vel.rotate(a > 0 ? 1.0f : -1.0f));
 	}
 
 private:
 	Transform* tr_;
-	Transform* caza_;
+	Transform* objetive_;
 };

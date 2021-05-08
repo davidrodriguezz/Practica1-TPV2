@@ -70,4 +70,3 @@ constexpr std::size_t maxHdlr = HdlrsList::size;
 constexpr std::size_t maxSystem = SysList::size;
 
 }
-
