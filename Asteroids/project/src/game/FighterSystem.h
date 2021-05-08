@@ -13,5 +13,5 @@ public:
 	void onCollisionWithAsteroid(Entity* a);
 
 private:
-	Transform* fighter_;
+	Entity* fighter_;
 };

@@ -21,4 +21,8 @@ private:
 	std::size_t numOfAsteroids_;
 	VirtualTimer* time;
 	//SoundEffect* sound = nullptr;
+
+	void createAsteroid(bool gold);
+	bool rndType();
+	Vector2D rndCenter();
 };
