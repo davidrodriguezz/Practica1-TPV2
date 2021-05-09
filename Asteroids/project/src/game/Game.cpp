@@ -14,8 +14,6 @@
 
 #include "../utils/Vector2D.h"
 
-#include "../entity/Fighter.h"
-
 //#include "AsteroidsSystem.h"
 //#include "BulletsSystem.h"
 #include "FighterSystem.h"

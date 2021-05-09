@@ -42,8 +42,8 @@ void GameLogic::update() {
 	{
 		if (asteroid_->isActive() && asteroid_->hasGroup<Asteroid_grp>()) {
 			Transform* a_ = asteroid_->getComponent<Transform>();
-			if (Collisions::collidesWithRotation(fighter_->getPos(), fighter_->getW(), fighter_->getH(), fighter_->getRot(),
-				a_->getPos(), a_->getW(), a_->getH(), a_->getRot())) {
+			if (Collisions::collidesWithRotation(fighter_->pos_, fighter_->width_, fighter_->height_, fighter_->getRot(),
+				a_->pos_, a_->width_, a_->height_, a_->getRot())) {
 
 				/*Health* h_ = fighter_->getEntity()->getComponent<Health>();
 				if (h_->getLives() > 0) {
@@ -74,8 +74,8 @@ void GameLogic::update() {
 				if (bullet_->isActive() && asteroid_->isActive() && asteroid_->hasGroup<Asteroid_grp>()) {
 					Transform* a_ = asteroid_->getComponent<Transform>(); // asteroid
 
-					if (Collisions::collidesWithRotation(a_->getPos(), a_->getW(), a_->getH(), a_->getRot(),
-						b_->getPos(), b_->getW(), b_->getH(), b_->getRot())) {
+					if (Collisions::collidesWithRotation(a_->pos_, a_->width_, a_->height_, a_->getRot(),
+						b_->pos_, b_->width_, b_->height_, b_->getRot())) {
 
 						//bullet_->setActive(false); // bullet destruction
 						//aMngr_->onCollision(static_cast<Asteroid*>(asteroid_)); // asteroid destruction

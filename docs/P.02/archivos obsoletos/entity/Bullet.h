@@ -15,7 +15,7 @@ public:
 	void init() {
 		Transform* caza = this->getMngr()->getHandler<Fighter_st>()->getComponent<Transform>();
 		sdlutils().soundEffects().at("fire").play();
-		Vector2D bPos = caza->getPos() + Vector2D(caza->getW() / 2.0f, caza->getH() / 2.0f) - Vector2D(0.0f, caza->getH() / 2.0f + 5.0f + 12.0f).rotate(caza->getRot()) - Vector2D(2.0f, 10.0f);
+		Vector2D bPos = caza->pos_ + Vector2D(caza->width_ / 2.0f, caza->height_ / 2.0f) - Vector2D(0.0f, caza->height_ / 2.0f + 5.0f + 12.0f).rotate(caza->getRot()) - Vector2D(2.0f, 10.0f);
 		Vector2D bVel = Vector2D(0.0f, -1.0f).rotate(caza->getRot()) * (caza->getVel().magnitude() + 5.0f);
 		this->addComponent<Transform>(bPos, bVel, 5.0f, 20.0f, caza->getRot());
 		this->addComponent<Image>(&sdlutils().images().at("fire"));

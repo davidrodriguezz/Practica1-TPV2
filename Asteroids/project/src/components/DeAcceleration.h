@@ -14,12 +14,12 @@ public:
 	virtual ~DeAcceleration() {
 	}
 
-	void init() override {
+	void init(){
 		tr_ = entity_->getComponent<Transform>();
 		assert(tr_ != nullptr);
 	}
 
-	void update() override {
+	void update(){
 		tr_->setVel(tr_->getVel() * 0.995f);
 	}
 

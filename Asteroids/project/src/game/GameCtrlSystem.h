@@ -13,7 +13,8 @@ public:
 		NEWGAME = 0, // just before starting a new game
 		PAUSED, // between rounds
 		RUNNING, // playing
-		GAMEOVER // game over
+		GAMEOVER, // game over
+		GAMEDONE // game completed
 	};
 
 	GameCtrlSystem();

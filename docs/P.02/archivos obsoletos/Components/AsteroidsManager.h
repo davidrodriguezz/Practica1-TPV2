@@ -71,10 +71,10 @@ public:
 
 	void onCollision(Asteroid* a) {
 		// datos
-		Vector2D pos = a->getComponent<Transform>()->getPos();
+		Vector2D pos = a->getComponent<Transform>()->pos_;
 		Vector2D vel = a->getComponent<Transform>()->getVel();
-		float w = a->getComponent<Transform>()->getW();
-		float h = a->getComponent<Transform>()->getH();
+		float w = a->getComponent<Transform>()->width_;
+		float h = a->getComponent<Transform>()->height_;
 		int r = sdlutils().rand().nextInt(0, 360 + 1);
 		// desactiva y crea 2 asteroides
 		deleteAsteroid(a);		

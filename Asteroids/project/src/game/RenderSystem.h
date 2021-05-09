@@ -4,6 +4,7 @@
 
 #include "../components/Image.h"
 #include "../components/FramedImage.h"
+class Entity;
 struct Transform;
 
 class RenderSystem : public System {

@@ -18,11 +18,11 @@ public:
 	virtual ~Gun() {
 	}
 
-	void init() override {
+	void init(){
 		time = new VirtualTimer();	
 	}
 
-	void update() override {
+	void update(){
 		if (ih().keyDownEvent()) {
 			if (ih().isKeyDown(SDL_SCANCODE_DOWN) || ih().isKeyDown(SDL_SCANCODE_S) && (time->currTime() >= 250)) {
 				createBullet();

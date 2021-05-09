@@ -14,14 +14,14 @@ public:
 	virtual ~MouseCtrl() {
 	}
 
-	void init() override {
+	void init() {
 		tr_ = entity_->getComponent<Transform>();
 		assert(tr_ != nullptr);
 	}
 
-	void update() override {
+	void update() {
 		if (ih().mouseMotionEvent()) {
-			auto &pos = tr_->getPos();
+			auto &pos = tr_->pos_;
 			pos.setY(float(ih().getMousePos().second));
 		}
 	}

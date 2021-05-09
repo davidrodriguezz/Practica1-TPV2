@@ -31,11 +31,11 @@ void RenderSystem::update()
 	drawIMG(GETCMP3(fighter_, Transform, manager_), GETCMP3(fighter_, Image, manager_));
 	// render las balas: son un grupo + igual al caza
 	// render de asteroides: igual a las balas
-	for (auto& e : manager_->getEnteties()) {
+	for (auto& e : manager_->getEntities()) {
 		if (manager_->hasGroup<Asteroid_grp>(e))
-			drawFrame(GETCMP3(fighter_, FramedImage, manager_));
+			drawFrame(GETCMP3(e, FramedImage, manager_));
 	}
-	/*for (auto e : manager_->getEnteties()) {
+	/*for (auto e : manager_->getEntities()) {
 		e->render();
 	}*/
 

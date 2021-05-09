@@ -17,14 +17,14 @@ public:
 	virtual ~Generations() {
 	}
 
-	void init() override {
+	void init(){
 		tr_ = entity_->getComponent<Transform>();
 		assert(tr_ != nullptr);
 		g_ = sdlutils().rand().nextInt(1, 3 + 1);
 		scale();
 	}
 
-	void update() override {
+	void update(){
 		//std::cout << sdlutils().rand().nextInt(0, 3) + 1 << std::endl;
 	}
 

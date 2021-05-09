@@ -31,20 +31,20 @@ public:
 		lives_ = 3;
 	}
 
-	void init() override {
+	void init() {
 		tr_ = entity_->getComponent<Transform>();
 		assert(tr_ != nullptr);
 		lives_ = 3;
 		tex_ = &sdlutils().images().at("heart");
 	}
 
-	void render() override {
-		Vector2D pos(tr_->getW(), tr_->getH()); // window position is like one fighter cube
-		SDL_Rect dest = build_sdlrect(pos, tr_->getW(), tr_->getH());
+	void render() {
+		Vector2D pos(tr_->width_, tr_->height_); // window position is like one fighter cube
+		SDL_Rect dest = build_sdlrect(pos, tr_->width_, tr_->height_);
 		for (uint i = 0; i < lives_; i++) {
 			tex_->render(dest);
 
-			dest.x = dest.x + int(tr_->getW()) + 10;
+			dest.x = dest.x + int(tr_->width_) + 10;
 		}
 	}
 

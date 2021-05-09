@@ -23,12 +23,12 @@ public:
 		speed_ = speed;
 	}
 
-	void init() override {
+	void init() {
 		tr_ = entity_->getComponent<Transform>();
 		assert(tr_ != nullptr);
 	}
 
-	void update() override {
+	void update() {
 		if (ih().keyDownEvent()) {
 			auto &vel = tr_->getVel();
 			if (ih().isKeyDown(SDL_SCANCODE_UP)) {

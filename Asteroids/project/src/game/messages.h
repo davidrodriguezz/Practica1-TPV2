@@ -17,9 +17,9 @@ enum MsgId : Uint8 {
 	_GAME_COMPLETE		// juego completado
 };
 
-struct BallExitMsg {
-	GameCtrlSystem::Side side_;
-};
+//struct BallExitMsg {
+//	GameCtrlSystem::Side side_;
+//};
 
 struct SomeOtherMsg { // just for the example
 	int otherData_;
@@ -28,7 +28,7 @@ struct SomeOtherMsg { // just for the example
 struct Message {
 	MsgId id_;
 	union {
-		BallExitMsg ballExit_;
+		//BallExitMsg ballExit_;
 		SomeOtherMsg otherMsg_; // just for the example
 	};
 };

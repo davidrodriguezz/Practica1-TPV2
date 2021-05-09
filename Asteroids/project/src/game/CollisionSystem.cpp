@@ -1,4 +1,7 @@
 #include "CollisionSystem.h"
+#include "../ecs/Manager.h"
+#include "../utils/Collisions.h"
+#include "../components/Transform.h"
 
 CollisionsSystem::CollisionsSystem()
 {
@@ -14,17 +17,18 @@ void CollisionsSystem::init()
 
 void CollisionsSystem::update()
 {
-	if (manager_->getSystem<GameManagerSystem>()->getState()
-		!= GameManagerSystem::RUNNING)
-		return;
+	if (manager_->getSystem<GameCtrlSystem>()->getState()
+		!= GameCtrlSystem::RUNNING)
+			return;
 
 	// check if fighter is hit by any asteroid
-	for (Entity* asteroid_ : entity_->getMngr()->getEntities())
+	for (Entity* asteroid_ : manager_->getEntities())
 	{
-		if (asteroid_->isActive() && asteroid_->hasGroup<Asteroid_grp>()) {
-			Transform* a_ = asteroid_->getComponent<Transform>();
-			if (Collisions::collidesWithRotation(fighter_->getPos(), fighter_->getW(), fighter_->getH(), fighter_->getRot(),
-				a_->getPos(), a_->getW(), a_->getH(), a_->getRot())) {
+		if (manager_->isActive(asteroid_) && manager_->hasGroup<Asteroid_grp>(asteroid_)) {
+			Transform* a_ = manager_->getComponent<Transform>(asteroid_);
+			Transform* fighter_ = manager_->getComponent<Transform>(manager_->getHandler<fighter>());
+			if (Collisions::collidesWithRotation(fighter_->pos_, fighter_->width_, fighter_->height_, fighter_->rotation_,
+				a_->pos_, a_->width_, a_->height_, a_->rotation_)) {
 
 				/*Health* h_ = fighter_->getEntity()->getComponent<Health>();
 				if (h_->getLives() > 0) {
@@ -46,17 +50,17 @@ void CollisionsSystem::update()
 	}
 
 	// check if any asteroid is hit by any bullet
-	for (Entity* bullet_ : entity_->getMngr()->getEntities())
+	for (Entity* bullet_ : manager_->getEntities())
 	{
-		if (bullet_->isActive() && bullet_->hasGroup<Bullet_grp>()) {
-			Transform* b_ = bullet_->getComponent<Transform>(); // bullet
-			for (Entity* asteroid_ : entity_->getMngr()->getEntities())
+		if (manager_->isActive(bullet_) && manager_->hasGroup<Bullet_grp>(bullet_)) {
+			Transform* b_ = manager_->getComponent<Transform>(bullet_); // bullet
+			for (Entity* asteroid_ : manager_->getEntities())
 			{
-				if (bullet_->isActive() && asteroid_->isActive() && asteroid_->hasGroup<Asteroid_grp>()) {
-					Transform* a_ = asteroid_->getComponent<Transform>(); // asteroid
+				if (manager_->isActive(bullet_) && manager_->isActive(asteroid_) && manager_->hasGroup<Asteroid_grp>(asteroid_)) {
+					Transform* a_ = manager_->getComponent<Transform>(asteroid_); // asteroid
 
-					if (Collisions::collidesWithRotation(a_->getPos(), a_->getW(), a_->getH(), a_->getRot(),
-						b_->getPos(), b_->getW(), b_->getH(), b_->getRot())) {
+					if (Collisions::collidesWithRotation(a_->pos_, a_->width_, a_->height_, a_->rotation_,
+						b_->pos_, b_->width_, b_->height_, b_->rotation_)) {
 
 						//bullet_->setActive(false); // bullet destruction
 						//aMngr_->onCollision(static_cast<Asteroid*>(asteroid_)); // asteroid destruction

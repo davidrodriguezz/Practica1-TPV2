@@ -1,6 +1,7 @@
 #pragma once
 #include "../ecs/System.h"
-#include "../entity/Bullet.h"
+#include "../ecs/Entity.h"
+#include "../utils/Vector2D.h"
 #include "../sdlutils/VirtualTimer.h"
 
 //struct Transform;
@@ -18,7 +19,7 @@ public:
 	void receive(const Message&) override;
 
 private:
-	std::size_t numOfAsteroids_;
+	size_t numOfAsteroids_;
 	VirtualTimer* time;
 	//SoundEffect* sound = nullptr;
 

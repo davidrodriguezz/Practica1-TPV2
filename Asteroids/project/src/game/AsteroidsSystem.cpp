@@ -1,6 +1,7 @@
 #include "AsteroidsSystem.h"
 #include "../components/Transform.h"
 #include "../components/FramedImage.h"
+#include "../components/Follow.h"
 #include "../ecs/Manager.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/InputHandler.h"
@@ -24,7 +25,7 @@ void AsteroidsSystem::update()
 		!= GameCtrlSystem::RUNNING)
 		return;
 
-	for (auto& e : manager_->getEnteties()) {
+	for (auto& e : manager_->getEntities()) {
 		if (manager_->hasGroup<Asteroid_grp>(e)) {
 			Follow* mov = GETCMP3(e, Follow, manager_);
 			FramedImage* img = GETCMP3(e, FramedImage, manager_);
@@ -82,7 +83,7 @@ void AsteroidsSystem::createAsteroid(bool gold)
 	Transform* tr_ = manager_->addComponent<Transform>(asteroid_, pos, Vector2D(), 40.0f, 40.0f, 0.0f);
 	if (gold) { 
 		manager_->addComponent<FramedImage>(asteroid_, &sdlutils().images().at("asteroid_gold"), tr_); 
-		manager_->addComponent<Follow>(asteroid_, manager_->getHandler<fighter>(), tr_);
+		manager_->addComponent<Follow>(asteroid_, GETCMP3(manager_->getHandler<fighter>(), Transform, manager_), tr_);
 	}
 	else { 
 

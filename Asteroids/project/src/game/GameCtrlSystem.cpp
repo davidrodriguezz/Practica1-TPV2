@@ -46,9 +46,9 @@ void GameCtrlSystem::update() {
 
 void GameCtrlSystem::receive(const Message& msg) {
 	switch (msg.id_) {
-	case _BALL_EXIT:
-		onBallExit(msg.ballExit_.side_);
-		break;
+	//case _BALL_EXIT:
+	//	//onBallExit(msg.ballExit_.side_);
+	//	break;
 	default:
 		break;
 	}
@@ -56,23 +56,23 @@ void GameCtrlSystem::receive(const Message& msg) {
 
 void GameCtrlSystem::onFighterDeath()
 {
-	assert(state_ == RUNNING);
-	// falta desactivar las balas
-	Health* h_ = fighter_->getEntity()->getComponent<Health>();
-	if (h_->getLives() > 0) {
-		h_->minusLife();
-		aMngr_->setReset();
-		fighter_->reset();
-		state_->setState(State::PAUSED);
-	}
-	else {
-		aMngr_->setReset();
-		fighter_->reset();
-		fighter_->getEntity()->getComponent<Health>()->resetLives();
-		state_->setState(State::GAMEOVER);
-	}
+	//assert(state_ == RUNNING);
+	//// falta desactivar las balas
+	//Health* h_ = fighter_->getEntity()->getComponent<Health>();
+	//if (h_->getLives() > 0) {
+	//	h_->minusLife();
+	//	aMngr_->setReset();
+	//	fighter_->reset();
+	//	state_ = PAUSED;
+	//}
+	//else {
+	//	aMngr_->setReset();
+	//	fighter_->reset();
+	//	fighter_->getEntity()->getComponent<Health>()->resetLives();
+	//	state_ = GAMEOVER;
+	//}
 
-	sdlutils().soundEffects().at("explosion").play();
+	//sdlutils().soundEffects().at("explosion").play();
 }
 
 void GameCtrlSystem::onAsteroidsExtinction()
@@ -80,7 +80,7 @@ void GameCtrlSystem::onAsteroidsExtinction()
 	assert(state_ == RUNNING);
 
 	// falta desactivar las balas
-	aMngr_->setReset(); //desactiva asteroides
-	fighter_->reset();
-	state_->setState(State::GAMEDONE);
+	//aMngr_->setReset(); //desactiva asteroides
+	//fighter_->reset();
+	state_ = GAMEDONE;
 }

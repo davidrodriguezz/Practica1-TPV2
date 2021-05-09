@@ -19,17 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\components\AsteroidsManager.cpp" />
     <ClCompile Include="src\components\DeAcceleration.cpp" />
-    <ClCompile Include="src\components\DisableOnExit.cpp" />
     <ClCompile Include="src\components\FighterCtrl.cpp" />
     <ClCompile Include="src\components\Follow.cpp" />
     <ClCompile Include="src\components\FramedImage.cpp" />
-    <ClCompile Include="src\components\GameLogic.cpp" />
     <ClCompile Include="src\components\Generations.cpp" />
     <ClCompile Include="src\components\Gun.cpp" />
     <ClCompile Include="src\components\Health.cpp" />
-    <ClCompile Include="src\components\Image.cpp" />
     <ClCompile Include="src\components\ShowAtOppositeSide.cpp" />
     <ClCompile Include="src\components\State.cpp" />
     <ClCompile Include="src\ecs\Entity.cpp" />
@@ -56,14 +52,12 @@
     <ClCompile Include="src\utils\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\components\AsteroidsManager.h" />
     <ClInclude Include="src\components\DeAcceleration.h" />
     <ClInclude Include="src\components\DisableOnExit.h" />
     <ClInclude Include="src\components\FighterCtrl.h" />
     <ClInclude Include="src\components\FighterCtrlKeys.h" />
     <ClInclude Include="src\components\Follow.h" />
     <ClInclude Include="src\components\FramedImage.h" />
-    <ClInclude Include="src\components\GameLogic.h" />
     <ClInclude Include="src\components\Generations.h" />
     <ClInclude Include="src\components\Gun.h" />
     <ClInclude Include="src\components\Health.h" />
@@ -75,14 +69,10 @@
     <ClInclude Include="src\components\Transform.h" />
     <ClInclude Include="src\ecs\Component.h" />
     <ClInclude Include="src\ecs\ecs.h" />
-    <ClInclude Include="src\ecs\ecs_defs_example.h" />
     <ClInclude Include="src\ecs\Entity.h" />
     <ClInclude Include="src\ecs\Manager.h" />
     <ClInclude Include="src\ecs\mpl.h" />
     <ClInclude Include="src\ecs\System.h" />
-    <ClInclude Include="src\entity\Asteroid.h" />
-    <ClInclude Include="src\entity\Bullet.h" />
-    <ClInclude Include="src\entity\Fighter.h" />
     <ClInclude Include="src\game\AsteroidsSystem.h" />
     <ClInclude Include="src\game\BulletsSystem.h" />
     <ClInclude Include="src\game\CollisionSystem.h" />

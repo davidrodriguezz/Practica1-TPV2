@@ -9,9 +9,9 @@ typedef unsigned int uint;
 
 class Follow : public Component {
 public:
-	Follow(Transform* caza, Transform* tr) :
+	Follow(Transform* target, Transform* tr) :
 		Component(),
-		objetive_(caza),
+		objetive_(target),
 		tr_(tr)
 	{
 		init();

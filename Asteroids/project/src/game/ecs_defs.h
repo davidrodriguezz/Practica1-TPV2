@@ -3,7 +3,7 @@
 #pragma once
 
 // components -- forward declaration, i.e., assume they are defined somewhere
-class Transform;
+struct Transform;
 class Rectangle;
 class KeyBoardCtrl;
 class PaddlePhysics;
@@ -12,7 +12,7 @@ class State;
 class BallPhysics;
 class GameLogic;
 class AICtrl;
-class Image;
+struct Image;
 // Asteroids
 class FighterCtrl;
 class ShowAtOppositeSide;

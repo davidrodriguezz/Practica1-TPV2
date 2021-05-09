@@ -84,9 +84,6 @@
     <ClCompile Include="src\components\DeAcceleration.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
-    <ClCompile Include="src\components\DisableOnExit.cpp">
-      <Filter>Source Files\components</Filter>
-    </ClCompile>
     <ClCompile Include="src\components\FighterCtrl.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
@@ -105,20 +102,11 @@
     <ClCompile Include="src\components\Health.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
-    <ClCompile Include="src\components\Image.cpp">
-      <Filter>Source Files\components</Filter>
-    </ClCompile>
     <ClCompile Include="src\components\ShowAtOppositeSide.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
     <ClCompile Include="src\components\State.cpp">
       <Filter>Source Files\components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\components\GameLogic.cpp">
-      <Filter>Source Files\components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\components\AsteroidsManager.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ecs\Entity.cpp">
       <Filter>Source Files</Filter>
@@ -242,26 +230,11 @@
     <ClInclude Include="src\components\Transform.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="src\components\GameLogic.h">
-      <Filter>Header Files\components</Filter>
-    </ClInclude>
     <ClInclude Include="src\components\MouseCtrl.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
     <ClInclude Include="src\sdlutils\asteroids_macros.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\entity\Bullet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\entity\Asteroid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\entity\Fighter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\components\AsteroidsManager.h">
-      <Filter>Header Files\components</Filter>
     </ClInclude>
     <ClInclude Include="src\components\FighterCtrlKeys.h">
       <Filter>Header Files</Filter>
@@ -270,9 +243,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\ecs\ecs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ecs\ecs_defs_example.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\ecs\Entity.h">

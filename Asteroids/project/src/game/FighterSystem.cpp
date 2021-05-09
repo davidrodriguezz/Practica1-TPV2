@@ -5,7 +5,7 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/InputHandler.h"
 
-FighterSystem::FighterSystem()
+FighterSystem::FighterSystem() : fighter_(nullptr)
 {
 }
 

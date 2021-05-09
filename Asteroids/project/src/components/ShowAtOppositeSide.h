@@ -16,16 +16,16 @@ public:
 	virtual ~ShowAtOppositeSide() {
 	}
 
-	void init() override {
+	void init() {
 		tr_ = entity_->getComponent<Transform>();
 		assert(tr_ != nullptr);
 	}
 
-	void update() override {
-		if (tr_->getPos().getX() + tr_->getW() / 2 < 0) { tr_->setX(sdlutils().width() + tr_->getW() / 2); }
-		if (tr_->getPos().getX() - tr_->getW() / 2 > sdlutils().width()) { tr_->setX(tr_->getW() / -2); }
-		if (tr_->getPos().getY() + tr_->getH() / 2 < 0) { tr_->setY(sdlutils().height() + tr_->getH() / 2); }
-		if (tr_->getPos().getY() - tr_->getH() / 2 > sdlutils().height()) { tr_->setY(tr_->getH() / -2); }
+	void update() {
+		if (tr_->pos_.getX() + tr_->width_ / 2 < 0) { tr_->pos_.setX(sdlutils().width() + tr_->width_ / 2); }
+		if (tr_->pos_.getX() - tr_->width_ / 2 > sdlutils().width()) { tr_->pos_.setX(tr_->width_ / -2); }
+		if (tr_->pos_.getY() + tr_->height_ / 2 < 0) { tr_->pos_.setY(sdlutils().height() + tr_->height_ / 2); }
+		if (tr_->pos_.getY() - tr_->height_ / 2 > sdlutils().height()) { tr_->pos_.setY(tr_->height_ / -2); }
 	}
 
 private:
