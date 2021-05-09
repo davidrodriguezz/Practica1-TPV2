@@ -1,5 +1,6 @@
 #include "BulletsSystem.h"
 #include "../components/Transform.h"
+#include "../components/Image.h"
 #include "../ecs/Manager.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/InputHandler.h"

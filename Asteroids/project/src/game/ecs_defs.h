@@ -4,14 +4,6 @@
 
 // components -- forward declaration, i.e., assume they are defined somewhere
 struct Transform;
-class Rectangle;
-class KeyBoardCtrl;
-class PaddlePhysics;
-class MouseCtrl;
-class State;
-class BallPhysics;
-class GameLogic;
-class AICtrl;
 struct Image;
 // Asteroids
 class FighterCtrl;
@@ -23,18 +15,9 @@ class Follow;
 class Health;
 class FramedImage;
 class Generations;
-class AsteroidsManager;
 
 #define _CMPS_LIST_  \
 	Transform,\
-	Rectangle,\
-	KeyBoardCtrl,\
-	PaddlePhysics,\
-	MouseCtrl,\
-	State,\
-	BallPhysics,\
-	GameLogic,\
-	AICtrl,\
 	Image,\
 	FighterCtrl,\
 	ShowAtOppositeSide,\
@@ -44,8 +27,7 @@ class AsteroidsManager;
 	Follow,\
 	Health,\
 	FramedImage,\
-	Generations,\
-	AsteroidsManager
+	Generations
 
 // groups
 struct Asteroid_grp;
