@@ -2,6 +2,10 @@ Grupo_06:
 - David Rodriguez Gomez
 - Pedro Pablo Cubells Talavera
 
+Info: 
+- Práctica desarrollada usando ecs_4 y ver_11 del CV.
+- Por tanto son sistemas comunicados por mensajes,
+	formados por composición. 
 Extras:
-- Puntuación modificada: 10 puntos por asteroide destruido
-- GameLogic = CollisionsManager
+- Puntuación modificada: 10 puntos por asteroide destruido.
+- Puntuación máxima: si llegas a 300ptos completas el juego.

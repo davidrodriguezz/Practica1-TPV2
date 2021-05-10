@@ -1,11 +1,11 @@
 #pragma once
 #include <SDL_pixels.h>
 #include <string>
+#include "../components/Transform.h"
 #include "../utils/Vector2D.h"
 #include "../ecs/System.h"
 
-class Entity;
-struct Transform;
+struct Entity;
 
 class RenderSystem : public System {
 public:

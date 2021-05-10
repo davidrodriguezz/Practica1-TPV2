@@ -4,7 +4,7 @@
 #include "../utils/Collisions.h"
 #include "../components/Transform.h"
 
-CollisionsSystem::CollisionsSystem() : fighter_(nullptr)
+CollisionsSystem::CollisionsSystem()
 {
 	init();
 }
@@ -15,8 +15,6 @@ CollisionsSystem::~CollisionsSystem()
 
 void CollisionsSystem::init()
 {
-	/*fighter_ = manager_->getHandler<fighter>();
-	assert(fighter_ != nullptr);*/
 }
 
 void CollisionsSystem::update()

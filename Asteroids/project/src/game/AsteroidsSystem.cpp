@@ -47,7 +47,7 @@ void AsteroidsSystem::update()
 	}
 }
 
-void AsteroidsSystem::addAsteroids(int n)
+void AsteroidsSystem::addAsteroids(uint n)
 {
 	for (size_t i = 0; i < n; i++)
 	{
@@ -101,11 +101,11 @@ void AsteroidsSystem::receive(const Message& msg)
 		resetAsteroids();
 		break;
 	case _NEW_GAME:
-		addAsteroids(1);
+		addAsteroids(10);
 		break;
 	case _LOSE_LIFE:
 		resetAsteroids();
-		addAsteroids(1);
+		addAsteroids(10);
 		break;
 	default:
 		break;
@@ -129,8 +129,8 @@ Entity* AsteroidsSystem::createAsteroid(bool gold)
 	float y = float(sdlutils().rand().nextInt(0, sdlutils().height() + 1));
 	Vector2D pos(x, y);
 	Transform* tr_ = manager_->addComponent<Transform>(asteroid_, pos, Vector2D(), 40.0f, 40.0f, 0.0f);
-	manager_->addComponent<ShowAtOppositeSide>(asteroid_, GETCMP3(asteroid_, Transform, manager_));
-	manager_->addComponent<Generations>(asteroid_, GETCMP3(asteroid_, Transform, manager_));
+	manager_->addComponent<ShowAtOppositeSide>(asteroid_, tr_);
+	manager_->addComponent<Generations>(asteroid_, tr_);
 	if (gold) { 
 		manager_->addComponent<FramedImage>(asteroid_, &sdlutils().images().at("asteroid_gold"), tr_); 
 		manager_->addComponent<Follow>(asteroid_, GETCMP3(manager_->getHandler<fighter>(), Transform, manager_), tr_);

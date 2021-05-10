@@ -17,7 +17,6 @@ BulletsSystem::~BulletsSystem()
 
 void BulletsSystem::init()
 {
-	time = new VirtualTimer();
 	sound = &sdlutils().soundEffects().at("fire");
 }
 
@@ -41,7 +40,6 @@ void BulletsSystem::update()
 void BulletsSystem::shoot()
 {
 	createBullet();
-	time->reset();
 	sound->play();
 }
 

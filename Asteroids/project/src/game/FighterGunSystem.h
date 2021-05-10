@@ -2,7 +2,7 @@
 #include "../ecs/System.h"
 #include "../sdlutils/VirtualTimer.h"
 
-struct Transform;
+class VirtualTimer;
 
 class FighterGunSystem : public System {
 public:

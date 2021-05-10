@@ -4,7 +4,7 @@
 #include "../ecs/Manager.h"
 #include "messages.h"
 
-FighterGunSystem::FighterGunSystem()
+FighterGunSystem::FighterGunSystem() : time(nullptr)
 {
 }
 

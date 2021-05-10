@@ -36,7 +36,6 @@ public:
 	void onAsteroidsExtinction(); // se acaban los asteroides
 	
 private:
-	//std::array<unsigned int, 2> score_;
 	unsigned int score_;
 	GameState state_;
 	unsigned int maxScore_;

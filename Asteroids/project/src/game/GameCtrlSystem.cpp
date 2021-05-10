@@ -1,6 +1,4 @@
 #include "GameCtrlSystem.h"
-
-
 #include "../components/Transform.h"
 #include "../components/Health.h"
 #include "../ecs/Manager.h"

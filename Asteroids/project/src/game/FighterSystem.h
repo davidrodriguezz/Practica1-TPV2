@@ -1,8 +1,7 @@
 #pragma once
 #include "../ecs/System.h"
 
-class Entity;
-struct Transform;
+struct Entity;
 
 class FighterSystem: public System {
 public:

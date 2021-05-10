@@ -4,8 +4,7 @@
 #include <SDL_stdinc.h>
 
 #include "GameCtrlSystem.h"
-class Entity;
-//#include "../ecs/Entity.h"
+struct Entity;
 
 enum MsgId : Uint8 {
 	_BULLET_SHOOT,		// fighter dispara un bullet

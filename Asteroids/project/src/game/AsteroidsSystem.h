@@ -3,9 +3,9 @@
 #include "../ecs/Entity.h"
 #include "../utils/Vector2D.h"
 
-//struct Transform;
 class SoundEffect;
 class VirtualTimer;
+typedef unsigned int uint;
 
 class AsteroidsSystem: public System {
 public:
@@ -14,7 +14,7 @@ public:
 	void init() override;
 	void update() override;
 
-	void addAsteroids(int n);
+	void addAsteroids(uint n);
 	void onCollisionWithBullet(Entity* a, Entity* b);
 	void receive(const Message&) override;
 

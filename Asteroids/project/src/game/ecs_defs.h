@@ -59,8 +59,8 @@ class RenderSystem;
 #include "messages.h"
 
 class Manager;
-class Entity;
-class Component;
+struct Entity;
+struct Component;
 
 // these two should be used to get a component via an
 // entity e provided as a parameter

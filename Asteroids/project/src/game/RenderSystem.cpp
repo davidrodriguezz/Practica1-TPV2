@@ -3,7 +3,6 @@
 #include "../components/Health.h"
 #include "../components/Image.h"
 #include "../components/FramedImage.h"
-#include "../components/Transform.h"
 #include "../ecs/Manager.h"
 #include "../sdlutils/macros.h"
 #include "GameCtrlSystem.h"
