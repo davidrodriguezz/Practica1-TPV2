@@ -47,7 +47,13 @@ void RenderSystem::update()
 	}*/
 
 	// dibujar marcador
-
+	auto& score_ = manager_->getSystem<GameCtrlSystem>()->getScore();
+	// score
+	Texture scoreMsg(
+		sdlutils().renderer(), //
+		std::to_string(score_[0]) + " - " + std::to_string(score_[1]),
+		sdlutils().fonts().at("ARIAL16"), build_sdlcolor(0xffffffff));
+	scoreMsg.render((sdlutils().width() - scoreMsg.width()) / 2, 10);
 	//dibujar vidas
 	Health* hp_ = GETCMP3(fighter_, Health, manager_);
 	hp_->render();
