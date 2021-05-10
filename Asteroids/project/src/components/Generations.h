@@ -8,9 +8,9 @@ typedef unsigned int uint;
 
 class Generations : public Component {
 public:
-	Generations() :
+	Generations(Transform* tr) :
 		Component(),
-		tr_(nullptr), 
+		tr_(tr), 
 		g_()
 	{}
 
@@ -18,22 +18,17 @@ public:
 	}
 
 	void init(){
-		tr_ = entity_->getComponent<Transform>();
 		assert(tr_ != nullptr);
 		g_ = sdlutils().rand().nextInt(1, 3 + 1);
 		scale();
-	}
-
-	void update(){
-		//std::cout << sdlutils().rand().nextInt(0, 3) + 1 << std::endl;
 	}
 
 	uint getGen() { return g_; }
 	void setGen(uint g) { g_ = g; scale(); }
 
 	void scale() {
-		tr_->setW(10 + 7.5f * g_);
-		tr_->setH(10 + 7.5f * g_);
+		tr_->width_ = (10 + 7.5f * g_);
+		tr_->height_ = (10 + 7.5f * g_);
 	}
 
 private:

@@ -1,6 +1,8 @@
 #pragma once
 #include "../ecs/System.h"
 
+class Entity;
+
 class CollisionsSystem : public System {
 public:
 	CollisionsSystem();
@@ -9,4 +11,6 @@ public:
 	void update() override;
 
 	void receive(const Message&) override;
+private:
+	Entity* fighter_;
 };

@@ -12,7 +12,10 @@ public:
 	void update() override;
 
 	void onCollisionWithAsteroid(Entity* a);
+	void receive(const Message&) override;
 
 private:
 	Entity* fighter_;
+
+	void createFighter();
 };

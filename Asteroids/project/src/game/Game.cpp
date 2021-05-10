@@ -14,11 +14,11 @@
 
 #include "../utils/Vector2D.h"
 
-//#include "AsteroidsSystem.h"
-//#include "BulletsSystem.h"
+#include "AsteroidsSystem.h"
+#include "BulletsSystem.h"
 #include "FighterSystem.h"
-//#include "FighterGunSystem.h"
-//#include "CollisionSystem.h"
+#include "FighterGunSystem.h"
+#include "CollisionSystem.h"
 #include "GameCtrlSystem.h"
 #include "RenderSystem.h"
 
@@ -41,11 +41,11 @@ void Game::init() {
 	SDLUtils::init("Asteroids", 800, 600,
 			"resources/config/asteroids.resources.json");
 
-	/*AsteroidsSystem_ = mngr_->addSystem<AsteroidsSystem>();
-	BulletsSystem_ = mngr_->addSystem<BulletsSystem>();*/
 	FighterSystem_ = mngr_->addSystem<FighterSystem>();
-	/*FighterGunSystem_ = mngr_->addSystem<FighterGunSystem>();
-	CollisionSystem_ = mngr_->addSystem<CollisionSystem>();*/
+	AsteroidsSystem_ = mngr_->addSystem<AsteroidsSystem>();
+	BulletsSystem_ = mngr_->addSystem<BulletsSystem>();
+	FighterGunSystem_ = mngr_->addSystem<FighterGunSystem>();
+	CollisionSystem_ = mngr_->addSystem<CollisionsSystem>();
 	GameCtrlSystem_ = mngr_->addSystem<GameCtrlSystem>();
 	RenderSystem_ = mngr_->addSystem<RenderSystem>();
 }
@@ -70,11 +70,11 @@ void Game::start() {
 
 		mngr_->refresh();
 
-		/*AsteroidsSystem_->update();
-		BulletsSystem_->update();*/
 		FighterSystem_->update();
-		/*FighterGunSystem_->update();
-		CollisionSystem_->update();*/
+		AsteroidsSystem_->update();
+		BulletsSystem_->update();
+		FighterGunSystem_->update();
+		CollisionSystem_->update();
 		GameCtrlSystem_->update();
 		
 		mngr_->flushMsgsQueue();

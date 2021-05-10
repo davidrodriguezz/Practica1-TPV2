@@ -1,12 +1,16 @@
 #include "AsteroidsSystem.h"
-#include "../components/Transform.h"
+#include "../components/Generations.h"
+#include "../components/ShowAtOppositeSide.h"
 #include "../components/FramedImage.h"
+#include "../components/Transform.h"
 #include "../components/Follow.h"
 #include "../ecs/Manager.h"
+#include "messages.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/InputHandler.h"
+#include "../sdlutils/VirtualTimer.h"
 
-AsteroidsSystem::AsteroidsSystem()
+AsteroidsSystem::AsteroidsSystem() : numOfAsteroids_(), time(nullptr)
 {
 }
 
@@ -17,6 +21,7 @@ AsteroidsSystem::~AsteroidsSystem()
 void AsteroidsSystem::init()
 {
 	time = new VirtualTimer();
+	addAsteroids(10);
 }
 
 void AsteroidsSystem::update()
@@ -25,17 +30,17 @@ void AsteroidsSystem::update()
 		!= GameCtrlSystem::RUNNING)
 		return;
 
-	for (auto& e : manager_->getEntities()) {
+	for (auto e : manager_->getEntities()) {
 		if (manager_->hasGroup<Asteroid_grp>(e)) {
-			Follow* mov = GETCMP3(e, Follow, manager_);
-			FramedImage* img = GETCMP3(e, FramedImage, manager_);
-			mov->update();
-			img->update();
+			Transform* tr_ = GETCMP3(e, Transform, manager_);
+			Follow* follow_ = GETCMP3(e, Follow, manager_);
+			tr_->update();
+			follow_->update();
 		}
 	}
 
 	if (time->currTime() >= 5000) {
-		createAsteroid(rndType());
+		addAsteroids(1);
 		time->reset();
 	}
 }
@@ -51,27 +56,40 @@ void AsteroidsSystem::addAsteroids(int n)
 
 void AsteroidsSystem::onCollisionWithBullet(Entity* a, Entity* b)
 {
-	//bullet_->setActive(false); // bullet destruction
-	//aMngr_->onCollision(static_cast<Asteroid*>(asteroid_)); // asteroid destruction
-	//state_->setScore(10);
+	manager_->setActive(a, false); // asteroid detruction
+	--numOfAsteroids_;
 
-	//// comprueba el final de la partida
-	//if (aMngr_->getNumAsteroids() <= 0) {
-	//	// enviar mensaje a GameCtrlSystem
-	//}
+	// comprueba el final de la partida
+	if (numOfAsteroids_ <= 0) {
+		Message m;
+		m.id_ = _GAME_COMPLETE;
+		manager_->send(m);
+	}
 
 	sdlutils().soundEffects().at("explosion").play();
 }
 
-void AsteroidsSystem::receive(const Message&)
+void AsteroidsSystem::receive(const Message& msg)
 {
-	/*switch (msg.id_) {
-	case _BALL_EXIT:
-		onBallExit(msg.ballExit_.side_);
+	switch (msg.id_) {
+	case _BULLET_ASTEROID:
+		onCollisionWithBullet(msg.col_.a, msg.col_.b);
+		break;
+	case _FIGHTER_ASTEROID:
+		resetAsteroids();
 		break;
 	default:
 		break;
-	}*/
+	}
+}
+
+void AsteroidsSystem::resetAsteroids()
+{
+	for (auto e : manager_->getEntities()) {
+		if (manager_->hasGroup<Asteroid_grp>(e)) {
+			manager_->setActive(e, false);
+		}
+	}
 }
 
 void AsteroidsSystem::createAsteroid(bool gold)
@@ -81,12 +99,13 @@ void AsteroidsSystem::createAsteroid(bool gold)
 	float y = float(sdlutils().rand().nextInt(0, sdlutils().height() + 1));
 	Vector2D pos(x, y);
 	Transform* tr_ = manager_->addComponent<Transform>(asteroid_, pos, Vector2D(), 40.0f, 40.0f, 0.0f);
+	manager_->addComponent<ShowAtOppositeSide>(asteroid_, GETCMP3(asteroid_, Transform, manager_));
+	manager_->addComponent<Generations>(asteroid_, GETCMP3(asteroid_, Transform, manager_));
 	if (gold) { 
 		manager_->addComponent<FramedImage>(asteroid_, &sdlutils().images().at("asteroid_gold"), tr_); 
 		manager_->addComponent<Follow>(asteroid_, GETCMP3(manager_->getHandler<fighter>(), Transform, manager_), tr_);
 	}
 	else { 
-
 		manager_->addComponent<FramedImage>(asteroid_, &sdlutils().images().at("asteroid"), tr_); 
 		manager_->addComponent<Follow>(asteroid_, rndCenter(), tr_);
 	}

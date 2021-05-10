@@ -4,6 +4,7 @@
 
 #include "../ecs/Component.h"
 #include "../utils/Vector2D.h"
+#include "../sdlutils/SDLUtils.h"
 
 struct Transform: Component {
 public:
@@ -18,6 +19,20 @@ public:
 			width_(width), //
 			height_(height), //
 			rotation_(rotation) {
+	}
+
+	void update() {
+		pos_ = pos_ + vel_;
+	}
+
+	SDL_Rect getRect() {
+		return build_sdlrect(pos_, width_, height_);
+	}
+
+	void reset() {
+		vel_ = Vector2D();
+		pos_ = Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f);
+		rotation_ = 0.0f;
 	}
 
 	Vector2D pos_;

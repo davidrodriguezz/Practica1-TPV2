@@ -2,6 +2,7 @@
 #include "../components/Transform.h"
 #include "../components/Image.h"
 #include "../ecs/Manager.h"
+#include "messages.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/InputHandler.h"
 #include "../components/DisableOnExit.h"
@@ -29,9 +30,8 @@ void BulletsSystem::update()
 	for (auto e : manager_->getEntities()) {
 		if (manager_->hasGroup<Bullet_grp>(e)) {
 			Transform* tr_ = GETCMP3(e, Transform, manager_);
-			tr_->pos_ = tr_->pos_ + tr_->vel_;
-
 			DisableOnExit* disOnExit = GETCMP3(e, DisableOnExit, manager_);
+			tr_->update();
 			disOnExit->update();
 		}
 	}
@@ -43,17 +43,26 @@ void BulletsSystem::shoot(Vector2D pos, Vector2D vel, double width, double heigh
 	time->reset();
 }
 
-void BulletsSystem::onCollisionWithAsteroid(Entity* b, Entity* a)
+void BulletsSystem::onCollisionWithAsteroid(Entity* a, Entity* b)
 {
-	//bullet_->setActive(false); // bullet destruction
-	//aMngr_->onCollision(static_cast<Asteroid*>(asteroid_)); // asteroid destruction
-	//state_->setScore(10);
-
-	//sdlutils().soundEffects().at("explosion").play();
+	manager_->setActive(b, false); // bullet destruction
 }
 
-void BulletsSystem::receive(const Message&)
+void BulletsSystem::receive(const Message& msg)
 {
+	switch (msg.id_) {
+	case _BULLET_SHOOT:
+		createBullet();
+		break;
+	case _BULLET_ASTEROID:
+		onCollisionWithAsteroid(msg.col_.a, msg.col_.b);
+		break;
+	case _FIGHTER_ASTEROID:
+		resetBullets();
+		break;
+	default:
+		break;
+	}
 }
 
 void BulletsSystem::createBullet() {
@@ -65,4 +74,13 @@ void BulletsSystem::createBullet() {
 	manager_->addComponent<Image>(bullet_, &sdlutils().images().at("fire"));
 	manager_->addComponent<DisableOnExit>(bullet_, bullet_, manager_);
 	manager_->setGroup<Bullet_grp>(bullet_, true);
+}
+
+void BulletsSystem::resetBullets()
+{
+	for (auto e : manager_->getEntities()) {
+		if (manager_->hasGroup<Bullet_grp>(e)) {
+			manager_->setActive(e, false);
+		}
+	}
 }

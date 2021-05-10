@@ -43,16 +43,15 @@ class AsteroidsSystem;
 class BulletsSystem;
 class FighterSystem;
 class FighterGunSystem;
-class CollisionSystem;
+class CollisionsSystem;
 class GameCtrlSystem;
 class RenderSystem;
-class CollisionSystem;
 #define _SYS_LIST_ \
 		AsteroidsSystem, \
 		BulletsSystem, \
 		FighterSystem, \
 		FighterGunSystem, \
-		CollisionSystem, \
+		CollisionsSystem, \
 		GameCtrlSystem, \
 		RenderSystem
 

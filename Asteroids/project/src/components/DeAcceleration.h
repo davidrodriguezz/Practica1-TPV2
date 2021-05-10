@@ -8,19 +8,18 @@
 
 class DeAcceleration : public Component {
 public:
-	DeAcceleration() :
-		tr_(nullptr){
+	DeAcceleration(Transform* tr) :
+		tr_(tr) {
 	}
 	virtual ~DeAcceleration() {
 	}
 
-	void init(){
-		tr_ = entity_->getComponent<Transform>();
+	void init() {
 		assert(tr_ != nullptr);
 	}
 
 	void update(){
-		tr_->setVel(tr_->getVel() * 0.995f);
+		tr_->vel_.set(tr_->vel_ * 0.995f);
 	}
 
 private:

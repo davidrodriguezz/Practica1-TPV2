@@ -4,6 +4,7 @@
 
 #include "../ecs/Component.h"
 #include "../ecs/Entity.h"
+#include "../ecs/Manager.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/Texture.h"
 #include "Transform.h"
@@ -13,10 +14,11 @@ typedef unsigned int uint;
 class Health : public Component {
 public:
 	Health() :
-		Component(),
 		tex_(nullptr),
 		tr_(nullptr),
-		lives_(3) {
+		lives_(3) 
+	{
+		init();
 	}
 	virtual ~Health() {
 	}
@@ -32,7 +34,8 @@ public:
 	}
 
 	void init() {
-		tr_ = entity_->getComponent<Transform>();
+		tr_ = new Transform(Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f),
+			Vector2D(), 20.0f, 20.0f, 0.0f);
 		assert(tr_ != nullptr);
 		lives_ = 3;
 		tex_ = &sdlutils().images().at("heart");

@@ -1,15 +1,15 @@
 #include "GameCtrlSystem.h"
 
 #include "../components/Transform.h"
+#include "../components/Health.h"
 #include "../ecs/Manager.h"
 #include "../sdlutils/InputHandler.h"
-//#include "BallSystem.h"
 #include "messages.h"
 
 GameCtrlSystem::GameCtrlSystem() :
 	score_(), //
 	state_(NEWGAME), //
-	maxScore_(3) {
+	maxScore_(300) {
 }
 
 GameCtrlSystem::~GameCtrlSystem() {
@@ -46,9 +46,15 @@ void GameCtrlSystem::update() {
 
 void GameCtrlSystem::receive(const Message& msg) {
 	switch (msg.id_) {
-	//case _BALL_EXIT:
-	//	//onBallExit(msg.ballExit_.side_);
-	//	break;
+	case _FIGHTER_ASTEROID:
+		onFighterDeath();
+		break;
+	case _BULLET_ASTEROID:
+		onAsteroidsExtinction();
+		break;
+	case _GAME_COMPLETE:
+		state_ = GAMEDONE;
+		break;
 	default:
 		break;
 	}
@@ -56,31 +62,25 @@ void GameCtrlSystem::receive(const Message& msg) {
 
 void GameCtrlSystem::onFighterDeath()
 {
-	//assert(state_ == RUNNING);
-	//// falta desactivar las balas
-	//Health* h_ = fighter_->getEntity()->getComponent<Health>();
-	//if (h_->getLives() > 0) {
-	//	h_->minusLife();
-	//	aMngr_->setReset();
-	//	fighter_->reset();
-	//	state_ = PAUSED;
-	//}
-	//else {
-	//	aMngr_->setReset();
-	//	fighter_->reset();
-	//	fighter_->getEntity()->getComponent<Health>()->resetLives();
-	//	state_ = GAMEOVER;
-	//}
+	assert(state_ == RUNNING);
 
-	//sdlutils().soundEffects().at("explosion").play();
+	Entity* fighter_ = manager_->getHandler<fighter>();
+	Transform* tr_ = GETCMP3(fighter_, Transform, manager_);
+	Health* h_ = GETCMP3(fighter_, Health, manager_);
+	if (h_->getLives() > 0) {
+		state_ = PAUSED;
+	}
+	else {
+		state_ = GAMEOVER;
+	}
 }
 
 void GameCtrlSystem::onAsteroidsExtinction()
 {
 	assert(state_ == RUNNING);
 
-	// falta desactivar las balas
-	//aMngr_->setReset(); //desactiva asteroides
-	//fighter_->reset();
-	state_ = GAMEDONE;
+	score_ = score_ + 10;
+
+	if (score_ >= maxScore_)
+		state_ = GAMEDONE;
 }

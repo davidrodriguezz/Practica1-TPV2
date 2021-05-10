@@ -1,10 +1,10 @@
 #pragma once
 #include "../ecs/System.h"
-#include "../sdlutils/VirtualTimer.h"
 #include "../ecs/Entity.h"
 #include "../utils/Vector2D.h"
 //struct Transform;
 //class SoundEffect;
+class VirtualTimer;
 
 class AsteroidsSystem: public System {
 public:
@@ -22,6 +22,7 @@ private:
 	VirtualTimer* time;
 	//SoundEffect* sound = nullptr;
 
+	void resetAsteroids();
 	void createAsteroid(bool gold);
 	bool rndType();
 	Vector2D rndCenter();

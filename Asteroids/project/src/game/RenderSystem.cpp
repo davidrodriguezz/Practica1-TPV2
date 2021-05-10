@@ -1,10 +1,13 @@
 #include "RenderSystem.h"
 
+#include "../components/Health.h"
+#include "../components/Image.h"
+#include "../components/FramedImage.h"
 #include "../components/Transform.h"
 #include "../ecs/Manager.h"
 #include "../sdlutils/macros.h"
-#include "../sdlutils/SDLUtils.h"
 #include "GameCtrlSystem.h"
+#include "messages.h"
 
 RenderSystem::RenderSystem() :
 	fighter_(nullptr)
@@ -23,44 +26,53 @@ void RenderSystem::init()
 
 void RenderSystem::update()
 {
-	if (manager_->getSystem<GameCtrlSystem>()->getState() 
+	/*if (manager_->getSystem<GameCtrlSystem>()->getState() 
 		!= GameCtrlSystem::RUNNING)
-		return;
+		return;*/
 
 	// render caza: transform + imagen(texture)
-	drawIMG(GETCMP3(fighter_, Transform, manager_), GETCMP3(fighter_, Image, manager_));
+	drawIMG(fighter_);
 	// render las balas: son un grupo + igual al caza
+	for (auto& e : manager_->getEntities()) {
+		if (manager_->hasGroup<Bullet_grp>(e))
+			drawIMG(e);
+	}
 	// render de asteroides: igual a las balas
 	for (auto& e : manager_->getEntities()) {
 		if (manager_->hasGroup<Asteroid_grp>(e))
-			drawFrame(GETCMP3(e, FramedImage, manager_));
+			drawFrame(e);
 	}
 	/*for (auto e : manager_->getEntities()) {
 		e->render();
 	}*/
 
 	// dibujar marcador
+
+	//dibujar vidas
+	Health* hp_ = GETCMP3(fighter_, Health, manager_);
+	hp_->render();
 	// dibujar mensaje en pause
 }
 
 void RenderSystem::drawRect(Transform* tr, SDL_Color color) {
 	SDL_SetRenderDrawColor(sdlutils().renderer(), COLOREXP(color));
 
-	SDL_Rect rect = build_sdlrect(tr->pos_, tr->width_, tr->height_);
+	SDL_Rect rect = tr->getRect();
 
 	SDL_RenderFillRect(sdlutils().renderer(), &rect);
 
 }
 
-void RenderSystem::drawIMG(Transform* tr, Image* img)
+void RenderSystem::drawIMG(Entity* e_)
 {
-	Vector2D zero = Vector2D();
-	SDL_Rect dest = build_sdlrect(tr->pos_, tr->width_, tr->height_);
-	SDL_Rect src = build_sdlrect(zero, float(img->tex_->width()), float(img->tex_->height()));
-	img->tex_->render(src, dest);
+	Transform*  tr_ = GETCMP3(e_, Transform, manager_);
+	Image* img_ = GETCMP3(e_, Image, manager_);
+	img_->render(tr_);
 }
 
-void RenderSystem::drawFrame(FramedImage* img)
+void RenderSystem::drawFrame(Entity* e_)
 {
-	img->render();
+	FramedImage* img_ = GETCMP3(e_, FramedImage, manager_);
+	img_->update();
+	img_->render();
 }

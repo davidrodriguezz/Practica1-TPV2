@@ -12,7 +12,7 @@
 class Manager;
 
 struct Entity {
-
+	virtual ~Entity() {};
 	friend Manager;
 
 private:

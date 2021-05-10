@@ -11,7 +11,9 @@ class DisableOnExit : public Component {
 public:
 	DisableOnExit(Entity* e, Manager* mngr) :
 		e_(e),
-		mngr_(mngr) {
+		mngr_(mngr) 
+	{
+		init();
 	}
 
 	virtual ~DisableOnExit() {
@@ -30,7 +32,7 @@ public:
 			|| tr_->pos_.getY() + tr_->height_ / 2 < 0
 			|| tr_->pos_.getY() - tr_->height_ / 2 > sdlutils().height() ) 
 		{
-			mngr_->setActive(e_, false); // mensaje?
+			mngr_->setActive(e_, false);
 		}
 	}
 

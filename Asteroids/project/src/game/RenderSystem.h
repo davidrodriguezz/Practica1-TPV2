@@ -2,8 +2,6 @@
 #include <SDL_pixels.h>
 #include "../ecs/System.h"
 
-#include "../components/Image.h"
-#include "../components/FramedImage.h"
 class Entity;
 struct Transform;
 
@@ -14,8 +12,8 @@ public:
 	void init() override;
 	void update() override;
 	void drawRect(Transform* tr, SDL_Color color);
-	void drawIMG(Transform* tr, Image* img);
-	void drawFrame(FramedImage* img);
+	void drawIMG(Entity* e_);
+	void drawFrame(Entity* e_);
 
 private:
 	Entity* fighter_;

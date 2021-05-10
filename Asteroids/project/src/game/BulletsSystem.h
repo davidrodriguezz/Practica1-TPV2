@@ -24,4 +24,5 @@ private:
 	//SoundEffect* sound = nullptr;
 
 	void createBullet();
+	void resetBullets();
 };

@@ -4,6 +4,8 @@
 #include <SDL_stdinc.h>
 
 #include "GameCtrlSystem.h"
+class Entity;
+//#include "../ecs/Entity.h"
 
 enum MsgId : Uint8 {
 	_BULLET_SHOOT,		// fighter dispara un bullet
@@ -21,6 +23,11 @@ enum MsgId : Uint8 {
 //	GameCtrlSystem::Side side_;
 //};
 
+struct Collision {
+	Entity* a;
+	Entity* b;
+};
+
 struct SomeOtherMsg { // just for the example
 	int otherData_;
 };
@@ -29,6 +36,7 @@ struct Message {
 	MsgId id_;
 	union {
 		//BallExitMsg ballExit_;
+		Collision col_;
 		SomeOtherMsg otherMsg_; // just for the example
 	};
 };
