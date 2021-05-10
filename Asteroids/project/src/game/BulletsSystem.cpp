@@ -18,6 +18,7 @@ BulletsSystem::~BulletsSystem()
 void BulletsSystem::init()
 {
 	time = new VirtualTimer();
+	sound = &sdlutils().soundEffects().at("fire");
 }
 
 void BulletsSystem::update()
@@ -37,10 +38,11 @@ void BulletsSystem::update()
 	}
 }
 
-void BulletsSystem::shoot(Vector2D pos, Vector2D vel, double width, double height)
+void BulletsSystem::shoot()
 {
 	createBullet();
 	time->reset();
+	sound->play();
 }
 
 void BulletsSystem::onCollisionWithAsteroid(Entity* a, Entity* b)
@@ -52,7 +54,7 @@ void BulletsSystem::receive(const Message& msg)
 {
 	switch (msg.id_) {
 	case _BULLET_SHOOT:
-		createBullet();
+		shoot();
 		break;
 	case _BULLET_ASTEROID:
 		onCollisionWithAsteroid(msg.col_.a, msg.col_.b);

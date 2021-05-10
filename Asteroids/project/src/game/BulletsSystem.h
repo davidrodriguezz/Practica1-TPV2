@@ -5,7 +5,7 @@
 #include "../sdlutils/VirtualTimer.h"
 
 //struct Transform;
-//class SoundEffect;
+class SoundEffect;
 
 class BulletsSystem : public System {
 public:
@@ -14,14 +14,14 @@ public:
 	void init() override;
 	void update() override;
 
-	void shoot(Vector2D pos, Vector2D vel, double width, double height);
+	void shoot();
 	void onCollisionWithAsteroid(Entity* b, Entity* a);
 	void receive(const Message&) override;
 
 private:
 	size_t numOfAsteroids_;
 	VirtualTimer* time;
-	//SoundEffect* sound = nullptr;
+	SoundEffect* sound = nullptr;
 
 	void createBullet();
 	void resetBullets();

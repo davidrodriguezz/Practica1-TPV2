@@ -12,9 +12,9 @@ public:
 	enum GameState : Uint8 {
 		NEWGAME = 0, // just before starting a new game
 		PAUSED, // between rounds
+		LOSE_LIFE, // between rounds
 		RUNNING, // playing
-		GAMEOVER, // game over
-		GAMEDONE // game completed
+		GAMEOVER // game over
 	};
 
 	GameCtrlSystem();

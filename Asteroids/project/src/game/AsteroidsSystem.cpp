@@ -21,7 +21,7 @@ AsteroidsSystem::~AsteroidsSystem()
 void AsteroidsSystem::init()
 {
 	time = new VirtualTimer();
-	addAsteroids(10);
+	sound = &sdlutils().soundEffects().at("explosion");
 }
 
 void AsteroidsSystem::update()
@@ -63,6 +63,8 @@ void AsteroidsSystem::onCollisionWithBullet(Entity* a, Entity* b)
 
 	Transform* tr_ = GETCMP3(a, Transform, manager_);
 	Generations* gen_ = GETCMP3(a, Generations, manager_);
+	Vector2D pos = tr_->pos_;
+	Vector2D vel = tr_->vel_;
 	float width_ = tr_->width_;
 	uint n = gen_->getGen() - 1;
 	if (n != 0) {
@@ -72,8 +74,8 @@ void AsteroidsSystem::onCollisionWithBullet(Entity* a, Entity* b)
 			Entity* a_ = createAsteroid(rndType());
 			tr_ = GETCMP3(a_, Transform, manager_);
 			gen_ = GETCMP3(a_, Generations, manager_);
-			tr_->vel_.set(tr_->vel_.rotate(float(r)) * 1.1f);
-			tr_->pos_.set(tr_->pos_ + tr_->vel_ * 2.0f * width_);
+			tr_->pos_.set(pos + vel * 2.0f * width_);
+			tr_->vel_.set(vel.rotate(float(r)) * 1.1f);
 			gen_->setGen(n);
 		}		
 	}
@@ -81,11 +83,11 @@ void AsteroidsSystem::onCollisionWithBullet(Entity* a, Entity* b)
 	// comprueba el final de la partida
 	if (numOfAsteroids_ <= 0) {
 		Message m;
-		m.id_ = _GAME_COMPLETE;
+		m.id_ = _ROUND_OVER;
+		m.c_.data = true;
 		manager_->send(m);
 	}
-
-	sdlutils().soundEffects().at("explosion").play();
+	sound->play();
 }
 
 void AsteroidsSystem::receive(const Message& msg)
@@ -95,7 +97,12 @@ void AsteroidsSystem::receive(const Message& msg)
 		onCollisionWithBullet(msg.col_.a, msg.col_.b);
 		break;
 	case _FIGHTER_ASTEROID:
+	case _ROUND_OVER:
 		resetAsteroids();
+		break;
+	case _ROUND_START:
+	case _NEW_GAME:
+		addAsteroids(10);
 		break;
 	default:
 		break;

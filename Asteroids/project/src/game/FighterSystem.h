@@ -18,4 +18,5 @@ private:
 	Entity* fighter_;
 
 	void createFighter();
+	void resetFighter();
 };

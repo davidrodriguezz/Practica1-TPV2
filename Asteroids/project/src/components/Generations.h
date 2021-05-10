@@ -9,10 +9,11 @@ typedef unsigned int uint;
 class Generations : public Component {
 public:
 	Generations(Transform* tr) :
-		Component(),
 		tr_(tr), 
 		g_()
-	{}
+	{
+		init();
+	}
 
 	virtual ~Generations() {
 	}

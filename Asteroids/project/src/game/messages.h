@@ -15,17 +15,17 @@ enum MsgId : Uint8 {
 	_PAUSE_START,		// entra en pausa
 	_PAUSE_OVER,		// termina la pausa
 	_ROUND_OVER,		// todos los asteroides destruidos
-	_GAME_OVER,			// te quedas sin vidas
-	_GAME_COMPLETE		// juego completado
+	_GAME_OVER,			// partida terminada
+	_NEW_GAME			// nueva partida
 };
-
-//struct BallExitMsg {
-//	GameCtrlSystem::Side side_;
-//};
 
 struct Collision {
 	Entity* a;
 	Entity* b;
+};
+
+struct Condition {
+	bool data;
 };
 
 struct SomeOtherMsg { // just for the example
@@ -35,8 +35,8 @@ struct SomeOtherMsg { // just for the example
 struct Message {
 	MsgId id_;
 	union {
-		//BallExitMsg ballExit_;
+		Condition c_;
 		Collision col_;
-		SomeOtherMsg otherMsg_; // just for the example
+		SomeOtherMsg otherMsg_; 
 	};
 };

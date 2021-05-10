@@ -39,17 +39,13 @@ void FighterSystem::update()
 	tr_->update();
 }
 
-void FighterSystem::onCollisionWithAsteroid(Entity* f)
+void FighterSystem::onCollisionWithAsteroid(Entity* fighter)
 {
-	Transform* tr_ = GETCMP3(f, Transform, manager_);
-	Health* h_ = GETCMP3(f, Health, manager_);
+	Transform* tr_ = GETCMP3(fighter, Transform, manager_);
+	Health* h_ = GETCMP3(fighter, Health, manager_);
 	if (h_->getLives() > 0) {
 		h_->minusLife();
 		tr_->reset(); 
-	}
-	else {
-		tr_->reset();
-		h_->resetLives();
 	}
 
 	sdlutils().soundEffects().at("explosion").play();
@@ -60,6 +56,9 @@ void FighterSystem::receive(const Message& msg)
 	switch (msg.id_) {
 	case _FIGHTER_ASTEROID:
 		onCollisionWithAsteroid(msg.col_.b);
+		break;
+	case _NEW_GAME:
+		resetFighter();
 		break;
 	default:
 		break;
@@ -77,4 +76,12 @@ void FighterSystem::createFighter()
 	manager_->addComponent<Health>(fighter_);
 	manager_->addComponent<Image>(fighter_, &sdlutils().images().at("fighter"));
 	manager_->setHandler<fighter>(fighter_);
+}
+
+void FighterSystem::resetFighter()
+{
+	Transform* tr_ = GETCMP3(fighter_, Transform, manager_);
+	Health* h_ = GETCMP3(fighter_, Health, manager_);
+	tr_->reset();
+	h_->resetLives();
 }

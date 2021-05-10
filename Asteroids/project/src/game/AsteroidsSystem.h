@@ -2,8 +2,9 @@
 #include "../ecs/System.h"
 #include "../ecs/Entity.h"
 #include "../utils/Vector2D.h"
+
 //struct Transform;
-//class SoundEffect;
+class SoundEffect;
 class VirtualTimer;
 
 class AsteroidsSystem: public System {
@@ -20,7 +21,7 @@ public:
 private:
 	size_t numOfAsteroids_;
 	VirtualTimer* time;
-	//SoundEffect* sound = nullptr;
+	SoundEffect* sound = nullptr;
 
 	void resetAsteroids();
 	Entity* createAsteroid(bool gold);
