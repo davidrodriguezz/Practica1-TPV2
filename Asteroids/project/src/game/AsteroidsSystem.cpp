@@ -77,13 +77,14 @@ void AsteroidsSystem::onCollisionWithBullet(Entity* a, Entity* b)
 			tr_->pos_.set(pos + vel * 2.0f * width_);
 			tr_->vel_.set(vel.rotate(float(r)) * 1.1f);
 			gen_->setGen(n);
+			++numOfAsteroids_;
 		}		
 	}
 
 	// comprueba el final de la partida
 	if (numOfAsteroids_ <= 0) {
 		Message m;
-		m.id_ = _ROUND_OVER;
+		m.id_ = _GAME_OVER;
 		m.c_.data = true;
 		manager_->send(m);
 	}
@@ -96,13 +97,15 @@ void AsteroidsSystem::receive(const Message& msg)
 	case _BULLET_ASTEROID:
 		onCollisionWithBullet(msg.col_.a, msg.col_.b);
 		break;
-	case _FIGHTER_ASTEROID:
-	case _ROUND_OVER:
+	case _GAME_OVER:
 		resetAsteroids();
 		break;
-	case _ROUND_START:
 	case _NEW_GAME:
-		addAsteroids(10);
+		addAsteroids(1);
+		break;
+	case _LOSE_LIFE:
+		resetAsteroids();
+		addAsteroids(1);
 		break;
 	default:
 		break;
@@ -116,6 +119,7 @@ void AsteroidsSystem::resetAsteroids()
 			manager_->setActive(e, false);
 		}
 	}
+	numOfAsteroids_ = 0;
 }
 
 Entity* AsteroidsSystem::createAsteroid(bool gold)

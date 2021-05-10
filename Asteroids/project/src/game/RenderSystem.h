@@ -25,6 +25,7 @@ private:
 	Entity* fighter_;
 	std::string pauseLine;
 	void renderGame();
+	void renderPause();
 	void drawPause();
 	void drawScore(std::string line);
 };

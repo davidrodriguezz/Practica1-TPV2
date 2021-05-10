@@ -10,7 +10,6 @@ public:
 	void init() override;
 	void update() override;
 
-	void receive(const Message&) override;
 private:
 	Entity* fighter_;
 };

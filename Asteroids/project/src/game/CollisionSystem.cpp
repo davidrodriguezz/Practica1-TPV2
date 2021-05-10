@@ -69,6 +69,3 @@ void CollisionsSystem::update()
 	}
 }
 
-void CollisionsSystem::receive(const Message&)
-{
-}

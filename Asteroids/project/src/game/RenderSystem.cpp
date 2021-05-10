@@ -25,7 +25,7 @@ void RenderSystem::init()
 {
 	fighter_ = manager_->getHandler<fighter>();
 	assert(fighter_ != nullptr);
-	pauseLine = "GAME PAUSED";
+	pauseLine = "PRESS SPACE TO BEGIN!";
 }
 
 void RenderSystem::update()
@@ -38,7 +38,8 @@ void RenderSystem::update()
 	case st::PAUSED:
 	case st::LOSE_LIFE:
 	case st::NEWGAME:
-		drawPause();
+	case st::GAMEOVER:
+		renderPause();
 		break;
 	default:
 		break;
@@ -52,7 +53,7 @@ void RenderSystem::receive(const Message& msg)
 		if (msg.c_.data) pauseLine = "YOU LOSE 1 LIFE, BE CAREFULL!!";
 		else if (!msg.c_.data) pauseLine = "GAME PAUSED";
 		break;
-	case _ROUND_OVER:
+	case _GAME_OVER:
 		if (msg.c_.data) pauseLine = "CONGRATULATIONS, YOU COMPLETE THE GAME!!";
 		else if (!msg.c_.data) pauseLine = "GAME OVER";
 		break;
@@ -120,9 +121,18 @@ void RenderSystem::renderGame()
 	// render score:
 	auto& score_ = manager_->getSystem<GameCtrlSystem>()->getScore();
 	drawScore(std::to_string(score_));
-	// render lifes
+	// render lifes:
 	Health* hp_ = GETCMP3(fighter_, Health, manager_);
 	hp_->render();
+}
+
+void RenderSystem::renderPause()
+{
+	// render score:
+	auto& score_ = manager_->getSystem<GameCtrlSystem>()->getScore();
+	drawScore(std::to_string(score_));
+	// mensaje:
+	drawPause();
 }
 
 void RenderSystem::drawPause()

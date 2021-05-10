@@ -53,12 +53,16 @@ void FighterSystem::onCollisionWithAsteroid(Entity* fighter)
 
 void FighterSystem::receive(const Message& msg)
 {
+	Transform* tr_ = GETCMP3(fighter_, Transform, manager_);
 	switch (msg.id_) {
 	case _FIGHTER_ASTEROID:
 		onCollisionWithAsteroid(msg.col_.b);
 		break;
-	case _NEW_GAME:
+	case _GAME_OVER:
 		resetFighter();
+		break;
+	case _LOSE_LIFE:
+		tr_->reset();
 		break;
 	default:
 		break;

@@ -25,23 +25,15 @@ void GameCtrlSystem::update() {
 		if (ih().isKeyDown(SDL_SCANCODE_SPACE)) {
 			Message m;
 			switch (state_) {
-			case NEWGAME:
-				state_ = RUNNING;
-				m.id_ = _ROUND_START;
-				manager_->send(m);
-				break;
+			case LOSE_LIFE:
 			case PAUSED:
 				state_ = RUNNING;
 				m.id_ = _PAUSE_OVER;
 				manager_->send(m);
 				break;
-			case LOSE_LIFE:
-				state_ = RUNNING;
-				m.id_ = _ROUND_START;
-				manager_->send(m);
-				break;
+			case NEWGAME:
 			case GAMEOVER:
-				state_ = NEWGAME;
+				state_ = RUNNING;
 				m.id_ = _NEW_GAME;
 				manager_->send(m);
 				break;
@@ -68,8 +60,11 @@ void GameCtrlSystem::receive(const Message& msg) {
 	case _BULLET_ASTEROID:
 		onAsteroidsExtinction();
 		break;
-	case _ROUND_OVER:
-		state_ = PAUSED;
+	case _GAME_OVER:
+		state_ = GAMEOVER;
+		break;
+	case _NEW_GAME:
+		score_ = 0;
 		break;
 	default:
 		break;
@@ -89,11 +84,14 @@ void GameCtrlSystem::onFighterDeath()
 		m.id_ = _PAUSE_START;
 		m.c_.data = true;
 		manager_->send(m);
+		Message m2;
+		m2.id_ = _LOSE_LIFE;
+		manager_->send(m2);
 	}
 	else {
 		state_ = GAMEOVER;
 		Message m;
-		m.id_ = _ROUND_OVER;
+		m.id_ = _GAME_OVER;
 		m.c_.data = false;
 		manager_->send(m);
 	}
@@ -101,14 +99,14 @@ void GameCtrlSystem::onFighterDeath()
 
 void GameCtrlSystem::onAsteroidsExtinction()
 {
-	assert(state_ == RUNNING);
+	if (state_ != RUNNING) return;
 
 	score_ = score_ + 10;
 
 	if (score_ >= maxScore_) {
 		state_ = GAMEOVER;
 		Message m;
-		m.id_ = _ROUND_OVER;
+		m.id_ = _GAME_OVER;
 		m.c_.data = true;
 		manager_->send(m);
 	}

@@ -53,13 +53,14 @@ void BulletsSystem::onCollisionWithAsteroid(Entity* a, Entity* b)
 void BulletsSystem::receive(const Message& msg)
 {
 	switch (msg.id_) {
-	case _BULLET_SHOOT:
+	case _BULLET_SHOOT: 
 		shoot();
 		break;
 	case _BULLET_ASTEROID:
 		onCollisionWithAsteroid(msg.col_.a, msg.col_.b);
 		break;
-	case _FIGHTER_ASTEROID:
+	case _GAME_OVER:
+	case _LOSE_LIFE:
 		resetBullets();
 		break;
 	default:
