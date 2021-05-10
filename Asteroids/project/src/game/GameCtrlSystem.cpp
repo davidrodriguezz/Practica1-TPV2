@@ -1,5 +1,6 @@
 #include "GameCtrlSystem.h"
 
+#include <cassert>
 #include "../components/Transform.h"
 #include "../components/Health.h"
 #include "../ecs/Manager.h"
@@ -62,7 +63,7 @@ void GameCtrlSystem::receive(const Message& msg) {
 
 void GameCtrlSystem::onFighterDeath()
 {
-	assert(state_ == RUNNING);
+	assert(state_ != RUNNING);
 
 	Entity* fighter_ = manager_->getHandler<fighter>();
 	Transform* tr_ = GETCMP3(fighter_, Transform, manager_);
@@ -77,7 +78,7 @@ void GameCtrlSystem::onFighterDeath()
 
 void GameCtrlSystem::onAsteroidsExtinction()
 {
-	assert(state_ == RUNNING);
+	assert(state_ != RUNNING);
 
 	score_ = score_ + 10;
 

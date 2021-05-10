@@ -23,7 +23,7 @@ private:
 	//SoundEffect* sound = nullptr;
 
 	void resetAsteroids();
-	void createAsteroid(bool gold);
+	Entity* createAsteroid(bool gold);
 	bool rndType();
 	Vector2D rndCenter();
 };

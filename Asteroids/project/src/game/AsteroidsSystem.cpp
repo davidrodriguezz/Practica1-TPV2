@@ -34,8 +34,10 @@ void AsteroidsSystem::update()
 		if (manager_->hasGroup<Asteroid_grp>(e)) {
 			Transform* tr_ = GETCMP3(e, Transform, manager_);
 			Follow* follow_ = GETCMP3(e, Follow, manager_);
-			tr_->update();
+			ShowAtOppositeSide* side_ = GETCMP3(e, ShowAtOppositeSide, manager_);
 			follow_->update();
+			side_->update();
+			tr_->update();
 		}
 	}
 
@@ -58,6 +60,23 @@ void AsteroidsSystem::onCollisionWithBullet(Entity* a, Entity* b)
 {
 	manager_->setActive(a, false); // asteroid detruction
 	--numOfAsteroids_;
+
+	Transform* tr_ = GETCMP3(a, Transform, manager_);
+	Generations* gen_ = GETCMP3(a, Generations, manager_);
+	float width_ = tr_->width_;
+	uint n = gen_->getGen() - 1;
+	if (n != 0) {
+		for (size_t i = 0; i < 2; i++)
+		{
+			int r = sdlutils().rand().nextInt(0, 360 + 1);
+			Entity* a_ = createAsteroid(rndType());
+			tr_ = GETCMP3(a_, Transform, manager_);
+			gen_ = GETCMP3(a_, Generations, manager_);
+			tr_->vel_.set(tr_->vel_.rotate(float(r)) * 1.1f);
+			tr_->pos_.set(tr_->pos_ + tr_->vel_ * 2.0f * width_);
+			gen_->setGen(n);
+		}		
+	}
 
 	// comprueba el final de la partida
 	if (numOfAsteroids_ <= 0) {
@@ -92,7 +111,7 @@ void AsteroidsSystem::resetAsteroids()
 	}
 }
 
-void AsteroidsSystem::createAsteroid(bool gold)
+Entity* AsteroidsSystem::createAsteroid(bool gold)
 {
 	Entity* asteroid_ = manager_->addEntity();
 	float x = float(sdlutils().rand().nextInt(0, sdlutils().width() + 1));
@@ -110,6 +129,7 @@ void AsteroidsSystem::createAsteroid(bool gold)
 		manager_->addComponent<Follow>(asteroid_, rndCenter(), tr_);
 	}
 	manager_->setGroup<Asteroid_grp>(asteroid_, true);
+	return asteroid_;
 }
 
 bool AsteroidsSystem::rndType()
