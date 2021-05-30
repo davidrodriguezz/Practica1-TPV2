@@ -1,6 +1,6 @@
 #include "FighterGunSystem.h"
 #include "../sdlutils/InputHandler.h"
-#include "GameCtrlSystem.h"
+#include "GameManagerSystem.h"
 #include "../ecs/Manager.h"
 #include "messages.h"
 
@@ -19,8 +19,8 @@ void FighterGunSystem::init()
 
 void FighterGunSystem::update()
 {
-	if (manager_->getSystem<GameCtrlSystem>()->getState()
-		!= GameCtrlSystem::RUNNING)
+	if (manager_->getSystem<GameManagerSystem>()->getState()
+		!= GameManagerSystem::RUNNING)
 		return;
 
 	if (ih().keyDownEvent()) {

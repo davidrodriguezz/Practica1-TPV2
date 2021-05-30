@@ -3,18 +3,19 @@
 #pragma once
 #include <SDL_stdinc.h>
 
-#include "GameCtrlSystem.h"
+#include "GameManagerSystem.h"
 struct Entity;
 
 enum MsgId : Uint8 {
 	_BULLET_SHOOT,		// fighter dispara un bullet
-	_BULLET_ASTEROID,	// colisionan un bullet y un asteroid
-	_FIGHTER_ASTEROID,	// colisionan fighter y un asteroid
+	//_BULLET_ASTEROID,	// colisionan un bullet y un asteroid
+	//_FIGHTER_ASTEROID,	// colisionan fighter y un asteroid
 	_PAUSE_START,		// entra en pausa
 	_PAUSE_OVER,		// termina la pausa
 	_GAME_OVER,			// partida terminada: todos los asteroides destruidos
 	_NEW_GAME,			// comienza una partida nueva
-	_LOSE_LIFE			// comienza una partida nueva
+	_LOSE_LIFE,			// comienza una partida nueva
+	_BULLET_FIGHTER
 };
 
 struct Collision {

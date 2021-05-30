@@ -5,10 +5,10 @@
 #include "../components/FramedImage.h"
 #include "../ecs/Manager.h"
 #include "../sdlutils/macros.h"
-#include "GameCtrlSystem.h"
+#include "GameManagerSystem.h"
 #include "messages.h"
 
-typedef GameCtrlSystem::GameState st;
+typedef GameManagerSystem::GameState st;
 
 RenderSystem::RenderSystem() :
 	fighter_(nullptr),
@@ -29,7 +29,7 @@ void RenderSystem::init()
 
 void RenderSystem::update()
 {
-	st state_ = manager_->getSystem<GameCtrlSystem>()->getState();
+	st state_ = st(manager_->getSystem<GameManagerSystem>()->getState());
 	switch (state_) {
 	case st::RUNNING:
 		renderGame();
@@ -49,11 +49,11 @@ void RenderSystem::receive(const Message& msg)
 {
 	switch (msg.id_) {
 	case _PAUSE_START:
-		if (msg.c_.data) pauseLine = "YOU LOSE 1 LIFE, BE CAREFULL!!";
+		if (msg.c_.data) pauseLine = "TE HAN DISPARADO";
 		else if (!msg.c_.data) pauseLine = "GAME PAUSED";
 		break;
 	case _GAME_OVER:
-		if (msg.c_.data) pauseLine = "CONGRATULATIONS, YOU COMPLETE THE GAME!!";
+		if (msg.c_.data) pauseLine = "CONGRATULATIONS, YOU WIN!!";
 		else if (!msg.c_.data) pauseLine = "GAME OVER";
 		break;
 	default:
@@ -67,7 +67,6 @@ void RenderSystem::drawRect(Transform* tr, SDL_Color color) {
 	SDL_Rect rect = tr->getRect();
 
 	SDL_RenderFillRect(sdlutils().renderer(), &rect);
-
 }
 
 void RenderSystem::drawIMG(Entity* e_)
@@ -97,13 +96,16 @@ void RenderSystem::drawText(std::string line, Vector2D pos)
 	scoreMsg.render(dest);
 }
 
-void RenderSystem::drawScore(std::string line)
+void RenderSystem::drawScore()
 {
-	Vector2D pos = { sdlutils().width() / 2.0f, 10.0f };
+	auto& score_ = manager_->getSystem<GameManagerSystem>()->getScore();
+	std::string line = 
+		std::to_string(score_[0]) + " - " + std::to_string(score_[1]);
+	Vector2D pos = { sdlutils().width() / 2, 10 };
 	drawText(line, pos);
 }
 
-void RenderSystem::renderGame()
+void RenderSystem::drawGame()
 {
 	// render caza:
 	drawIMG(fighter_);
@@ -112,24 +114,25 @@ void RenderSystem::renderGame()
 		if (manager_->hasGroup<Bullet_grp>(e))
 			drawIMG(e);
 	}
+	// render score:
+	drawScore();
+
+
 	// render de asteroides:
-	for (auto& e : manager_->getEntities()) {
+	/*for (auto& e : manager_->getEntities()) {
 		if (manager_->hasGroup<Asteroid_grp>(e))
 			drawFrame(e);
-	}
-	// render score:
-	auto& score_ = manager_->getSystem<GameCtrlSystem>()->getScore();
-	drawScore(std::to_string(score_));
+	}*/
+	
 	// render lifes:
-	Health* hp_ = GETCMP3(fighter_, Health, manager_);
-	hp_->render();
+	/*Health* hp_ = GETCMP3(fighter_, Health, manager_);
+	hp_->render();*/
 }
 
 void RenderSystem::renderPause()
 {
 	// render score:
-	auto& score_ = manager_->getSystem<GameCtrlSystem>()->getScore();
-	drawScore(std::to_string(score_));
+	drawScore();
 	// mensaje:
 	drawPause();
 }

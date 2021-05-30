@@ -19,12 +19,12 @@ void CollisionsSystem::init()
 
 void CollisionsSystem::update()
 {
-	if (manager_->getSystem<GameCtrlSystem>()->getState()
-		!= GameCtrlSystem::RUNNING)
+	if (manager_->getSystem<GameManagerSystem>()->getState()
+		!= GameManagerSystem::RUNNING)
 			return;
 
 	// check if fighter is hit by any asteroid
-	for (Entity* asteroid_ : manager_->getEntities())
+	/*for (Entity* asteroid_ : manager_->getEntities())
 	{
 		if (manager_->isActive(asteroid_) && manager_->hasGroup<Asteroid_grp>(asteroid_)) {
 			Transform* a_ = manager_->getComponent<Transform>(asteroid_);	
@@ -40,9 +40,33 @@ void CollisionsSystem::update()
 				manager_->send(m);
 			}
 		}
-	}
+	}*/
 
 	// check if any asteroid is hit by any bullet
+	for (Entity* bullet_ : manager_->getEntities())
+	{
+		if (manager_->isActive(bullet_) && manager_->hasGroup<Bullet_grp>(bullet_)) {
+			Transform* b_ = manager_->getComponent<Transform>(bullet_); // bullet
+			for (Entity* asteroid_ : manager_->getEntities())
+			{
+				if (manager_->isActive(bullet_) && manager_->isActive(asteroid_) && manager_->hasGroup<Asteroid_grp>(asteroid_)) {
+					Transform* a_ = manager_->getComponent<Transform>(asteroid_); // asteroid
+
+					if (Collisions::collidesWithRotation(a_->pos_, a_->width_, a_->height_, a_->rotation_,
+						b_->pos_, b_->width_, b_->height_, b_->rotation_)) {
+
+						Message m;
+						m.id_ = _BULLET_ASTEROID;
+						m.col_.a = asteroid_;
+						m.col_.b = bullet_;
+						manager_->send(m);
+					}
+				}
+			}
+		}
+	}
+
+	// check if any fighter is hit by any bullet
 	for (Entity* bullet_ : manager_->getEntities())
 	{
 		if (manager_->isActive(bullet_) && manager_->hasGroup<Bullet_grp>(bullet_)) {

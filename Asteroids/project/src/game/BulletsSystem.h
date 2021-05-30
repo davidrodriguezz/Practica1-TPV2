@@ -14,11 +14,12 @@ public:
 
 	void onCollisionWithAsteroid(Entity* b, Entity* a);
 	void receive(const Message&) override;
+	void createBullet();
+	void resetBullets();
 
 private:
 	SoundEffect* sound = nullptr;
 
 	void shoot();
-	void createBullet();
-	void resetBullets();
+
 };

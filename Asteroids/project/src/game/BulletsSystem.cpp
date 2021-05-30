@@ -22,8 +22,8 @@ void BulletsSystem::init()
 
 void BulletsSystem::update()
 {
-	if (manager_->getSystem<GameCtrlSystem>()->getState()
-		!= GameCtrlSystem::RUNNING)
+	if (manager_->getSystem<GameManagerSystem>()->getState()
+		!= GameManagerSystem::RUNNING)
 		return;
 
 	// Mueve las balas
@@ -43,10 +43,10 @@ void BulletsSystem::shoot()
 	sound->play();
 }
 
-void BulletsSystem::onCollisionWithAsteroid(Entity* a, Entity* b)
+/*void BulletsSystem::onCollisionWithAsteroid(Entity* a, Entity* b)
 {
 	manager_->setActive(b, false); // bullet destruction
-}
+}*/
 
 void BulletsSystem::receive(const Message& msg)
 {
@@ -54,7 +54,7 @@ void BulletsSystem::receive(const Message& msg)
 	case _BULLET_SHOOT: 
 		shoot();
 		break;
-	case _BULLET_ASTEROID:
+	case _BULLET_FIGHTER:
 		onCollisionWithAsteroid(msg.col_.a, msg.col_.b);
 		break;
 	case _GAME_OVER:
@@ -68,7 +68,7 @@ void BulletsSystem::receive(const Message& msg)
 
 void BulletsSystem::createBullet() {
 	Entity* bullet_ = manager_->addEntity();
-	Transform* caza = GETCMP3(manager_->getHandler<fighter>(), Transform, manager_); 
+	Transform* caza = GETCMP3(manager_->getHandler<fighter1>(), Transform, manager_); 
 	Vector2D bPos = caza->pos_ + Vector2D(caza->width_ / 2.0f, caza->height_ / 2.0f) - Vector2D(0.0f, caza->height_ / 2.0f + 5.0f + 12.0f).rotate(caza->rotation_) - Vector2D(2.0f, 10.0f);
 	Vector2D bVel = Vector2D(0.0f, -1.0f).rotate(caza->rotation_) * (caza->vel_.magnitude() + 5.0f);
 	manager_->addComponent<Transform>(bullet_, bPos, bVel, 5.0f, 20.0f, caza->rotation_);

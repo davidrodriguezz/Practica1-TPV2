@@ -11,10 +11,10 @@ class ShowAtOppositeSide;
 class DisableOnExit;
 class DeAcceleration;
 class Gun;
-class Follow;
+//class Follow;
 class Health;
 class FramedImage;
-class Generations;
+//class Generations;
 
 #define _CMPS_LIST_  \
 	Transform,\
@@ -24,35 +24,33 @@ class Generations;
 	DisableOnExit,\
 	DeAcceleration,\
 	Gun,\
-	Follow,\
 	Health,\
 	FramedImage,\
-	Generations
 
 // groups
-struct Asteroid_grp;
+//struct Asteroid_grp;
 struct Bullet_grp;
-#define _GRPS_LIST_  Asteroid_grp,Bullet_grp
+#define _GRPS_LIST_ Bullet_grp
 
 // handlers
-struct fighter;
-#define _HDLRS_LIST_ fighter
+struct fighter1;
+struct fighter2;
+#define _HDLRS_LIST_ fighter1, fighter2
 
 // systems
-class AsteroidsSystem;
+//class AsteroidsSystem;
 class BulletsSystem;
 class FighterSystem;
 class FighterGunSystem;
 class CollisionsSystem;
-class GameCtrlSystem;
+class GameManagerSystem;
 class RenderSystem;
 #define _SYS_LIST_ \
-		AsteroidsSystem, \
 		BulletsSystem, \
 		FighterSystem, \
 		FighterGunSystem, \
 		CollisionsSystem, \
-		GameCtrlSystem, \
+		GameManagerSystem, \
 		RenderSystem
 
 // messages

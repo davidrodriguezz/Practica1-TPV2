@@ -19,10 +19,11 @@ public:
 private:
 	std::unique_ptr<Manager> mngr_;
 	System *FighterSystem_;
-	System *AsteroidsSystem_;
+	//System *AsteroidsSystem_;
 	System *BulletsSystem_;
 	System *FighterGunSystem_;
 	System *CollisionSystem_;
-	System *GameCtrlSystem_;
+	System *GameManagerSystem_;
 	System *RenderSystem_;
+	System* networkSys_;
 };

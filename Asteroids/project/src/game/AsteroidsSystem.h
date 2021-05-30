@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #include "../ecs/System.h"
 #include "../ecs/Entity.h"
 #include "../utils/Vector2D.h"

@@ -1,5 +1,7 @@
 #pragma once
 #include "../ecs/System.h"
+#include "../sdl_network/network_types.h"
+#include "../utils/Vector2D.h"
 
 struct Entity;
 
@@ -10,12 +12,15 @@ public:
 	void init() override;
 	void update() override;
 
-	void onCollisionWithAsteroid(Entity* a);
+	//void onCollisionWithAsteroid(Entity* a);
 	void receive(const Message&) override;
+	void setFighterPosition(uint8_nt id, Vector2D pos);
 
 private:
-	Entity* fighter_;
+	Entity* fighter1_;
+	Entity* fighter2_;
 
-	void createFighter();
-	void resetFighter();
+	Entity* createFighter();
+	void resetFighters();
+	void moveFighter(Entity* tie);
 };

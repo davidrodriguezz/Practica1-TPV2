@@ -1,4 +1,4 @@
-#include "AsteroidsSystem.h"
+/*#include "AsteroidsSystem.h"
 #include "../components/Generations.h"
 #include "../components/ShowAtOppositeSide.h"
 #include "../components/FramedImage.h"
@@ -26,8 +26,8 @@ void AsteroidsSystem::init()
 
 void AsteroidsSystem::update()
 {
-	if (manager_->getSystem<GameCtrlSystem>()->getState()
-		!= GameCtrlSystem::RUNNING)
+	if (manager_->getSystem<GameManagerSystem>()->getState()
+		!= GameManagerSystem::RUNNING)
 		return;
 
 	for (auto e : manager_->getEntities()) {

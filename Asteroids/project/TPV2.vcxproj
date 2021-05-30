@@ -35,7 +35,7 @@
     <ClCompile Include="src\game\FighterGunSystem.cpp" />
     <ClCompile Include="src\game\FighterSystem.cpp" />
     <ClCompile Include="src\game\Game.cpp" />
-    <ClCompile Include="src\game\GameCtrlSystem.cpp" />
+    <ClCompile Include="src\game\GameManagerSystem.cpp" />
     <ClCompile Include="src\game\RenderSystem.cpp" />
     <ClCompile Include="src\json\JSON.cpp" />
     <ClCompile Include="src\json\JSONValue.cpp" />
@@ -45,6 +45,7 @@
     <ClCompile Include="src\sdlutils\SDLUtils.cpp" />
     <ClCompile Include="src\sdlutils\SoundEffect.cpp" />
     <ClCompile Include="src\sdlutils\Texture.cpp" />
+    <ClCompile Include="src\sdl_network\NetworkSystem.cpp" />
     <ClCompile Include="src\utils\Collisions.cpp" />
     <ClCompile Include="src\utils\Vector2D.cpp" />
   </ItemGroup>
@@ -74,7 +75,7 @@
     <ClInclude Include="src\game\FighterGunSystem.h" />
     <ClInclude Include="src\game\FighterSystem.h" />
     <ClInclude Include="src\game\Game.h" />
-    <ClInclude Include="src\game\GameCtrlSystem.h" />
+    <ClInclude Include="src\game\GameManagerSystem.h" />
     <ClInclude Include="src\game\messages.h" />
     <ClInclude Include="src\game\RenderSystem.h" />
     <ClInclude Include="src\json\JSON.h" />
@@ -90,6 +91,9 @@
     <ClInclude Include="src\sdlutils\SoundEffect.h" />
     <ClInclude Include="src\sdlutils\Texture.h" />
     <ClInclude Include="src\sdlutils\VirtualTimer.h" />
+    <ClInclude Include="src\sdl_network\NetworkSystem.h" />
+    <ClInclude Include="src\sdl_network\network_types.h" />
+    <ClInclude Include="src\sdl_network\netwrok_messages.h" />
     <ClInclude Include="src\utils\Collisions.h" />
     <ClInclude Include="src\utils\Singleton.h" />
     <ClInclude Include="src\utils\Vector2D.h" />

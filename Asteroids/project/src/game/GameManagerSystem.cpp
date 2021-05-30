@@ -1,24 +1,29 @@
-#include "GameCtrlSystem.h"
+#include "GameManagerSystem.h"
+#include "BulletsSystem.h"
+#include "../sdl_network/NetworkSystem.h"
 #include "../components/Transform.h"
 #include "../components/Health.h"
 #include "../ecs/Manager.h"
 #include "../sdlutils/InputHandler.h"
 #include "messages.h"
 
-GameCtrlSystem::GameCtrlSystem() :
+GameManagerSystem::GameManagerSystem() :
 	score_(), //
 	state_(NEWGAME), //
 	maxScore_(300) {
 }
 
-GameCtrlSystem::~GameCtrlSystem() {
+GameManagerSystem::~GameManagerSystem() {
 }
 
-void GameCtrlSystem::init() {
+// --- SYSTEM FUNCTIONS -------------------------
+
+void GameManagerSystem::init() 
+{
 
 }
 
-void GameCtrlSystem::update() {
+void GameManagerSystem::update() {
 	if (state_ != RUNNING) {
 		if (ih().isKeyDown(SDL_SCANCODE_SPACE)) {
 			Message m;
@@ -50,14 +55,16 @@ void GameCtrlSystem::update() {
 		}
 }
 
-void GameCtrlSystem::receive(const Message& msg) {
+// --- MSG DEFINITIONS -------------------------
+
+void GameManagerSystem::receive(const Message& msg) {
 	switch (msg.id_) {
-	case _FIGHTER_ASTEROID:
+	case _BULLET_FIGHTER:
 		onFighterDeath();
 		break;
-	case _BULLET_ASTEROID:
-		onAsteroidsExtinction();
-		break;
+	//case _BULLET_ASTEROID:
+		//onAsteroidsExtinction();
+		//break;
 	case _GAME_OVER:
 		state_ = GAMEOVER;
 		break;
@@ -69,7 +76,9 @@ void GameCtrlSystem::receive(const Message& msg) {
 	}
 }
 
-void GameCtrlSystem::onFighterDeath()
+// --- GAME DYNAMICS ------------------------
+
+void GameManagerSystem::onFighterDeath()
 {
 	if (state_ != RUNNING) return;
 
@@ -95,7 +104,7 @@ void GameCtrlSystem::onFighterDeath()
 	}
 }
 
-void GameCtrlSystem::onAsteroidsExtinction()
+/*void GameManagerSystem::onAsteroidsExtinction()
 {
 	if (state_ != RUNNING) return;
 
@@ -108,4 +117,41 @@ void GameCtrlSystem::onAsteroidsExtinction()
 		m.c_.data = true;
 		manager_->send(m);
 	}
+}*/
+
+// --- NETWORK ACTIONS ------------------------
+
+void GameManagerSystem::startGame()
+{
+	if (state_ == RUNNING)
+		return;
+
+	if (!manager_->getSystem<NetworkSystem>()->isGameReady())
+		return;
+
+	auto isMaster = manager_->getSystem<NetworkSystem>()->isMaster();
+
+	if (isMaster) {
+		state_ = RUNNING;
+		//manager_->getSystem<BulletsSystem>()->initBullet();
+		manager_->getSystem<NetworkSystem>()->sendStateChanged(state_,
+			score_[0], score_[1]);
+	}
+	else {
+		manager_->getSystem<NetworkSystem>()->sendStartGameRequest();
+	}
+}
+
+void GameManagerSystem::changeState(Uint8 state, Uint8 left_score, Uint8 right_score)
+{
+	state_ = state;
+	score_[0] = left_score;
+	score_[1] = right_score;
+}
+
+void GameManagerSystem::resetGame()
+{
+	state_ = NEWGAME;
+	score_[0] = score_[1] = 0;
+	manager_->getSystem<BulletsSystem>()->resetBullets();
 }
