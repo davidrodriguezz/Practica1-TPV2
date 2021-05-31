@@ -23,7 +23,7 @@ public:
 	using s = SideGame;
 
 	// used to set the fighter position of the other player
-	void setFighterPosition(Uint8 id, Vector2D pos);
+	void setFighterPosition(Uint8 id, Vector2D pos, float rot);
 
 	void resetFighters();
 

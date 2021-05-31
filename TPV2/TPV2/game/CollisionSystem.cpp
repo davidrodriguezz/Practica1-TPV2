@@ -8,8 +8,6 @@
 #include "../ecs/Manager.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../utils/Collisions.h"
-#include "BulletsSystem.h"
-#include "FightersSystem.h"
 #include "GameManagerSystem.h"
 
 #include "NetworkSystem.h"
@@ -58,8 +56,6 @@ void CollisionSystem::update() {
 				b_->pos_, b_->width_, b_->height_, b_->rotation_)) {
 
 				manager_->getSystem<GameManagerSystem>()->onFighterDeath(GameManagerSystem::s::LEFT);
-				manager_->getSystem<FightersSystem>()->resetFighters();
-				manager_->getSystem<BulletsSystem>()->resetBullets();
 
 				explosion_->play();
 
@@ -68,8 +64,6 @@ void CollisionSystem::update() {
 				b_->pos_, b_->width_, b_->height_, b_->rotation_)) {
 
 				manager_->getSystem<GameManagerSystem>()->onFighterDeath(GameManagerSystem::s::RIGHT);
-				manager_->getSystem<FightersSystem>()->resetFighters();
-				manager_->getSystem<BulletsSystem>()->resetBullets();
 
 				explosion_->play();
 

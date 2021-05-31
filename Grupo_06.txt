@@ -3,9 +3,9 @@ Grupo_06:
 - Pedro Pablo Cubells Talavera
 
 Info: 
-- Práctica desarrollada usando ecs_4 y ver_11 del CV.
+- Práctica desarrollada usando ecs_1 y ver_14 del CV.
 - Por tanto son sistemas comunicados por mensajes,
-	formados por composición. 
+	formados por herencia. 
 Extras:
-- Puntuación modificada: 10 puntos por asteroide destruido.
-- Puntuación máxima: si llegas a 300ptos completas el juego.
+- Cada jugador si pulsa espacio se detenie en el sitio.
+- Añadida banda sonora.

@@ -54,7 +54,7 @@ void Game::init(const char *host, Uint16 port)
 
 	bulletsSys_ = mngr_->addSystem<BulletsSystem>();
 	fightersSys_ = mngr_->addSystem<FightersSystem>();
-	fighterGunSys_ = mngr_->addSystem<FighterGunSystem>();
+	fighterGunSys_ = mngr_->addSystem<FighterGunSystem>(static_cast<BulletsSystem*>(bulletsSys_));
 
 	collisionsSys_ = mngr_->addSystem<CollisionSystem>();
 	gameMngrSys_ = mngr_->addSystem<GameManagerSystem>();

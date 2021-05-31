@@ -30,7 +30,7 @@ void GameManagerSystem::init() {
 }
 
 void GameManagerSystem::onFighterDeath(Side side) {
-	std::cout << "RUNNING!" << std::endl;
+	std::cout << "FIGHTER DEATH!" << std::endl;
 	assert(state_ == RUNNING); // this should be called only when game is runnig
 
 	if (side == s::LEFT) {
@@ -41,8 +41,11 @@ void GameManagerSystem::onFighterDeath(Side side) {
 
 	if (score_[0] < maxScore_ && score_[1] < maxScore_)
 		state_ = PAUSED;
-	else
+	else {
 		state_ = GAMEOVER;
+	}
+
+	intro_->haltChannel();
 
 	manager_->getSystem<NetworkSystem>()->sendStateChanged(state_, score_[0],
 			score_[1]);
@@ -53,7 +56,7 @@ void GameManagerSystem::update() {
 	if (state_ != RUNNING) {
 		if (ih().isKeyDown(SDL_SCANCODE_SPACE)) {
 			switch (state_) {
-			case NEWGAME:
+			case NEWGAME:	
 				startGame();
 				break;
 			case PAUSED:
@@ -83,9 +86,12 @@ void GameManagerSystem::startGame() {
 	if (!manager_->getSystem<NetworkSystem>()->isGameReady())
 		return;
 
+	resetGame();
+
 	auto isMaster = manager_->getSystem<NetworkSystem>()->isMaster();
 
 	if (isMaster) {
+		intro_->play();
 		state_ = RUNNING;
 		manager_->getSystem<NetworkSystem>()->sendStateChanged(state_,
 				score_[0], score_[1]);
@@ -93,7 +99,6 @@ void GameManagerSystem::startGame() {
 		manager_->getSystem<NetworkSystem>()->sendStartGameRequest();
 	}
 
-	intro_->play();
 	std::cout << "GameManagerSystem: startGame() done!" << std::endl;
 }
 
@@ -106,7 +111,6 @@ void GameManagerSystem::changeState(Uint8 state, Uint8 left_score,
 
 void GameManagerSystem::resetGame() {
 	state_ = NEWGAME;
-	score_[0] = score_[1] = 0;
 	manager_->getSystem<BulletsSystem>()->resetBullets();
 	manager_->getSystem<FightersSystem>()->resetFighters();
 }

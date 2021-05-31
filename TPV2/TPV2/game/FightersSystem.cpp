@@ -13,6 +13,7 @@
 #include "../sdlutils/SDLUtils.h"
 
 #include "NetworkSystem.h"
+#include "GameManagerSystem.h"
 
 
 FightersSystem::FightersSystem() :
@@ -39,6 +40,9 @@ void FightersSystem::init() {
 }
 
 void FightersSystem::update() {
+	if (manager_->getSystem<GameManagerSystem>()->getState()
+		!= GameManagerSystem::RUNNING)
+		return;
 
 	// move your fighter only
 	Uint8 myId = manager_->getSystem<NetworkSystem>()->getId();
@@ -96,7 +100,7 @@ Entity* FightersSystem::createFighter(SideGame side)
 		SDL_SCANCODE_UP,
 		SDL_SCANCODE_LEFT,
 		SDL_SCANCODE_RIGHT,
-		SDL_SCANCODE_DOWN
+		SDL_SCANCODE_SPACE
 	);
 
 	std::cout << "keycodes finish" << std::endl;
@@ -112,7 +116,6 @@ Entity* FightersSystem::createFighter(SideGame side)
 
 void FightersSystem::moveFighter(Entity *e) 
 {
-
 	Transform* tr_ = GETCMP3(e, Transform, manager_);
 	FighterCtrl* ctrl_ = GETCMP3(e, FighterCtrl, manager_);
 	ShowAtOppositeSide* checkMargins_ = GETCMP3(e, ShowAtOppositeSide, manager_);
@@ -122,12 +125,11 @@ void FightersSystem::moveFighter(Entity *e)
 	checkMargins_->update();
 	deAcelerate_->update();
 	tr_->update();
-
-	manager_->getSystem<NetworkSystem>()->sendFighterPosition(tr_->pos_);
-
+	
+	manager_->getSystem<NetworkSystem>()->sendFighterPosition(tr_->pos_, tr_->rotation_);
 }
 
-void FightersSystem::setFighterPosition(Uint8 id, Vector2D pos) {
+void FightersSystem::setFighterPosition(Uint8 id, Vector2D pos, float rot) {
 	Entity *e = nullptr;
 	if (id == 0) {
 		e = leftFighter_;
@@ -136,6 +138,7 @@ void FightersSystem::setFighterPosition(Uint8 id, Vector2D pos) {
 	}
 	auto tr_ = manager_->getComponent<Transform>(e);
 	tr_->pos_ = pos;
+	tr_->rotation_ = rot;
 }
 
 void FightersSystem::resetFighters()

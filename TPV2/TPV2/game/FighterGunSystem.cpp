@@ -6,9 +6,10 @@
 #include "../utils/Vector2D.h"
 
 #include "GameManagerSystem.h"
+#include "BulletsSystem.h"
 #include "NetworkSystem.h"
 
-FighterGunSystem::FighterGunSystem() : time(nullptr)
+FighterGunSystem::FighterGunSystem(BulletsSystem* bSys) : bSys_(bSys), time(nullptr)
 {
 	std::cout << "Initializing GunSystem..." << std::endl;
 }
@@ -58,4 +59,5 @@ void FighterGunSystem::createBullet()
 		* (caza->vel_.magnitude() + 5.0f);
 	
 	manager_->getSystem<NetworkSystem>()->sendBulletInfo(bPos, bVel, caza->rotation_);
+	bSys_->setBulletInfo(bPos, bVel, caza->rotation_);
 }

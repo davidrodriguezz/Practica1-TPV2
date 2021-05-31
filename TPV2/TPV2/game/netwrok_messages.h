@@ -40,6 +40,7 @@ struct FighterPositionMsg: NetworkMessage {
 	uint8_nt id;
 	float32_nt x;
 	float32_nt y;
+	float32_nt rot;
 };
 
 struct BulletInfoMsg: NetworkMessage {

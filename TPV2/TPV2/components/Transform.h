@@ -14,10 +14,12 @@ public:
 
 	Transform(Vector2D pos, Vector2D vel, float width, float height,
 			float rotation) :
+			posInit_(pos),
 			pos_(pos), //
 			vel_(vel), //
 			width_(width), //
 			height_(height), //
+			rotInit_(rotation),
 			rotation_(rotation) {
 	}
 
@@ -36,9 +38,13 @@ public:
 	}
 
 	void reset() {
+		std::cout << "reset fighters positions" << std::endl;
 		vel_ = Vector2D();
-		pos_ = Vector2D(sdlutils().width() / 2.0f, sdlutils().height() / 2.0f);
-		rotation_ = 0.0f;
+		pos_ = Vector2D(posInit_);
+		rotation_ = rotInit_;
 	}
+private:
+	Vector2D posInit_;
+	float rotInit_;
 };
 

@@ -131,24 +131,31 @@ void RenderSystem::drawNames() {
 	// name of player 0
 	Texture name_0(
 			sdlutils().renderer(), //
-			names_[0], sdlutils().fonts().at("FORTNITE"),
-			build_sdlcolor(0xffffffff));
+			names_[0], 
+			sdlutils().fonts().at("FORTNITE"),
+			build_sdlcolor(0xffffffff)
+	);
 	name_0.render(10, 10);
 
 	// name of player 1
 	Texture name_1(
 			sdlutils().renderer(), //
-			names_[1], sdlutils().fonts().at("FORTNITE"),
-			build_sdlcolor(0xffffffff));
+			names_[1], 
+			sdlutils().fonts().at("FORTNITE"),
+			build_sdlcolor(0xffffffff)
+	);
 	name_1.render(sdlutils().width() - name_1.width() - 10, 10);
 
 	// draw a star next to the master name
 	auto isMaster = manager_->getSystem<NetworkSystem>()->isMaster();
 	auto myId = manager_->getSystem<NetworkSystem>()->getId();
 
-	Texture isMasterMsg(sdlutils().renderer(), //
+	Texture isMasterMsg(
+			sdlutils().renderer(), //
 			"*", //
-			sdlutils().fonts().at("FORTNITE"), build_sdlcolor(0xff0000ff));
+			sdlutils().fonts().at("FORTNITE"), 
+			build_sdlcolor(0xff0000ff)
+	);
 	isMasterMsg.render(
 			(isMaster && myId == 1) || (!isMaster && myId == 0) ?
 					sdlutils().width() - isMasterMsg.width() - 1 : 1, 10);

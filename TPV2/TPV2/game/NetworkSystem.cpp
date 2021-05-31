@@ -146,8 +146,6 @@ void NetworkSystem::update() {
 	p_->address = otherPlayerAddress_;
 	SDLNet_UDP_Send(conn_, -1, p_);
 
-
-
 	// in each iteration we poll all pending message and process them
 	while (SDLNet_UDP_Recv(conn_, p_) > 0) {
 		lastTimeActive_ = SDL_GetTicks();
@@ -195,7 +193,8 @@ void NetworkSystem::update() {
 		case _FIGHTER_POS: {
 			FighterPositionMsg *m = static_cast<FighterPositionMsg*>(m_);
 			Vector2D pos(m->x, m->y);
-			manager_->getSystem<FightersSystem>()->setFighterPosition(m->id, pos);
+			float rot = m->rot;
+			manager_->getSystem<FightersSystem>()->setFighterPosition(m->id, pos, rot);
 			break;
 		}
 
@@ -237,7 +236,7 @@ void NetworkSystem::update() {
 
 }
 
-void NetworkSystem::sendFighterPosition(Vector2D pos) {
+void NetworkSystem::sendFighterPosition(Vector2D pos, float rot) {
 
 	// if the other player is not connected do nothing
 	if (!isGameReady_)
@@ -248,6 +247,7 @@ void NetworkSystem::sendFighterPosition(Vector2D pos) {
 	m->_type = _FIGHTER_POS;
 	m->x = pos.getX();
 	m->y = pos.getY();
+	m->rot = rot;
 	m->id = id_;
 
 	// set the message length and the address of the other player

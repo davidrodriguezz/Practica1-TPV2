@@ -16,7 +16,7 @@ struct FighterCtrlKeys: Component {
 			forward_(forward), //
 			left_(left), //
 			right_(right), //
-			stop_(right) {
+			stop_(stop) {
 	}
 
 	SDL_Scancode forward_;	// up

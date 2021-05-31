@@ -29,7 +29,7 @@ public:
 		return isGameReady_;
 	}
 
-	void sendFighterPosition(Vector2D pos);
+	void sendFighterPosition(Vector2D pos, float rot);
 	void sendStartGameRequest();
 	void sendStateChanged(Uint8 state, Uint8 left_score, Uint8 right_score);
 	void sendBulletInfo(Vector2D pos, Vector2D vel, float rot);
