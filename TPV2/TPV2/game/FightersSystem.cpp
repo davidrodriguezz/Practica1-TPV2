@@ -55,7 +55,7 @@ Entity* FightersSystem::createFighter(Side side)
 			Vector2D(), //
 			25.0f, 25.0f, -90.0f);
 
-		manager_->addComponent<Image>(e, &sdlutils().images().at("leftFighter"));
+		manager_->addComponent<Image>(e, &sdlutils().images().at("left_Fighter"));
 	}
 
 	else if (side == s::RIGHT) {
@@ -66,7 +66,7 @@ Entity* FightersSystem::createFighter(Side side)
 			Vector2D(), //
 			25.0f, 25.0f, 0.0f);
 
-		manager_->addComponent<Image>(e, &sdlutils().images().at("rightFighter"));
+		manager_->addComponent<Image>(e, &sdlutils().images().at("right_Fighter"));
 	}
 
 	FighterCtrlKeys* keys = manager_->addComponent<FighterCtrlKeys>(e, //
@@ -96,7 +96,7 @@ void FightersSystem::moveFighter(Entity *e)
 	deAcelerate_->update();
 	tr_->update();
 
-	manager_->getSystem<NetworkSystem>()->sendPaddlePosition(tr_->pos_);
+	manager_->getSystem<NetworkSystem>()->sendFighterPosition(tr_->pos_);
 
 }
 

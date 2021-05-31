@@ -7,6 +7,7 @@
 #include "../ecs/System.h"
 
 struct Transform;
+class SoundEffect;
 
 class GameManagerSystem: public System {
 public:
@@ -50,5 +51,8 @@ private:
 	std::array<Uint8, 2> score_;
 	Uint8 state_;
 	Uint8 maxScore_;
+
+	SoundEffect* select_;
+	SoundEffect* intro_;
 };
 

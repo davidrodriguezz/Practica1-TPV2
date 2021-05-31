@@ -68,7 +68,7 @@ void RenderSystem::drawScore() {
 	Texture scoreMsg(
 			sdlutils().renderer(), //
 			std::to_string(score_[0]) + " - " + std::to_string(score_[1]),
-			sdlutils().fonts().at("ARIAL16"), build_sdlcolor(0xffffffff));
+			sdlutils().fonts().at("FORTNITE"), build_sdlcolor(0xffffffff));
 	scoreMsg.render((sdlutils().width() - scoreMsg.width()) / 2, 10);
 }
 
@@ -101,7 +101,7 @@ void RenderSystem::drawMsgs() {
 		Texture side(
 				sdlutils().renderer(), //
 				(myId == 0 ? "You are playing left" : " You are playing right"),
-				sdlutils().fonts().at("ARIAL16"), build_sdlcolor(0xffffffff));
+				sdlutils().fonts().at("FORTNITE"), build_sdlcolor(0xffffffff));
 		side.render((sdlutils().width() - side.width()) / 2,
 				sdlutils().height() - side.height() - 2 * side.height() - 10);
 
@@ -113,7 +113,7 @@ void RenderSystem::drawMsgs() {
 			Texture switch_key(
 					sdlutils().renderer(), //
 					"(press P to switch side)",
-					sdlutils().fonts().at("ARIAL16"),
+					sdlutils().fonts().at("FORTNITE"),
 					build_sdlcolor(0xffffffff));
 			switch_key.render((sdlutils().width() - switch_key.width()) / 2,
 					sdlutils().height() - switch_key.height() - 10);
@@ -128,14 +128,14 @@ void RenderSystem::drawNames() {
 	// name of player 0
 	Texture name_0(
 			sdlutils().renderer(), //
-			names_[0], sdlutils().fonts().at("ARIAL16"),
+			names_[0], sdlutils().fonts().at("FORTNITE"),
 			build_sdlcolor(0xffffffff));
 	name_0.render(10, 10);
 
 	// name of player 1
 	Texture name_1(
 			sdlutils().renderer(), //
-			names_[1], sdlutils().fonts().at("ARIAL16"),
+			names_[1], sdlutils().fonts().at("FORTNITE"),
 			build_sdlcolor(0xffffffff));
 	name_1.render(sdlutils().width() - name_1.width() - 10, 10);
 
@@ -145,7 +145,7 @@ void RenderSystem::drawNames() {
 
 	Texture isMasterMsg(sdlutils().renderer(), //
 			"*", //
-			sdlutils().fonts().at("ARIAL24"), build_sdlcolor(0xff0000ff));
+			sdlutils().fonts().at("FORTNITE"), build_sdlcolor(0xff0000ff));
 	isMasterMsg.render(
 			(isMaster && myId == 1) || (!isMaster && myId == 0) ?
 					sdlutils().width() - isMasterMsg.width() - 1 : 1, 10);

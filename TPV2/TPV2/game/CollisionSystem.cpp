@@ -4,18 +4,20 @@
 
 #include <cassert>
 #include "../components/Transform.h"
+#include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../utils/Collisions.h"
-#include "BallSystem.h"
+#include "BulletsSystem.h"
+#include "FightersSystem.h"
 #include "GameManagerSystem.h"
+
 #include "NetworkSystem.h"
 
 CollisionSystem::CollisionSystem() :
-		ballTr_(nullptr), //
-		leftPaddelTr_(nullptr), //
-		rightPaddelTr_(nullptr), //
-		paddleHit_(nullptr) {
+		leftFighter_(nullptr), //
+		rightFighter_(nullptr), //
+		explosion_(nullptr) {
 
 }
 
@@ -23,15 +25,11 @@ CollisionSystem::~CollisionSystem() {
 }
 
 void CollisionSystem::init() {
-	paddleHit_ = &sdlutils().soundEffects().at("paddle_hit");
-	ballTr_ = manager_->getComponent<Transform>(manager_->getHandler<Ball>());
-	assert(ballTr_ != nullptr);
-	leftPaddelTr_ = manager_->getComponent<Transform>(
-			manager_->getHandler<LeftPaddle>());
-	assert(leftPaddelTr_ != nullptr);
-	rightPaddelTr_ = manager_->getComponent<Transform>(
-			manager_->getHandler<RightPaddle>());
-	assert(rightPaddelTr_ != nullptr);
+	explosion_ = &sdlutils().soundEffects().at("explosion");
+	leftFighter_ = manager_->getHandler<LeftFighter>();
+	assert(leftFighter_ != nullptr);
+	rightFighter_ = manager_->getHandler<RightFighter>();
+	assert(rightFighter_ != nullptr);
 }
 
 void CollisionSystem::update() {
@@ -43,31 +41,38 @@ void CollisionSystem::update() {
 			!= GameManagerSystem::RUNNING)
 		return;
 
-	// check if ball hits paddles
-	if (Collisions::collides(leftPaddelTr_->pos_, leftPaddelTr_->width_,
-			leftPaddelTr_->height_, ballTr_->pos_, ballTr_->width_,
-			ballTr_->height_)
-			|| Collisions::collides(rightPaddelTr_->pos_,
-					rightPaddelTr_->width_, rightPaddelTr_->height_,
-					ballTr_->pos_, ballTr_->width_, ballTr_->height_)) {
+	Transform* leftFighterTr_ = GETCMP3(leftFighter_, Transform, manager_);
+	Transform* rightFighterTr_ = GETCMP3(rightFighter_, Transform, manager_);
 
-		// change the direction of the ball, and increment the speed
-		ballTr_->vel_.setX(-ballTr_->vel_.getX());
-		ballTr_->vel_ = ballTr_->vel_ * 1.2f;
-		manager_->getSystem<NetworkSystem>()->sendBallInfo(ballTr_->pos_,
-				ballTr_->vel_);
+	// check if any fighter is hit by any bullet
+	for (Entity* bullet_ : manager_->getEnteties())
+	{
+		if (manager_->isActive(bullet_) && manager_->hasGroup<Bullets>(bullet_))
+		{
+			Transform* b_ = manager_->getComponent<Transform>(bullet_); // bullet
 
-		// play some sound
-		paddleHit_->play();
+			if (Collisions::collidesWithRotation(leftFighterTr_->pos_, leftFighterTr_->width_, leftFighterTr_->height_, leftFighterTr_->rotation_,
+				b_->pos_, b_->width_, b_->height_, b_->rotation_)) {
 
-	} else if (ballTr_->pos_.getX() < 0) {
-		manager_->getSystem<GameManagerSystem>()->onBallExit(
-				GameManagerSystem::LEFT);
-		manager_->getSystem<BallSystem>()->resetBall();
-	} else if (ballTr_->pos_.getX() + ballTr_->width_ > sdlutils().width()) {
-		manager_->getSystem<GameManagerSystem>()->onBallExit(
-				GameManagerSystem::RIGHT);
-		manager_->getSystem<BallSystem>()->resetBall();
-	}
+				manager_->getSystem<GameManagerSystem>()->onFighterDeath(GameManagerSystem::s::LEFT);
+				manager_->getSystem<FightersSystem>()->resetFighters();
+				manager_->getSystem<BulletsSystem>()->resetBullets();
+
+				explosion_->play();
+
+			}
+			else if (Collisions::collidesWithRotation(rightFighterTr_->pos_, rightFighterTr_->width_, rightFighterTr_->height_, rightFighterTr_->rotation_,
+				b_->pos_, b_->width_, b_->height_, b_->rotation_)) {
+
+				manager_->getSystem<GameManagerSystem>()->onFighterDeath(GameManagerSystem::s::RIGHT);
+				manager_->getSystem<FightersSystem>()->resetFighters();
+				manager_->getSystem<BulletsSystem>()->resetBullets();
+
+				explosion_->play();
+
+			}
+
+		}	// end if active bullet
+	}	// end for
 
 }

@@ -3,7 +3,7 @@
 #pragma once
 #include "../ecs/System.h"
 
-struct Transform;
+struct Entity;
 class SoundEffect;
 
 class CollisionSystem: public System {
@@ -13,9 +13,8 @@ public:
 	void init() override;
 	void update() override;
 private:
-	Transform *ballTr_;
-	Transform *leftPaddelTr_;
-	Transform *rightPaddelTr_;
-	SoundEffect *paddleHit_;
+	Entity* leftFighter_;
+	Entity* rightFighter_;
+	SoundEffect* explosion_;
 };
 

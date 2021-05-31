@@ -10,10 +10,10 @@ enum MsgType : uint8_nt {
 	_NONE_ = 0, //
 	_I_WANT_TO_PLAY_, //
 	_WELCOME_, //
-	_PADDLE_POS, //
+	_FIGHTER_POS, //
 	_START_GAME_REQUEST_,
 	_STATE_CHANGED_, //
-	_BALL_INFO_, //
+	_CREATE_BULLET_, //
 	_DISCONNECTED_, //
 	_ACTIVE_
 };

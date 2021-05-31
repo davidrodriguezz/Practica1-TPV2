@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include <SDL_stdinc.h>
 #include <cassert>
 #include <cstddef>
 #include <memory>

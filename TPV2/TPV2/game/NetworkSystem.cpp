@@ -5,10 +5,10 @@
 #include <SDL_net.h>
 
 #include "../ecs/Manager.h"
-#include "BallSystem.h"
 #include "GameManagerSystem.h"
 #include "netwrok_messages.h"
 #include "FightersSystem.h"
+#include "BulletsSystem.h"
 
 
 
@@ -190,18 +190,18 @@ void NetworkSystem::update() {
 		}
 
 			// change paddle position of other player
-		case _PADDLE_POS: {
+		case _FIGHTER_POS: {
 			PaddlePositionMsg *m = static_cast<PaddlePositionMsg*>(m_);
 			Vector2D pos(m->x, m->y);
-			manager_->getSystem<FightersSystem>()->setPaddlePosition(m->id, pos);
+			manager_->getSystem<FightersSystem>()->setFighterPosition(m->id, pos);
 			break;
 		}
 
-		case _BALL_INFO_: {
+		case _CREATE_BULLET_: {
 			BallInfoMsg *m = static_cast<BallInfoMsg*>(m_);
 			Vector2D pos(m->pos_x, m->pos_y);
 			Vector2D vel(m->vel_x, m->vel_y);
-			manager_->getSystem<BallSystem>()->setBallInfo(pos, vel);
+			manager_->getSystem<BulletsSystem>()->setBulletInfo(pos, vel);
 
 			break;
 		}
@@ -234,7 +234,7 @@ void NetworkSystem::update() {
 
 }
 
-void NetworkSystem::sendPaddlePosition(Vector2D pos) {
+void NetworkSystem::sendFighterPosition(Vector2D pos) {
 
 	// if the other player is not connected do nothing
 	if (!isGameReday_)
@@ -242,7 +242,7 @@ void NetworkSystem::sendPaddlePosition(Vector2D pos) {
 
 	// we prepare a message that includes all information
 	PaddlePositionMsg *m = static_cast<PaddlePositionMsg*>(m_);
-	m->_type = _PADDLE_POS;
+	m->_type = _FIGHTER_POS;
 	m->x = pos.getX();
 	m->y = pos.getY();
 	m->id = id_;
@@ -285,14 +285,14 @@ void NetworkSystem::sendStateChanged(Uint8 state, Uint8 left_score,
 
 }
 
-void NetworkSystem::sendBallInfo(Vector2D pos, Vector2D vel) {
+void NetworkSystem::sendBulletInfo(Vector2D pos, Vector2D vel) {
 	// if the other player is not connected do nothing
 	if (!isGameReday_)
 		return;
 
 	// we prepare a message that includes all information
 	BallInfoMsg *m = static_cast<BallInfoMsg*>(m_);
-	m->_type = _BALL_INFO_;
+	m->_type = _CREATE_BULLET_;
 	m->pos_x = pos.getX();
 	m->pos_y = pos.getY();
 	m->vel_x = vel.getX();

@@ -1,22 +1,24 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
 
 #pragma once
+#include <vector>
 #include "../ecs/System.h"
 
 struct Transform;
+struct Entity;
 class SoundEffect;
 class Vector2D;
 
-class BallSystem: public System {
+class BulletsSystem: public System {
 public:
-	BallSystem();
-	virtual ~BallSystem();
+	BulletsSystem();
+	virtual ~BulletsSystem();
 	void init() override;
 	void update() override;
 
-	void resetBall();
-	void initBall();
-	void setBallInfo(Vector2D pos, Vector2D vel);
+	void resetBullets();
+	Entity* initBullet();
+	void setBulletInfo(Vector2D pos, Vector2D vel);
 private:
 	std::vector<Entity*> bullets_;
 	SoundEffect *shoot_;

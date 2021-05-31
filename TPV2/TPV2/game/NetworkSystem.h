@@ -29,10 +29,10 @@ public:
 		return isGameReday_;
 	}
 
-	void sendPaddlePosition(Vector2D pos);
+	void sendFighterPosition(Vector2D pos);
 	void sendStartGameRequest();
 	void sendStateChanged(Uint8 state, Uint8 left_score, Uint8 right_score);
-	void sendBallInfo(Vector2D pos, Vector2D vel);
+	void sendBulletInfo(Vector2D pos, Vector2D vel);
 
 	auto& getNames() {
 		return names_;

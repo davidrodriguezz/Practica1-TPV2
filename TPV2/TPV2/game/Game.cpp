@@ -11,19 +11,22 @@
 
 #include "../ecs/Manager.h"
 #include "../utils/Vector2D.h"
-#include "BallSystem.h"
-#include "CollisionSystem.h"
-#include "GameManagerSystem.h"
+
 #include "NetworkSystem.h"
-#include "FightersSystem.h"
+
+#include "GameManagerSystem.h"
+#include "CollisionSystem.h"
 #include "RenderSystem.h"
+
+#include "FightersSystem.h"
+#include "BulletsSystem.h"
 
 Game::Game() {
 	mngr_.reset(new Manager());
 	networkSys_ = nullptr;
-	ballSys_ = nullptr;
-	paddlesSys_ = nullptr;
-	collisionSys_ = nullptr;
+	bulletsSys_ = nullptr;
+	fightersSys_ = nullptr;
+	collisionsSys_ = nullptr;
 	gameMngrSys_ = nullptr;
 	renderSys_ = nullptr;
 }
@@ -42,10 +45,10 @@ void Game::init(const char *host, Uint16 port) {
 			"resources/config/fighters.resources.json");
 
 	networkSys_ = mngr_->addSystem<NetworkSystem>(host, port, playerName);
-	ballSys_ = mngr_->addSystem<BulletsSystem>();
+	bulletsSys_ = mngr_->addSystem<BulletsSystem>();
 	//ballSys_ = mngr_->addSystem<GunSystem>();
-	paddlesSys_ = mngr_->addSystem<FightersSystem>();
-	collisionSys_ = mngr_->addSystem<CollisionSystem>();
+	fightersSys_ = mngr_->addSystem<FightersSystem>();
+	collisionsSys_ = mngr_->addSystem<CollisionSystem>();
 	gameMngrSys_ = mngr_->addSystem<GameManagerSystem>();
 	renderSys_ = mngr_->addSystem<RenderSystem>();
 }
@@ -70,9 +73,9 @@ void Game::start() {
 
 		mngr_->refresh();
 
-		ballSys_->update();
-		paddlesSys_->update();
-		collisionSys_->update();
+		bulletsSys_->update();
+		fightersSys_->update();
+		collisionsSys_->update();
 		gameMngrSys_->update();
 		networkSys_->update();
 
