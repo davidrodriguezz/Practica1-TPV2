@@ -7,24 +7,26 @@ struct Transform;
 struct Image;
 // Asteroids
 class FighterCtrl;
+class FighterCtrlKeys;
 class ShowAtOppositeSide;
 class DisableOnExit;
 class DeAcceleration;
 class Gun;
+class FramedImage;
 //class Follow;
 //class Health;
-class FramedImage;
 //class Generations;
 
 #define _CMPS_LIST_  \
 	Transform,\
 	Image,\
 	FighterCtrl,\
+	FighterCtrlKeys,\
 	ShowAtOppositeSide,\
 	DisableOnExit,\
 	DeAcceleration,\
 	Gun,\
-	FramedImage,\
+	FramedImage
 	//Health,\
 
 // groups
@@ -45,12 +47,14 @@ class FighterGunSystem;
 class CollisionsSystem;
 class GameManagerSystem;
 class RenderSystem;
+class NetworkSystem;
 #define _SYS_LIST_ \
 		BulletsSystem, \
 		FighterSystem, \
 		FighterGunSystem, \
 		CollisionsSystem, \
 		GameManagerSystem, \
+		NetworkSystem, \
 		RenderSystem
 
 // messages

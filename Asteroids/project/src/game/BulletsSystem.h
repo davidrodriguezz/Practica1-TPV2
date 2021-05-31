@@ -12,7 +12,7 @@ public:
 	void init() override;
 	void update() override;
 
-	void onCollisionWithAsteroid(Entity* b, Entity* a);
+	//void onCollisionWithAsteroid(Entity* b, Entity* a);
 	void receive(const Message&) override;
 	void createBullet();
 	void resetBullets();

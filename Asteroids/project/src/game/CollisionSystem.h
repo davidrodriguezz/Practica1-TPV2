@@ -1,5 +1,6 @@
 #pragma once
 #include "../ecs/System.h"
+#include "../components/Transform.h"
 
 class CollisionsSystem : public System {
 public:

@@ -1,6 +1,6 @@
 #include "RenderSystem.h"
 #include "../sdl_network/NetworkSystem.h"
-#include "../components/Health.h"
+//#include "../components/Health.h"
 #include "../components/Image.h"
 #include "../components/FramedImage.h"
 #include "../ecs/Manager.h"
@@ -111,7 +111,7 @@ void RenderSystem::drawScore()
 	auto& score_ = manager_->getSystem<GameManagerSystem>()->getScore();
 	std::string line = 
 		std::to_string(score_[0]) + " - " + std::to_string(score_[1]);
-	Vector2D pos = { sdlutils().width() / 2, 10 };
+	Vector2D pos = { float(sdlutils().width() / 2), 10.0f };
 	drawText(line, pos);
 }
 

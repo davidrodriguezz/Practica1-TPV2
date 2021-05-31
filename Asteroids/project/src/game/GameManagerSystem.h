@@ -30,7 +30,7 @@ public:
 
 	void init() override;
 	void update() override;
-	void receive(const Message& msg) override;
+	//void receive(const Message& msg) override;
 
 	void onFighterDeath(); // muere el caza
 	//void onAsteroidsExtinction(); // se acaban los asteroides

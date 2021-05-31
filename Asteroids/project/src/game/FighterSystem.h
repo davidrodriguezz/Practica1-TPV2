@@ -15,13 +15,13 @@ public:
 
 	//void onCollisionWithAsteroid(Entity* a);
 	//void receive(const Message&) override;
-	void setFighterPosition(uint8_nt id, Vector2D pos);
+	void setFighterPosition(Uint8 id, Vector2D pos);
+	void resetFighters();
+	void moveFighter(Entity* tie);
+	Entity* createFighter();
 
 private:
 	Entity* fighter1_;
 	Entity* fighter2_;
 
-	Entity* createFighter();
-	void resetFighters();
-	void moveFighter(Entity* tie);
 };

@@ -55,7 +55,7 @@ void BulletsSystem::receive(const Message& msg)
 		shoot();
 		break;
 	case _BULLET_FIGHTER:
-		onCollisionWithAsteroid(msg.col_.a, msg.col_.b);
+		//onCollisionWithAsteroid(msg.col_.a, msg.col_.b);
 		break;
 	case _GAME_OVER:
 	case _LOSE_LIFE:

@@ -1,7 +1,7 @@
 #include "FighterSystem.h"
 #include "GameManagerSystem.h"
 #include "../sdl_network/NetworkSystem.h"
-#include "../components/Health.h"
+//#include "../components/Health.h"
 #include "../components/DeAcceleration.h"
 #include "../components/FighterCtrl.h"
 #include "../components/ShowAtOppositeSide.h"
@@ -58,7 +58,7 @@ void FighterSystem::moveFighter(Entity* tie)
 	manager_->getSystem<NetworkSystem>()->sendFighterPosition(tr_->pos_);
 }
 
-void FighterSystem::setFighterPosition(uint8_nt id, Vector2D pos)
+void FighterSystem::setFighterPosition(Uint8 id, Vector2D pos)
 {
 	Entity* e = nullptr;
 	if (id == 0) {
@@ -67,7 +67,7 @@ void FighterSystem::setFighterPosition(uint8_nt id, Vector2D pos)
 	else {
 		e = fighter2_;
 	}
-	auto tr_ = GETCMP3(e, Transform, manager_);
+	Transform* tr_ = GETCMP3(e, Transform, manager_);
 	tr_->pos_ = pos;
 }
 

@@ -167,3 +167,4 @@ Vector2D AsteroidsSystem::rndCenter()
 	c.rotate(a); // comprobar si hace bien la circunferencia
 	return c;
 }
+*/
