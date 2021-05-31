@@ -21,9 +21,19 @@ private:
 	std::unique_ptr<Manager> mngr_;
 	System *bulletsSys_;
 	System *fightersSys_;
+	System *fighterGunSys_;
 	System *collisionsSys_;
 	System *gameMngrSys_;
 	System *renderSys_;
 	System *networkSys_;
 };
+
+static void limpiar_pantalla()
+{
+#ifdef _WIN32
+	system("cls");
+#else
+	system("clear");
+#endif
+}
 

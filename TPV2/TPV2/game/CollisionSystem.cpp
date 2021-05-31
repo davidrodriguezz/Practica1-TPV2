@@ -17,8 +17,9 @@
 CollisionSystem::CollisionSystem() :
 		leftFighter_(nullptr), //
 		rightFighter_(nullptr), //
-		explosion_(nullptr) {
-
+		explosion_(nullptr) 
+{
+	std::cout << "Initializing CollisionSystem..." << std::endl;
 }
 
 CollisionSystem::~CollisionSystem() {
@@ -30,6 +31,8 @@ void CollisionSystem::init() {
 	assert(leftFighter_ != nullptr);
 	rightFighter_ = manager_->getHandler<RightFighter>();
 	assert(rightFighter_ != nullptr);
+
+	std::cout << "CollisionSystem done!" << std::endl;
 }
 
 void CollisionSystem::update() {

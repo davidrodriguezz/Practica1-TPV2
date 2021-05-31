@@ -17,17 +17,21 @@ public:
 
 	void init() {
 		assert(tr_ != nullptr);
+		thrustSound_ = &sdlutils().soundEffects().at("thrust");
 	}
 
 	void update(){
 		if (ih().keyDownEvent()) {
 			auto& vel = tr_->vel_;
 			if (ih().isKeyDown(keys_->forward_) || ih().isKeyDown(SDL_SCANCODE_W)) {
+
 				vel.set(vel + Vector2D(0, -1).rotate(tr_->rotation_) * thrust_);
-				sdlutils().soundEffects().at("thrust").play();
+
 				if (vel.magnitude() > speedlimit_)
 					tr_->vel_.set(vel.normalize() * speedlimit_);
 				else { tr_->vel_.set(vel); }
+
+				thrustSound_->play();
 			}
 			else if (ih().isKeyDown(keys_->right_) || ih().isKeyDown(SDL_SCANCODE_D)) {
 				tr_->rotation_ = tr_->rotation_ + 5.0f;
@@ -47,4 +51,6 @@ private:
 	Transform* tr_;
 	float speedlimit_;
 	float thrust_;
+
+	SoundEffect* thrustSound_;
 };

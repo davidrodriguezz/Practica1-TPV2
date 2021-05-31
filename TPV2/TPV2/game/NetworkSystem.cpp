@@ -17,7 +17,7 @@ NetworkSystem::NetworkSystem(const char *host, Uint16 port,
 		host_(host), //
 		port_(port), //
 		isMaster_(false), //
-		isGameReday_(false), //
+		isGameReady_(false), //
 		id_(0), //
 		conn_(), //
 		p_(nullptr), //
@@ -25,7 +25,9 @@ NetworkSystem::NetworkSystem(const char *host, Uint16 port,
 		otherPlayerAddress_(), //
 		localPlayerName_(playerName), //
 		remotePlayerName_("N/A"), //
-		lastTimeActive_(0) {
+		lastTimeActive_(0) 
+{
+	std::cout << "Initializing NetworkSystem..." << std::endl;
 }
 
 NetworkSystem::~NetworkSystem() {
@@ -114,7 +116,7 @@ void NetworkSystem::init() {
 			if (SDLNet_SocketReady(conn_)) {
 				if (SDLNet_UDP_Recv(conn_, p_) > 0) {
 					if (m_->_type == _WELCOME_) {
-						isGameReday_ = true;
+						isGameReady_ = true;
 						WelcomeMsg *m = static_cast<WelcomeMsg*>(m_);
 						remotePlayerName_ = std::string(
 								reinterpret_cast<char*>(m->name));
@@ -130,11 +132,11 @@ void NetworkSystem::init() {
 		SDLNet_FreeSocketSet(socketSet);
 
 		// if did not succeed to connect, throw an exception
-		if (!isGameReday_)
+		if (!isGameReady_)
 			throw "Failed to connect!";
 
 	}
-
+	std::cout << "NetworkSystem done!" << std::endl;
 }
 
 void NetworkSystem::update() {
@@ -153,7 +155,7 @@ void NetworkSystem::update() {
 
 		case _I_WANT_TO_PLAY_: {
 			// we accept the connection if the player is the master, and no other player is connected
-			if (isMaster_ && !isGameReday_) {
+			if (isMaster_ && !isGameReady_) {
 				PlayRequestMsg *m = static_cast<PlayRequestMsg*>(m_);
 				otherPlayerAddress_ = p_->address;
 				remotePlayerName_ = std::string(
@@ -169,7 +171,7 @@ void NetworkSystem::update() {
 				mr->id = 1 - id_;
 				p_->len = sizeof(WelcomeMsg);
 				SDLNet_UDP_Send(conn_, -1, p_);
-				isGameReday_ = true;
+				isGameReady_ = true;
 			}
 			break;
 		}
@@ -191,24 +193,25 @@ void NetworkSystem::update() {
 
 			// change paddle position of other player
 		case _FIGHTER_POS: {
-			PaddlePositionMsg *m = static_cast<PaddlePositionMsg*>(m_);
+			FighterPositionMsg *m = static_cast<FighterPositionMsg*>(m_);
 			Vector2D pos(m->x, m->y);
 			manager_->getSystem<FightersSystem>()->setFighterPosition(m->id, pos);
 			break;
 		}
 
 		case _CREATE_BULLET_: {
-			BallInfoMsg *m = static_cast<BallInfoMsg*>(m_);
+			BulletInfoMsg *m = static_cast<BulletInfoMsg*>(m_);
 			Vector2D pos(m->pos_x, m->pos_y);
 			Vector2D vel(m->vel_x, m->vel_y);
-			manager_->getSystem<BulletsSystem>()->setBulletInfo(pos, vel);
+			float rot(m->rot);
+			manager_->getSystem<BulletsSystem>()->setBulletInfo(pos, vel, rot);
 
 			break;
 		}
 
 		case _DISCONNECTED_: {
 			DissConnectMsg *m = static_cast<DissConnectMsg*>(m_);
-			isGameReday_ = false;
+			isGameReady_ = false;
 			names_[1 - m->id] = remotePlayerName_ = "N/A";
 			manager_->getSystem<GameManagerSystem>()->resetGame();
 			if (!isMaster_) {
@@ -220,8 +223,8 @@ void NetworkSystem::update() {
 		}
 	}
 
-	if (isGameReday_ && SDL_GetTicks() - lastTimeActive_ > 3000) {
-		isGameReday_ = false;
+	if (isGameReady_ && SDL_GetTicks() - lastTimeActive_ > 3000) {
+		isGameReady_ = false;
 		names_[1 - id_] = remotePlayerName_ = "N/A";
 		manager_->getSystem<GameManagerSystem>()->resetGame();
 		if (!isMaster_) {
@@ -237,18 +240,18 @@ void NetworkSystem::update() {
 void NetworkSystem::sendFighterPosition(Vector2D pos) {
 
 	// if the other player is not connected do nothing
-	if (!isGameReday_)
+	if (!isGameReady_)
 		return;
 
 	// we prepare a message that includes all information
-	PaddlePositionMsg *m = static_cast<PaddlePositionMsg*>(m_);
+	FighterPositionMsg *m = static_cast<FighterPositionMsg*>(m_);
 	m->_type = _FIGHTER_POS;
 	m->x = pos.getX();
 	m->y = pos.getY();
 	m->id = id_;
 
 	// set the message length and the address of the other player
-	p_->len = sizeof(PaddlePositionMsg);
+	p_->len = sizeof(FighterPositionMsg);
 	p_->address = otherPlayerAddress_;
 
 	// send the message
@@ -266,7 +269,7 @@ void NetworkSystem::sendStartGameRequest() {
 void NetworkSystem::sendStateChanged(Uint8 state, Uint8 left_score,
 		Uint8 right_score) {
 	// if the other player is not connected do nothing
-	if (!isGameReday_)
+	if (!isGameReady_)
 		return;
 
 	// we prepare a message that includes all information
@@ -285,21 +288,22 @@ void NetworkSystem::sendStateChanged(Uint8 state, Uint8 left_score,
 
 }
 
-void NetworkSystem::sendBulletInfo(Vector2D pos, Vector2D vel) {
+void NetworkSystem::sendBulletInfo(Vector2D pos, Vector2D vel, float rot) {
 	// if the other player is not connected do nothing
-	if (!isGameReday_)
+	if (!isGameReady_)
 		return;
 
 	// we prepare a message that includes all information
-	BallInfoMsg *m = static_cast<BallInfoMsg*>(m_);
+	BulletInfoMsg *m = static_cast<BulletInfoMsg*>(m_);
 	m->_type = _CREATE_BULLET_;
 	m->pos_x = pos.getX();
 	m->pos_y = pos.getY();
 	m->vel_x = vel.getX();
 	m->vel_y = vel.getY();
+	m->rot = rot;
 
 	// set the message length and the address of the other player
-	p_->len = sizeof(BallInfoMsg);
+	p_->len = sizeof(BulletInfoMsg);
 	p_->address = otherPlayerAddress_;
 
 	// send the message

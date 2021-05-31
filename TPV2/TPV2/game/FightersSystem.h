@@ -16,11 +16,11 @@ public:
 	void init() override;
 	void update() override;
 
-	enum class Side {
+	enum class SideGame {
 		LEFT = 0, //
 		RIGHT
 	};
-	using s = Side;
+	using s = SideGame;
 
 	// used to set the fighter position of the other player
 	void setFighterPosition(Uint8 id, Vector2D pos);
@@ -28,9 +28,10 @@ public:
 	void resetFighters();
 
 private:
-	Entity* createFighter(Side side);
+	Entity* createFighter(SideGame side);
 	void moveFighter(Entity* tie);
 
 	Entity* leftFighter_;
 	Entity* rightFighter_;
+	
 };

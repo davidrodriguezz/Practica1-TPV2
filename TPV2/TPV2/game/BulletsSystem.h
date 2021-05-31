@@ -4,7 +4,6 @@
 #include <vector>
 #include "../ecs/System.h"
 
-struct Transform;
 struct Entity;
 class SoundEffect;
 class Vector2D;
@@ -17,9 +16,10 @@ public:
 	void update() override;
 
 	void resetBullets();
-	Entity* initBullet();
-	void setBulletInfo(Vector2D pos, Vector2D vel);
+	void setBulletInfo(Vector2D pos, Vector2D vel, float rot);
+
 private:
+	Entity* initBullet(Vector2D pos, Vector2D vel, float rot);
 	std::vector<Entity*> bullets_;
 	SoundEffect *shoot_;
 };

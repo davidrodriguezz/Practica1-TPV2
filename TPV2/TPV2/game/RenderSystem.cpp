@@ -14,7 +14,9 @@
 
 RenderSystem::RenderSystem() :
 	fighter1_(nullptr),
-	fighter2_(nullptr) {
+	fighter2_(nullptr) 
+{
+	std::cout << "Initializing RenderSystem..." << std::endl;
 }
 
 RenderSystem::~RenderSystem() {
@@ -25,6 +27,7 @@ void RenderSystem::init() {
 	fighter2_ = manager_->getHandler<RightFighter>();
 	assert(fighter1_ != nullptr);
 	assert(fighter2_ != nullptr);
+	std::cout << "RenderSystem done!" << std::endl;
 }
 
 void RenderSystem::update() {

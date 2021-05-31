@@ -10,6 +10,9 @@ public:
 	virtual ~FighterGunSystem();
 	void init() override;
 	void update() override;
+
+	void createBullet();
+
 private:
 	VirtualTimer* time;
 };

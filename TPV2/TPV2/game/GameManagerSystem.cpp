@@ -7,15 +7,17 @@
 #include "../ecs/Manager.h"
 #include "../sdlutils/InputHandler.h"
 
-#include "NetworkSystem.h"
 #include "FightersSystem.h"
 #include "BulletsSystem.h"
 
+#include "NetworkSystem.h"
 
 GameManagerSystem::GameManagerSystem() :
 		score_(), //
 		state_(NEWGAME), //
-		maxScore_(3) {
+		maxScore_(3) 
+{
+	std::cout << "Initializing GameManagerSystem..." << std::endl;
 }
 
 GameManagerSystem::~GameManagerSystem() {
@@ -24,6 +26,7 @@ GameManagerSystem::~GameManagerSystem() {
 void GameManagerSystem::init() {
 	select_ = &sdlutils().soundEffects().at("beat");
 	intro_ = &sdlutils().soundEffects().at("imperial_march");
+	std::cout << "GameManagerSystem done!" << std::endl;
 }
 
 void GameManagerSystem::onFighterDeath(Side side) {
@@ -73,6 +76,7 @@ void GameManagerSystem::update() {
 }
 
 void GameManagerSystem::startGame() {
+	std::cout << "GameManagerSystem: startGame()" << std::endl;
 	if (state_ == RUNNING)
 		return;
 
@@ -90,6 +94,7 @@ void GameManagerSystem::startGame() {
 	}
 
 	intro_->play();
+	std::cout << "GameManagerSystem: startGame() done!" << std::endl;
 }
 
 void GameManagerSystem::changeState(Uint8 state, Uint8 left_score,

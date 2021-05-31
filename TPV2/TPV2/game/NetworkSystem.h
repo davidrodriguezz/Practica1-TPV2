@@ -26,20 +26,20 @@ public:
 	}
 
 	inline bool isGameReady() {
-		return isGameReday_;
+		return isGameReady_;
 	}
 
 	void sendFighterPosition(Vector2D pos);
 	void sendStartGameRequest();
 	void sendStateChanged(Uint8 state, Uint8 left_score, Uint8 right_score);
-	void sendBulletInfo(Vector2D pos, Vector2D vel);
+	void sendBulletInfo(Vector2D pos, Vector2D vel, float rot);
 
 	auto& getNames() {
 		return names_;
 	}
 
 	void switchId() {
-		if (isMaster_ && !isGameReday_) {
+		if (isMaster_ && !isGameReady_) {
 			id_ = 1 - id_;
 			std::swap(names_[0], names_[1]);
 		}
@@ -49,7 +49,7 @@ private:
 	const char *host_;
 	Uint16 port_;
 	bool isMaster_;
-	bool isGameReday_;
+	bool isGameReady_;
 	Uint8 id_;
 	UDPsocket conn_;
 	UDPpacket *p_;

@@ -36,17 +36,18 @@ struct WelcomeMsg: NetworkMessage {
 	uint8_nt name[10];
 };
 
-struct PaddlePositionMsg: NetworkMessage {
+struct FighterPositionMsg: NetworkMessage {
 	uint8_nt id;
 	float32_nt x;
 	float32_nt y;
 };
 
-struct BallInfoMsg: NetworkMessage {
+struct BulletInfoMsg: NetworkMessage {
 	float32_nt pos_x;
 	float32_nt pos_y;
 	float32_nt vel_x;
 	float32_nt vel_y;
+	float32_nt rot;
 };
 
 struct StateChangedMessage: NetworkMessage {

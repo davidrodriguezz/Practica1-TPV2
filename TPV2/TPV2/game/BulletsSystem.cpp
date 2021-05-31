@@ -13,14 +13,19 @@
 
 BulletsSystem::BulletsSystem() :
 		bullets_(), //
-		shoot_(nullptr) {
+		shoot_(nullptr) 
+{
+	std::cout << "Initializing BulletsSystem..." << std::endl;
 }
 
 BulletsSystem::~BulletsSystem() {
 }
 
 void BulletsSystem::init() {
+	shoot_ = &sdlutils().soundEffects().at("gun_shot");
 	resetBullets();
+
+	std::cout << "BulletsSystem done!" << std::endl;
 }
 
 void BulletsSystem::update() {
@@ -38,46 +43,25 @@ void BulletsSystem::resetBullets() {
 			manager_->setActive(e, false);
 		}
 	}
-	/*manager_->getSystem<NetworkSystem>()->sendBulletsInfo(ballTr_->pos_,
-			ballTr_->vel_);*/
 }
 
-Entity* BulletsSystem::initBullet() {
+Entity* BulletsSystem::initBullet(Vector2D pos, Vector2D vel, float rot) {
 	Entity* bullet_ = manager_->addEntity();
+	bullets_.push_back(bullet_);
 
-	// depends on your fighter transform
-	Uint8 myId = manager_->getSystem<NetworkSystem>()->getId();
-
-	Entity* e;
-	if (myId == 0)
-		e = manager_->getHandler<LeftFighter>();
-	else
-		e = manager_->getHandler<RightFighter>();
-
-	Transform* caza = GETCMP3(e, Transform, manager_);
-
-	Vector2D bPos = caza->pos_ + Vector2D(caza->width_ / 2.0f, caza->height_ / 2.0f) 
-		- Vector2D(0.0f, caza->height_ / 2.0f + 5.0f + 12.0f).rotate(caza->rotation_) 
-		- Vector2D(2.0f, 10.0f);
-
-	Vector2D bVel = Vector2D(0.0f, -1.0f).rotate(caza->rotation_) 
-		* (caza->vel_.magnitude() + 5.0f);
-
-	manager_->addComponent<Transform>(bullet_, bPos, bVel, 5.0f, 20.0f, caza->rotation_);
+	manager_->addComponent<Transform>(bullet_, pos, vel, 5.0f, 20.0f, rot);
 	manager_->addComponent<Image>(bullet_, &sdlutils().images().at("shoot"));
 	manager_->addComponent<DisableOnExit>(bullet_, bullet_, manager_);
 	manager_->setGroup<Bullets>(bullet_, true);
 
-	manager_->getSystem<NetworkSystem>()->sendBulletInfo(bPos, bVel);
-
-	shoot_ = &sdlutils().soundEffects().at("gun_shot");
+	shoot_->play();
 
 	return bullet_;
 }
 
-void BulletsSystem::setBulletInfo(Vector2D pos, Vector2D vel) {
-	Entity* e = initBullet();
-	bullets_.push_back(e);
+void BulletsSystem::setBulletInfo(Vector2D pos, Vector2D vel, float rot) 
+{
+	Entity* e = initBullet(pos, vel, rot);
 	Transform* bTr = GETCMP3(e, Transform, manager_);
 	bTr->vel_ = vel;
 	bTr->pos_ = pos;

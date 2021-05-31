@@ -3,6 +3,7 @@
 #pragma once
 #include <memory>
 #include <cassert>
+#include <iostream>
 
 /*
  * This is an attempt to have a single Singleton class that can be used
@@ -53,8 +54,10 @@ public:
 	// can call this method at the beginning of the program.
 	template<typename ...Targs>
 	inline static T* init(Targs &&...args) {
+		std::cout << "Initializing Resources..." << std::endl;
 		assert(instance_.get() == nullptr);
 		instance_.reset(new T(std::forward<Targs>(args)...));
+		std::cout << "Resources done!" << std::endl;
 		return instance_.get();
 	}
 

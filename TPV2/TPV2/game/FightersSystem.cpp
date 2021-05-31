@@ -17,13 +17,16 @@
 
 FightersSystem::FightersSystem() :
 		leftFighter_(nullptr), //
-		rightFighter_(nullptr) {
+		rightFighter_(nullptr) 
+{
+	std::cout << "Initializing FightersSystem..." << std::endl;
 }
 
 FightersSystem::~FightersSystem() {
 }
 
 void FightersSystem::init() {
+
 	leftFighter_ = createFighter(s::LEFT);
 
 	manager_->setHandler<LeftFighter>(leftFighter_);
@@ -31,6 +34,8 @@ void FightersSystem::init() {
 	rightFighter_ = createFighter(s::RIGHT);
 	
 	manager_->setHandler<RightFighter>(rightFighter_);
+
+	std::cout << "FightersSystem done!" << std::endl;
 }
 
 void FightersSystem::update() {
@@ -44,43 +49,65 @@ void FightersSystem::update() {
 		moveFighter(rightFighter_);
 }
 
-Entity* FightersSystem::createFighter(Side side)
+Entity* FightersSystem::createFighter(SideGame side)
 {
-	Entity* e = manager_->addEntity();
+	std::cout << "CreateFighter begin" << std::endl;
+
+	Entity* fighter = manager_->addEntity();
 	Transform* tr;
 
+	std::cout << "basics begins" << std::endl;
+
 	if (side == s::LEFT) {
-		tr = manager_->addComponent<Transform>(leftFighter_, //
+		std::cout << "LEFT begins" << std::endl;
+
+		tr = manager_->addComponent<Transform>(
+			fighter, //
 			Vector2D(10.0, sdlutils().height() / 2.0f - 25.0f / 2), //
 			Vector2D(), //
-			25.0f, 25.0f, -90.0f);
+			25.0f, 25.0f, 90.0f);
 
-		manager_->addComponent<Image>(e, &sdlutils().images().at("left_Fighter"));
+		std::cout << "TRANSFORM finish" << std::endl;
+
+		manager_->addComponent<Image>(fighter, &sdlutils().images().at("left_Fighter"));
+
+		std::cout << "LEFT finish" << std::endl;
 	}
 
 	else if (side == s::RIGHT) {
+		std::cout << "RIGHT finish" << std::endl;
+
 		tr = manager_->addComponent<Transform>(
-			rightFighter_, //
+			fighter, //
 			Vector2D(sdlutils().width() - 10.0f - 25.0f,
 				sdlutils().height() / 2.0f - 25.0f / 2), //
 			Vector2D(), //
-			25.0f, 25.0f, 0.0f);
+			25.0f, 25.0f, -90.0f);
 
-		manager_->addComponent<Image>(e, &sdlutils().images().at("right_Fighter"));
+		manager_->addComponent<Image>(fighter, &sdlutils().images().at("right_Fighter"));
+
+		std::cout << "RIGHT finish" << std::endl;
 	}
 
-	FighterCtrlKeys* keys = manager_->addComponent<FighterCtrlKeys>(e, //
+	std::cout << "basics finish" << std::endl;
+	std::cout << "keycodes begins" << std::endl;
+
+	FighterCtrlKeys* keys = manager_->addComponent<FighterCtrlKeys>(fighter, //
 		SDL_SCANCODE_UP,
 		SDL_SCANCODE_LEFT,
 		SDL_SCANCODE_RIGHT,
 		SDL_SCANCODE_DOWN
 	);
 
-	manager_->addComponent<FighterCtrl>(e, tr, keys);
-	manager_->addComponent<ShowAtOppositeSide>(e, tr);
-	manager_->addComponent<DeAcceleration>(e, tr);
+	std::cout << "keycodes finish" << std::endl;
+
+	manager_->addComponent<FighterCtrl>(fighter, tr, keys);
+	manager_->addComponent<ShowAtOppositeSide>(fighter, tr);
+	manager_->addComponent<DeAcceleration>(fighter, tr);
 	
-	return e;
+	std::cout << "CreateFighter finish" << std::endl;
+
+	return fighter;
 }
 
 void FightersSystem::moveFighter(Entity *e) 

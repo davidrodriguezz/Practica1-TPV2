@@ -37,6 +37,7 @@ struct RightFighter;
 // systems
 class BulletsSystem;
 class FightersSystem;
+class FighterGunSystem;
 class RenderSystem;
 class CollisionSystem;
 class GameManagerSystem;
@@ -45,6 +46,7 @@ class NetworkSystem;
 #define _SYS_LIST_ \
 		BulletsSystem, \
 		FightersSystem, \
+		FighterGunSystem, \
 		RenderSystem, \
 		CollisionSystem, \
 		GameManagerSystem,\
