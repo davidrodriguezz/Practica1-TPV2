@@ -16,10 +16,11 @@ public:
 	void receive(const Message&) override;
 	void createBullet();
 	void resetBullets();
+	void setBulletInfo(Vector2D pos, Vector2D vel);
 
 private:
 	SoundEffect* sound = nullptr;
-
+	Transform *bulletTr_;
 	void shoot();
 
 };

@@ -1,6 +1,7 @@
 #pragma once
+#include <SDL_stdinc.h>
+
 #include "../ecs/System.h"
-#include "../sdl_network/network_types.h"
 #include "../utils/Vector2D.h"
 
 struct Entity;
@@ -13,7 +14,7 @@ public:
 	void update() override;
 
 	//void onCollisionWithAsteroid(Entity* a);
-	void receive(const Message&) override;
+	//void receive(const Message&) override;
 	void setFighterPosition(uint8_nt id, Vector2D pos);
 
 private:

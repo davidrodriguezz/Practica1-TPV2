@@ -12,7 +12,7 @@ class DisableOnExit;
 class DeAcceleration;
 class Gun;
 //class Follow;
-class Health;
+//class Health;
 class FramedImage;
 //class Generations;
 
@@ -24,8 +24,8 @@ class FramedImage;
 	DisableOnExit,\
 	DeAcceleration,\
 	Gun,\
-	Health,\
 	FramedImage,\
+	//Health,\
 
 // groups
 //struct Asteroid_grp;

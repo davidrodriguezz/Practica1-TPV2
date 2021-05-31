@@ -73,23 +73,23 @@ void FighterSystem::setFighterPosition(uint8_nt id, Vector2D pos)
 
 // --- SYSTEMS COMUNICATION ---------------------------------
 
-void FighterSystem::receive(const Message& msg)
-{
-	Transform* tr_ = GETCMP3(fighter1_, Transform, manager_);
-	switch (msg.id_) {
-		/*case _FIGHTER_ASTEROID:
-			onCollisionWithAsteroid(msg.col_.b);
-			break;*/
-	case _GAME_OVER:
-		resetFighters();
-		break;
-	case _LOSE_LIFE:
-		tr_->reset();
-		break;
-	default:
-		break;
-	}
-}
+//void FighterSystem::receive(const Message& msg)
+//{
+//	Transform* tr_ = GETCMP3(fighter1_, Transform, manager_);
+//	switch (msg.id_) {
+//		/*case _FIGHTER_ASTEROID:
+//			onCollisionWithAsteroid(msg.col_.b);
+//			break;*/
+//	case _GAME_OVER:
+//		resetFighters();
+//		break;
+//	case _LOSE_LIFE:
+//		tr_->reset();
+//		break;
+//	default:
+//		break;
+//	}
+//}
 
 // --- CREATE & DELETE -----------------------------
 

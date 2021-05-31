@@ -15,16 +15,19 @@ public:
 
 	void init() override;
 	void update() override;
-	void receive(const Message& msg) override;
+	//void receive(const Message& msg) override;
 
 private:
-	Entity* fighter_;
+	Entity* fighter1_;
+	Entity* fighter2_;
 	std::string pauseLine;
 
 	void drawGame();
-	void renderPause();
-	void drawPause();
+	/*void renderPause();
+	void drawPause();*/
 	void drawScore();
+	void drawMsgs();
+	void drawNames();
 
 	void drawRect(Transform* tr, SDL_Color color);
 	void drawIMG(Entity* e_);

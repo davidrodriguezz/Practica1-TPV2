@@ -7,8 +7,8 @@
 #include "../sdlutils/InputHandler.h"
 #include "../components/DisableOnExit.h"
 
-BulletsSystem::BulletsSystem()
-{
+BulletsSystem::BulletsSystem() :
+		bulletTr_(nullptr) {
 }
 
 BulletsSystem::~BulletsSystem()
@@ -84,4 +84,8 @@ void BulletsSystem::resetBullets()
 			manager_->setActive(e, false);
 		}
 	}
+}
+void BulletsSystem::setBulletInfo(Vector2D pos, Vector2D vel) {
+	bulletTr_->vel_ = vel;
+	bulletTr_->pos_ = pos;
 }

@@ -1,8 +1,10 @@
 #include "GameManagerSystem.h"
+
 #include "BulletsSystem.h"
 #include "../sdl_network/NetworkSystem.h"
+
 #include "../components/Transform.h"
-#include "../components/Health.h"
+//#include "../components/Health.h"
 #include "../ecs/Manager.h"
 #include "../sdlutils/InputHandler.h"
 #include "messages.h"
@@ -26,55 +28,81 @@ void GameManagerSystem::init()
 void GameManagerSystem::update() {
 	if (state_ != RUNNING) {
 		if (ih().isKeyDown(SDL_SCANCODE_SPACE)) {
-			Message m;
 			switch (state_) {
-			case LOSE_LIFE:
-			case PAUSED:
-				state_ = RUNNING;
-				m.id_ = _PAUSE_OVER;
-				manager_->send(m);
-				break;
 			case NEWGAME:
+				startGame();
+				break;
+			case PAUSED:
+				startGame();
+				break;
 			case GAMEOVER:
-				state_ = RUNNING;
-				m.id_ = _NEW_GAME;
-				manager_->send(m);
+				state_ = NEWGAME;
+				score_[0] = score_[1] = 0;
+				manager_->getSystem<NetworkSystem>()->sendStateChanged(state_,
+					score_[0], score_[1]);
 				break;
 			default:
 				break;
 			}
 		}
-	}
-	else if (state_ == RUNNING)
-		if (ih().isKeyDown(SDL_SCANCODE_SPACE)) {
-			state_ = PAUSED;
-			Message m;
-			m.id_ = _PAUSE_START;
-			m.c_.data = false;
-			manager_->send(m);
+		else if (ih().isKeyDown(SDL_SCANCODE_P)) {
+			manager_->getSystem<NetworkSystem>()->switchId();
 		}
+	}
 }
+
+//void GameManagerSystem::update() {
+//	if (state_ != RUNNING) {
+//		if (ih().isKeyDown(SDL_SCANCODE_SPACE)) {
+//			Message m;
+//			switch (state_) {
+//			case LOSE_LIFE:
+//			case PAUSED:
+//				state_ = RUNNING;
+//				m.id_ = _PAUSE_OVER;
+//				manager_->send(m);
+//				break;
+//			case NEWGAME:
+//			case GAMEOVER:
+//				state_ = RUNNING;
+//				m.id_ = _NEW_GAME;
+//				manager_->send(m);
+//				break;
+//			default:
+//				break;
+//			}
+//		}
+//	}
+//	else if (state_ == RUNNING)
+//		if (ih().isKeyDown(SDL_SCANCODE_SPACE)) {
+//			state_ = PAUSED;
+//			Message m;
+//			m.id_ = _PAUSE_START;
+//			m.c_.data = false;
+//			manager_->send(m);
+//		}
+//}
 
 // --- MSG DEFINITIONS -------------------------
 
-void GameManagerSystem::receive(const Message& msg) {
-	switch (msg.id_) {
-	case _BULLET_FIGHTER:
-		onFighterDeath();
-		break;
-	//case _BULLET_ASTEROID:
-		//onAsteroidsExtinction();
-		//break;
-	case _GAME_OVER:
-		state_ = GAMEOVER;
-		break;
-	case _NEW_GAME:
-		score_ = 0;
-		break;
-	default:
-		break;
-	}
-}
+//void GameManagerSystem::receive(const Message& msg) {
+//	switch (msg.id_) {
+//	case _BULLET_FIGHTER:
+//		onFighterDeath();
+//		break;
+//	//case _BULLET_ASTEROID:
+//		//onAsteroidsExtinction();
+//		//break;
+//	case _GAME_OVER:
+//		state_ = GAMEOVER;
+//		break;
+//	case _NEW_GAME:
+//		score_ = 0;
+//		break;
+//	default:
+//		break;
+//	}
+//}
 
 // --- GAME DYNAMICS ------------------------
 
@@ -82,7 +110,9 @@ void GameManagerSystem::onFighterDeath()
 {
 	if (state_ != RUNNING) return;
 
-	Entity* fighter_ = manager_->getHandler<fighter>();
+	manager_->getSystem<NetworkSystem>()->sendStateChanged(state_, score_[0],
+		score_[1]);
+	/*Entity* fighter_ = manager_->getHandler<fighter>();
 	Transform* tr_ = GETCMP3(fighter_, Transform, manager_);
 	Health* h_ = GETCMP3(fighter_, Health, manager_);
 	if (h_->getLives() > 0) {
@@ -101,7 +131,7 @@ void GameManagerSystem::onFighterDeath()
 		m.id_ = _GAME_OVER;
 		m.c_.data = false;
 		manager_->send(m);
-	}
+	}*/
 }
 
 /*void GameManagerSystem::onAsteroidsExtinction()
